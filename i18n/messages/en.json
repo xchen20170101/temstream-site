@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "Home",
+    "download": "Download",
+    "tutorial": "Tutorial",
+    "faq": "FAQ",
+    "tagline": "Moonlight · Sunshine in Chinese"
+  },
+  "home": {
+    "heroEyebrow": "Open-source · Low-latency · Self-hosted game streaming",
+    "heroTitle": "Stream your living-room PC to every screen you own",
+    "heroSubtitle": "temstream is a Chinese-language guide to Moonlight and Sunshine — free, cross-platform, and low-latency game streaming over your home network or the public internet.",
+    "ctaPrimary": "Get the apps",
+    "ctaSecondary": "Read the tutorial",
+    "metrics": {
+      "latency": "End-to-end latency",
+      "latencyValue": "<30ms",
+      "resolution": "Max resolution",
+      "resolutionValue": "4K HDR",
+      "codecs": "Codec support",
+      "codecsValue": "H.264 / HEVC / AV1",
+      "price": "Price",
+      "priceValue": "Always free"
+    },
+    "featuresTitle": "Why Moonlight + Sunshine",
+    "featuresSubtitle": "An open-source reimplementation of NVIDIA's GameStream protocol. Cross-platform, low-latency, and maintained by an active community.",
+    "howTitle": "How it works",
+    "howSubtitle": "One PC hosts, any device plays — start streaming in three steps.",
+    "howSteps": [
+      {
+        "title": "Host encodes",
+        "desc": "Sunshine runs on your gaming PC, capturing the screen and audio and encoding in real time using NVENC, QuickSync or AMF."
+      },
+      {
+        "title": "Stream over the network",
+        "desc": "The NVIDIA GameStream protocol (reimplemented by Moonlight) carries the video over LAN or via ZeroTier, Tailscale, or a custom VPN."
+      },
+      {
+        "title": "Client decodes & plays",
+        "desc": "Moonlight on Windows, Android, iOS, Mac, Linux or TV decodes the video and sends your controller and keyboard input back to the host."
+      }
+    ]
+  },
+  "download": {
+    "title": "Download",
+    "subtitle": "All links point to the latest stable releases from the official repositories. Install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "clientTitle": "Moonlight client",
+    "clientSubtitle": "Runs on the device you want to play on. Windows and Android are first-class targets.",
+    "serverTitle": "Sunshine host",
+    "serverSubtitle": "Runs on your gaming PC. Windows is the only officially supported PC host today.",
+    "platform": "Platform",
+    "arch": "Arch",
+    "version": "Version",
+    "size": "Size",
+    "downloadBtn": "Download",
+    "viewAll": "View all releases",
+    "items": {
+      "moonlight-windows-x64": {
+        "label": "Moonlight Windows client",
+        "platform": "Windows",
+        "arch": "x64",
+        "version": "v6.1.0"
+      },
+      "moonlight-android-apk": {
+        "label": "Moonlight Android client",
+        "platform": "Android",
+        "arch": "universal APK",
+        "version": "v12.1"
+      },
+      "moonlight-android-play": {
+        "label": "Moonlight Android (Google Play)",
+        "platform": "Android",
+        "arch": "Google Play",
+        "version": "v12.1"
+      },
+      "sunshine-windows-installer": {
+        "label": "Sunshine Windows installer",
+        "platform": "Windows",
+        "arch": "AMD64",
+        "version": "Latest"
+      },
+      "sunshine-windows-portable": {
+        "label": "Sunshine Windows portable",
+        "platform": "Windows",
+        "arch": "AMD64",
+        "version": "Latest"
+      }
+    },
+    "sizeMap": {
+      "moonlight-windows-x64": "~25 MB",
+      "moonlight-android-apk": "~6.5 MB",
+      "moonlight-android-play": "via Google Play",
+      "sunshine-windows-installer": "~24 MB",
+      "sunshine-windows-portable": "~24 MB"
+    }
+  },
+  "tutorial": {
+    "title": "Set up your streaming environment from scratch",
+    "subtitle": "About 15 minutes from zero to playing PC games on your TV or phone.",
+    "steps": [
+      {
+        "title": "Install Sunshine (the host)",
+        "desc": "Download and run the Sunshine Windows installer on your gaming PC. Make sure to keep the recommended driver components (e.g. ViGEmBus) checked."
+      },
+      {
+        "title": "First-time Web UI setup",
+        "desc": "After installation, open https://localhost:47990 in your browser, create a username and password, and enter the dashboard."
+      },
+      {
+        "title": "Add games or apps",
+        "desc": "In the Sunshine Applications page, add Steam, Epic, the desktop, or any other program you want to stream and set its cover art."
+      },
+      {
+        "title": "Install Moonlight (the client)",
+        "desc": "On the device you want to stream to, download Moonlight: the Windows client or the Android APK / Google Play release."
+      },
+      {
+        "title": "Pair with a PIN",
+        "desc": "Add your PC in Moonlight (auto-discovered on LAN). The first connection shows a PIN — type it into the Sunshine Web UI to finish pairing."
+      },
+      {
+        "title": "(Optional) Stream over the internet",
+        "desc": "We recommend ZeroTier or Tailscale for remote access. Avoid exposing ports 47984, 47989 and 47990 directly."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Running into trouble? Check here first.",
+    "items": [
+      {
+        "q": "Are Sunshine and Moonlight free?",
+        "a": "Yes — both are free and open-source. The Moonlight client is GPLv3; the Sunshine host is GPLv3."
+      },
+      {
+        "q": "Do I need an NVIDIA GPU?",
+        "a": "No. Sunshine supports NVIDIA (NVENC), Intel (QuickSync), AMD (AMF) hardware encoders, as well as a software fallback."
+      },
+      {
+        "q": "Can I stream outside my home network?",
+        "a": "Yes. The usual approach is ZeroTier, Tailscale or NordVPN Meshnet — software-defined networks that avoid exposing Sunshine's ports."
+      },
+      {
+        "q": "What's the typical latency?",
+        "a": "Wired LAN usually runs under 30 ms. A solid 5 GHz Wi-Fi link typically lands between 30 and 60 ms. Over the public internet, it depends on physical distance and link quality."
+      },
+      {
+        "q": "Are controllers supported?",
+        "a": "Yes. Sunshine can emulate an Xbox, PlayStation or Nintendo Switch pad. Moonlight also supports PS, Xbox and Android controllers locally or remotely."
+      },
+      {
+        "q": "Can I stream at 4K 120FPS HDR?",
+        "a": "Yes, when host, client and bandwidth all line up. You need HEVC Main10 or AV1 encoding on the host and HDR decoding on the client."
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "temstream · an unofficial Chinese-language Moonlight + Sunshine guide",
+    "disclaimer": "This site is not affiliated with NVIDIA, LizardByte, or the Moonlight team. All trademarks belong to their respective owners.",
+    "officialLinks": "Official",
+    "communityLinks": "Community"
+  }
+}

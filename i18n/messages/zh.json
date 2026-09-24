@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "首页",
+    "download": "下载",
+    "tutorial": "教程",
+    "faq": "常见问题",
+    "tagline": "Moonlight · Sunshine 中文指南"
+  },
+  "home": {
+    "heroEyebrow": "开源 · 低延迟 · 自托管游戏串流",
+    "heroTitle": "把客厅的 PC 游戏，串流到你的每一块屏幕",
+    "heroSubtitle": "temstream 基于 Moonlight 与 Sunshine 构建，跨平台、低延迟、完全免费——在家用局域网，或者在公网玩你自己的游戏库。",
+    "ctaPrimary": "立即下载",
+    "ctaSecondary": "查看教程",
+    "metrics": {
+      "latency": "端到端延迟",
+      "latencyValue": "<30ms",
+      "resolution": "最高分辨率",
+      "resolutionValue": "4K HDR",
+      "codecs": "编码支持",
+      "codecsValue": "H.264 / HEVC / AV1",
+      "price": "价格",
+      "priceValue": "完全免费"
+    },
+    "featuresTitle": "为什么选择 Moonlight + Sunshine",
+    "featuresSubtitle": "NVIDIA GameStream 协议的开源再实现，跨平台、低延迟，活跃社区长期维护。",
+    "howTitle": "工作原理",
+    "howSubtitle": "一台 PC 做服务端、任意设备做客户端，三步就能开始串流。",
+    "howSteps": [
+      {
+        "title": "服务端编码",
+        "desc": "Sunshine 在你的游戏 PC 上运行，捕获屏幕与音频并实时编码（NVENC / QuickSync / AMF）。"
+      },
+      {
+        "title": "网络传输",
+        "desc": "使用 NVIDIA GameStream 协议（Moonlight 开源实现）通过局域网或 ZeroTier / Tailscale / 自定义 VPN 传输。"
+      },
+      {
+        "title": "客户端解码",
+        "desc": "Moonlight 在 Windows / Android / iOS / Mac / Linux / TV 上解码视频，并将手柄与键鼠输入回传给服务端。"
+      }
+    ]
+  },
+  "download": {
+    "title": "下载",
+    "subtitle": "所有下载均指向官方仓库的最新稳定版本。建议先在 PC 上安装 Sunshine，再到设备上安装 Moonlight。",
+    "clientTitle": "Moonlight 客户端",
+    "clientSubtitle": "运行在你想要玩游戏的设备上。Windows / Android 优先支持。",
+    "serverTitle": "Sunshine 服务端",
+    "serverSubtitle": "运行在你的游戏 PC 上。Windows 当前为唯一官方支持的 PC 服务端。",
+    "platform": "平台",
+    "arch": "架构",
+    "version": "版本",
+    "size": "大小",
+    "downloadBtn": "下载",
+    "viewAll": "查看全部版本",
+    "items": {
+      "moonlight-windows-x64": {
+        "label": "Moonlight Windows 客户端",
+        "platform": "Windows",
+        "arch": "x64",
+        "version": "v6.1.0"
+      },
+      "moonlight-android-apk": {
+        "label": "Moonlight Android 客户端",
+        "platform": "Android",
+        "arch": "universal APK",
+        "version": "v12.1"
+      },
+      "moonlight-android-play": {
+        "label": "Moonlight Android (Google Play)",
+        "platform": "Android",
+        "arch": "Google Play",
+        "version": "v12.1"
+      },
+      "sunshine-windows-installer": {
+        "label": "Sunshine Windows 安装版",
+        "platform": "Windows",
+        "arch": "AMD64",
+        "version": "Latest"
+      },
+      "sunshine-windows-portable": {
+        "label": "Sunshine Windows 便携版",
+        "platform": "Windows",
+        "arch": "AMD64",
+        "version": "Latest"
+      }
+    },
+    "sizeMap": {
+      "moonlight-windows-x64": "约 25 MB",
+      "moonlight-android-apk": "约 6.5 MB",
+      "moonlight-android-play": "由 Google Play 分发",
+      "sunshine-windows-installer": "约 24 MB",
+      "sunshine-windows-portable": "约 24 MB"
+    }
+  },
+  "tutorial": {
+    "title": "从零搭建你的串流环境",
+    "subtitle": "大约 15 分钟，你就能在客厅的电视或手机上玩到 PC 上的游戏。",
+    "steps": [
+      {
+        "title": "安装 Sunshine（服务端）",
+        "desc": "在游戏 PC 上下载并运行 Sunshine Windows 安装版，安装时勾选所需的驱动组件（ViGEmBus 等）。"
+      },
+      {
+        "title": "首次配置 Web UI",
+        "desc": "安装完成后，浏览器打开 https://localhost:47990，创建一个用户名与密码，进入主面板。"
+      },
+      {
+        "title": "添加游戏或应用",
+        "desc": "在 Sunshine 的 Applications 页面，添加 Steam、Epic、桌面等你想串流的程序，并设置图标。"
+      },
+      {
+        "title": "安装 Moonlight（客户端）",
+        "desc": "在想要串流到的设备上下载 Moonlight：Windows 客户端或 Android APK / Google Play。"
+      },
+      {
+        "title": "配对 PIN",
+        "desc": "在 Moonlight 中添加 PC（局域网内可自动发现），首次连接会显示一个 PIN，回到 Sunshine Web UI 输入完成配对。"
+      },
+      {
+        "title": "（可选）公网串流",
+        "desc": "推荐使用 ZeroTier 或 Tailscale 组网，避免暴露 47984/47989/47990 等端口，简单又安全。"
+      }
+    ]
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "遇到问题？先看这里。",
+    "items": [
+      {
+        "q": "Sunshine 与 Moonlight 是免费的吗？",
+        "a": "完全免费且开源。Moonlight 客户端基于 GPLv3 协议，Sunshine 服务端基于 GPLv3 协议。"
+      },
+      {
+        "q": "我需要 NVIDIA 显卡吗？",
+        "a": "不需要。Sunshine 支持 NVIDIA (NVENC)、Intel (QuickSync)、AMD (AMF) 硬件编码，以及纯软件编码。"
+      },
+      {
+        "q": "能在我家的局域网之外使用吗？",
+        "a": "可以。常见方案是 ZeroTier / Tailscale / NordVPN Meshnet 等软件定义网络，避免直接暴露 Sunshine 端口。"
+      },
+      {
+        "q": "延迟大概是多少？",
+        "a": "局域网有线环境下通常 <30ms；良好的 5GHz Wi-Fi 下一般 30–60ms；公网串流取决于物理距离与链路质量。"
+      },
+      {
+        "q": "支持手柄吗？",
+        "a": "支持。Sunshine 可模拟 Xbox / PlayStation / Switch 手柄；Moonlight 也支持 PS、Xbox、Android 手柄的本地与远程模式。"
+      },
+      {
+        "q": "能串流 4K 120FPS HDR 吗？",
+        "a": "在客户端、服务端与网络均满足条件时可以。需 HEVC Main10 或 AV1 编码支持，且客户端支持 HDR 解码。"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "temstream · 一个非官方 Moonlight + Sunshine 中文指南站点",
+    "disclaimer": "本站与 NVIDIA、LizardByte、Moonlight 官方团队无任何隶属关系。所有商标归各自所有者所有。",
+    "officialLinks": "官方资源",
+    "communityLinks": "社区"
+  }
+}
