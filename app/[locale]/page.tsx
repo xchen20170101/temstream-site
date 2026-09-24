@@ -126,13 +126,13 @@ export default async function HomePage({
               {t('heroSubtitle')}
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <Link href={`/${locale}/download/`} className="btn-primary">
+              <Link href={`/${locale}/download`} className="btn-primary">
                 {t('ctaPrimary')}
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
                   <path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
               </Link>
-              <Link href={`/${locale}/tutorial/`} className="btn-ghost">
+              <Link href={`/${locale}/tutorial`} className="btn-ghost">
                 {t('ctaSecondary')}
               </Link>
             </div>
@@ -191,10 +191,10 @@ export default async function HomePage({
         </ol>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-          <Link href={`/${locale}/download/`} className="btn-primary">
+          <Link href={`/${locale}/download`} className="btn-primary">
             {t('ctaPrimary')}
           </Link>
-          <Link href={`/${locale}/tutorial/`} className="btn-ghost">
+          <Link href={`/${locale}/tutorial`} className="btn-ghost">
             {t('ctaSecondary')}
           </Link>
         </div>

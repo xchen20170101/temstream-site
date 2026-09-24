@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'temstream · Moonlight + Sunshine 中文指南',
   description:
     'temstream 是一个非官方 Moonlight + Sunshine 中文站点，提供 Windows / Android 客户端与 Windows 服务端的下载、教程与常见问题。',
-  metadataBase: new URL('https://temstream.example.com'),
+  metadataBase: new URL('https://temstream-site.vercel.app'),
   openGraph: {
     title: 'temstream · Moonlight + Sunshine 中文指南',
     description:
