@@ -9,6 +9,12 @@ export default async function FaqPage({
   setRequestLocale(locale);
   const t = await getTranslations('faq');
   const items = t.raw('items') as { q: string; a: string }[];
+  const quickRef = t.raw('quickRef') as {
+    title: string;
+    phenomenon: string;
+    action: string;
+    rows: { phenomenon: string; action: string }[];
+  };
 
   return (
     <>
@@ -19,7 +25,7 @@ export default async function FaqPage({
         </div>
       </section>
 
-      <section className="container-x pb-20">
+      <section className="container-x pb-16">
         <div className="mx-auto max-w-3xl space-y-3">
           {items.map((item, i) => (
             <details
@@ -36,9 +42,39 @@ export default async function FaqPage({
                   <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.a}</p>
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-300">
+                {item.a}
+              </p>
             </details>
           ))}
+        </div>
+      </section>
+
+      <section className="container-x pb-24">
+        <div className="mx-auto max-w-4xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              {quickRef.title}
+            </h2>
+          </div>
+          <div className="glass-card mt-8 overflow-hidden p-0">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b border-white/10 bg-white/[0.04] text-slate-200">
+                <tr>
+                  <th className="w-2/5 px-4 py-3 font-medium">{quickRef.phenomenon}</th>
+                  <th className="px-4 py-3 font-medium">{quickRef.action}</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 text-slate-300">
+                {quickRef.rows.map((r, i) => (
+                  <tr key={i} className="align-top transition hover:bg-white/[0.03]">
+                    <td className="px-4 py-3 text-white">{r.phenomenon}</td>
+                    <td className="px-4 py-3">{r.action}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </>

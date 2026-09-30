@@ -107,33 +107,88 @@
   },
   "faq": {
     "title": "Frequently asked questions",
-    "subtitle": "Running into trouble? Check here first.",
+    "subtitle": "A user-facing guide to everyday usage and troubleshooting. Most account, pairing and network issues can be handled on your own; for anything beyond that, check the Sunshine web console on the streamed PC.",
     "items": [
       {
-        "q": "Are Sunshine and Moonlight free?",
-        "a": "Yes — both are free and open-source. The Moonlight client is GPLv3; the Sunshine host is GPLv3."
+        "q": "What software does the system need, and where should each piece be installed?",
+        "a": "The system is made up of three pieces, each installed on a different machine. Do not mix them up:\n\n- Management portal: a server that stays on all the time. It centrally aggregates the account list, device list, and device online status, and is the source of the device list clients see after logging in (accounts are not assigned by an administrator — you self-register on the host and the portal picks them up from there).\n- Hosts (Sunshine): the PC that will be streamed from (the high-performance one). It captures and sends the screen and audio. Accounts are self-registered here.\n- Clients (Moonlight): the device you watch the screen on (a box or another PC). It shows the picture and sends your keyboard and mouse input back.\n\nA few things people often get wrong:\n\n- The system only needs one management portal; installing more will cause conflicts.\n- There can be multiple hosts and clients, but they must all connect to the same management portal.\n- The three machines don't need to be on the same LAN — they just need to reach the management portal.\n- Accounts are not assigned by an administrator — you register your own account on the host, then log in with those credentials on the client."
       },
       {
-        "q": "Do I need an NVIDIA GPU?",
-        "a": "No. Sunshine supports NVIDIA (NVENC), Intel (QuickSync), AMD (AMF) hardware encoders, as well as a software fallback."
+        "q": "What's the correct order of operations for first-time use?",
+        "a": "Follow these steps in order. If you skip any step, the next one will get stuck:\n\n1. The administrator installs and starts the management portal (the admin handles this).\n2. On the PC that will be streamed from, install the host, start it, and register a user.\n3. Once started, the host automatically checks in with the management portal, and the PC appears in the portal's device list.\n4. On the device you want to watch the screen on, install the client and log in with the username and password you registered yourself.\n5. Once logged in, the available PCs appear in the device list. Click one to start using it."
       },
       {
-        "q": "Can I stream outside my home network?",
-        "a": "Yes. The usual approach is ZeroTier, Tailscale or NordVPN Meshnet — software-defined networks that avoid exposing Sunshine's ports."
+        "q": "The client says my username or password is wrong. What now?",
+        "a": "Work through these possibilities from most likely to least:\n\n- Double-check the username and password. Watch the case and any extra spaces.\n- Confirm the account exists and hasn't been disabled or deleted.\n- Confirm you're connecting to the right Sunshine host (with multiple hosts on the network, it's easy to pick the wrong one).\n- If you recently changed your password, log in with the new one.\n\nIf you forgot your password, reset it from the Temstream configuration tool. If the account is disabled, check the account status on the streamed PC."
       },
       {
-        "q": "What's the typical latency?",
-        "a": "Wired LAN usually runs under 30 ms. A solid 5 GHz Wi-Fi link typically lands between 30 and 60 ms. Over the public internet, it depends on physical distance and link quality."
+        "q": "I logged in successfully, but the device list is empty. What's wrong?",
+        "a": "This is the most common issue, and the cause usually lives on the management-portal ↔ host link. Work through these in order:\n\n1. Confirm the host (the service on the streamed PC) is running (check the system tray icon or service status).\n2. Confirm the host has successfully checked in with the management portal — the streamed PC appears in the portal's device list.\n3. Confirm the client can reach the management portal (that's where the device list comes from).\n4. For external access, confirm both the client → portal and the client → host networks are reachable.\n5. Confirm the firewall allows the relevant ports (47984 / 47989 / 8443, etc.).\n6. If you still can't find it, ask the administrator to check the device's account association in the management portal.\n\n⚠️ Logging out of the client and logging back in usually doesn't fix this. The key is whether both links — host → portal and client → portal — are up."
       },
       {
-        "q": "Are controllers supported?",
-        "a": "Yes. Sunshine can emulate an Xbox, PlayStation or Nintendo Switch pad. Moonlight also supports PS, Xbox and Android controllers locally or remotely."
+        "q": "I see \"Tunnel not ready\" or I just can't connect to the server. What's happening?",
+        "a": "When the system runs over the public internet, the client must first connect to the **management portal** (to fetch the device list) and then route through it to reach the host. If either link is broken, the client gets stuck.\n\nCheck the following in order:\n\n1. Has your account been registered on the host and synced up to the management portal? If the portal never received that sync, the client has no device and won't try to build a tunnel.\n2. Can the client reach the management portal? Open the portal's address in a browser first and confirm it's reachable, then log back into the client.\n3. Can the client reach the host? For a VPN setup, confirm both ends are on the same VPN; for HTTPS 8443, confirm the reverse proxy and certificate are working.\n4. Have your credentials expired or been disabled? Log in again to see if the issue clears.\n\nIf none of the above explains it, the issue is likely with the host or the network setup. Please report the symptoms to the administrator."
       },
       {
-        "q": "Can I stream at 4K 120FPS HDR?",
-        "a": "Yes, when host, client and bandwidth all line up. You need HEVC Main10 or AV1 encoding on the host and HDR decoding on the client."
+        "q": "The portal shows my device as \"offline,\" but that PC is clearly on.",
+        "a": "First, understand how the system decides a device is \"online\": the host (the service running on the streamed PC) keeps checking in with the **management portal**. If no message is received for about 3 minutes, the portal marks the device as \"offline.\"\n\nSo \"offline\" has nothing to do with the picture or with your client — you need to check the streamed PC and the host-to-portal link:\n\n1. Is the host program still running? The most common cause is that the program was closed, crashed, or the PC was recently restarted and the host hasn't been started again.\n2. Is the PC sleeping or hibernating? When the PC sleeps, the host stops checking in. Change the power settings so it stays awake.\n3. Is the host-to-portal network working? Any break on that link (disconnection, network change, security software intercepting traffic) will cause check-ins to fail.\n4. Is the management portal address configured correctly on the host? If it's wrong, the host is checking in somewhere else.\n5. Is the management portal itself running normally?\n\nAfter fixing any of the above, wait roughly a few seconds to a minute and the portal will mark it as online again automatically."
+      },
+      {
+        "q": "I can connect, but the picture is black, laggy, or there's no sound.",
+        "a": "These issues usually come from \"transmission,\" not the device itself. Try the following in order:\n\nPicture laggy or blurry:\n\n- Lower the picture quality in Moonlight's streaming settings (drop the resolution, frame rate, or bitrate by one notch). This is the most immediate fix.\n- Check the network between the two machines: Wi-Fi, long distances, and many users sharing the same network all noticeably hurt smoothness.\n- For public-internet access, try a time of day and route with better network quality.\n\nBlack screen, can't enter the picture:\n\n- Make sure the streamed PC's screen is awake — don't let it sleep or lock.\n- Confirm in the Sunshine web console that no other account is exclusively using it.\n- Confirm Sunshine is still running on the streamed PC.\n\nNo sound:\n\n- Confirm the audio output device on the streamed PC is normal (e.g. it wasn't switched to a non-existent headset).\n- Check that the volume isn't muted or turned all the way down in Moonlight.\n\nIf only one device has the issue while others work fine, the problem is most likely with that specific device — check the Sunshine host for help."
+      },
+      {
+        "q": "What's the \"shared drive\" that appears during streaming? Why can't I find it on my PC?",
+        "a": "The \"shared drive\" is a temporary network drive mounted by Sunshine during streaming. It's used to transfer files between the client device and the streamed PC.\n\nThree normal behaviors — don't mistake them for bugs:\n\n1. It only exists during streaming and disappears when streaming ends. So if you go looking for it on the PC when no streaming is in progress, you won't find it — that's by design, not data loss.\n2. You also need to view it from Moonlight while streaming is active.\n3. Sunshine does not enable the shared folder by default; you must enable it in the web console first.\n\nIf you still can't see it during streaming, or if you get an access error:\n\n- Confirm the client device and the Sunshine host are on the same network (shared folders generally don't work across networks).\n- In that case, take a screenshot of the Moonlight message and verify the configuration on the Sunshine host."
+      },
+      {
+        "q": "What can I check myself before reaching out for help?",
+        "a": "Before asking for help, do these three things. They'll resolve most issues:\n\nStep 1: Restart the host and the client. Fully close and reopen the host on the streamed PC, and your client too. If you recently restarted the PC or router, wait a minute or two before trying again.\n\nStep 2: Log in again and have the host check in again. Log out of your account on the client and log back in. On the streamed PC, also confirm the host has successfully checked in with the management portal (the PC appears in the portal's device list).\n\nStep 3: Check both ends yourself. On the streamed PC you can view the host's local logs; the management portal status needs to be verified by the administrator. This step checks both the client → portal and host → portal links at the same time.\n\nWhen reporting an issue, please include as much of the following as you can — it saves a lot of back-and-forth:\n\n- Your account name, and which device you're operating from.\n- The full on-screen message text (or a screenshot).\n- Roughly when it started, and what changed before it (network change, reboot, password change, etc.).\n- Whether other colleagues can use the system normally at the same time."
       }
-    ]
+    ],
+    "quickRef": {
+      "title": "Quick reference",
+      "phenomenon": "Symptom",
+      "action": "What to do first",
+      "rows": [
+        {
+          "phenomenon": "Login says username or password is wrong",
+          "action": "Double-check credentials; confirm the account is registered on the host and not disabled."
+        },
+        {
+          "phenomenon": "Logged in but the device list is empty",
+          "action": "Confirm the host has checked in with the portal; confirm the client can reach the portal; check firewall."
+        },
+        {
+          "phenomenon": "\"Tunnel not ready\" or can't connect at all",
+          "action": "Client must reach the portal (to get the device list), then the host; external access via HTTPS 8443 or VPN."
+        },
+        {
+          "phenomenon": "Moonlight shows a PC offline (but the PC is on)",
+          "action": "Check the streamed PC: is the host running, is it sleeping, can it reach the portal?"
+        },
+        {
+          "phenomenon": "Picture laggy or blurry",
+          "action": "Lower quality in Moonlight; check network quality."
+        },
+        {
+          "phenomenon": "Black screen, can't enter",
+          "action": "Confirm the streamed PC's screen is awake, not locked; check Sunshine web console for exclusive use."
+        },
+        {
+          "phenomenon": "No sound",
+          "action": "Check the streamed PC's audio output device and the Moonlight volume."
+        },
+        {
+          "phenomenon": "Can't find the \"shared drive\"",
+          "action": "Sunshine doesn't enable it by default; enable it in the web console. It only exists during streaming."
+        },
+        {
+          "phenomenon": "No idea what's wrong",
+          "action": "Follow the three steps in question 10 (restart host + client, re-login, confirm host has checked in with the portal), and include the original message and screenshots."
+        }
+      ]
+    }
   },
   "footer": {
     "tagline": "temstream · an unofficial Chinese-language Moonlight + Sunshine guide",
