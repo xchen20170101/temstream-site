@@ -43,7 +43,7 @@
   },
   "download": {
     "title": "Download",
-    "subtitle": "All links point to the latest stable releases from the official repositories. Install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "subtitle": "All builds ship from the temstream_release v0.4 dual mirrors (gitee by default, GitHub as backup). Install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
     "clientTitle": "Moonlight client",
     "clientSubtitle": "Runs on the device you want to play on. Windows and Android are first-class targets.",
     "serverTitle": "Sunshine host",
@@ -53,45 +53,34 @@
     "version": "Version",
     "size": "Size",
     "downloadBtn": "Download",
+    "mirrorBtn": "Mirror",
+    "mirrorHintZh": "Mirror slow? Switch to the gitee mirror.",
+    "mirrorHintEn": "Main mirror slow? Switch to the GitHub mirror.",
     "viewAll": "View all releases",
     "items": {
       "moonlight-windows-x64": {
         "label": "Moonlight Windows client",
         "platform": "Windows",
-        "arch": "x64",
-        "version": "v6.1.0"
+        "arch": "AMD64 (zip)",
+        "version": "v0.4"
       },
       "moonlight-android-apk": {
         "label": "Moonlight Android client",
         "platform": "Android",
         "arch": "universal APK",
-        "version": "v12.1"
-      },
-      "moonlight-android-play": {
-        "label": "Moonlight Android (Google Play)",
-        "platform": "Android",
-        "arch": "Google Play",
-        "version": "v12.1"
+        "version": "v0.4"
       },
       "sunshine-windows-installer": {
-        "label": "Sunshine Windows installer",
+        "label": "Sunshine Windows host",
         "platform": "Windows",
-        "arch": "AMD64",
-        "version": "Latest"
-      },
-      "sunshine-windows-portable": {
-        "label": "Sunshine Windows portable",
-        "platform": "Windows",
-        "arch": "AMD64",
-        "version": "Latest"
+        "arch": "AMD64 (installer)",
+        "version": "v0.4"
       }
     },
     "sizeMap": {
-      "moonlight-windows-x64": "~25 MB",
-      "moonlight-android-apk": "~6.5 MB",
-      "moonlight-android-play": "via Google Play",
-      "sunshine-windows-installer": "~24 MB",
-      "sunshine-windows-portable": "~24 MB"
+      "moonlight-windows-x64": "Zip archive, full client",
+      "moonlight-android-apk": "Universal APK (ARM64 / x86_64)",
+      "sunshine-windows-installer": "Windows installer (includes ViGEmBus, etc.)"
     }
   },
   "tutorial": {

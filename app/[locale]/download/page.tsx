@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { downloads } from '@/lib/downloads';
+import { downloads, mirrorUrl, primaryUrl, releasesUrlFor } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
 
 type Locale = (typeof routing.locales)[number];
@@ -18,11 +18,24 @@ function DownloadCard({
     version: string;
     size: string;
     downloadBtn: string;
+    mirrorBtn: string;
+    mirrorHintZh: string;
+    mirrorHintEn: string;
     viewAll: string;
   };
 }) {
   const size = locale === 'zh' ? item.sizeLabel.zh : item.sizeLabel.en;
   const label = item.label[locale];
+  const primary = primaryUrl(item, locale);
+  const mirror = mirrorUrl(item, locale);
+  const releases = releasesUrlFor(item, locale);
+  const mirrorHost = (() => {
+    try {
+      return new URL(mirror).hostname;
+    } catch {
+      return mirror;
+    }
+  })();
 
   return (
     <article className="glass-card flex flex-col gap-4">
@@ -53,7 +66,7 @@ function DownloadCard({
 
       <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">
         <a
-          href={item.url}
+          href={primary}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary"
@@ -68,9 +81,28 @@ function DownloadCard({
           </svg>
           {labels.downloadBtn}
         </a>
-        {item.releasesUrl && (
+        <a
+          href={mirror}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost"
+          title={locale === 'zh' ? labels.mirrorHintZh : labels.mirrorHintEn}
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+            <path
+              d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M20 4v4h-4M4 20v-4h4"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {labels.mirrorBtn}
+          <span className="ml-1 text-[10px] text-slate-500">({mirrorHost})</span>
+        </a>
+        {releases && (
           <a
-            href={item.releasesUrl}
+            href={releases}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ghost"
@@ -97,6 +129,9 @@ export default async function DownloadPage({
     version: t('version'),
     size: t('size'),
     downloadBtn: t('downloadBtn'),
+    mirrorBtn: t('mirrorBtn'),
+    mirrorHintZh: t('mirrorHintZh'),
+    mirrorHintEn: t('mirrorHintEn'),
     viewAll: t('viewAll'),
   };
 

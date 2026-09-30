@@ -43,7 +43,7 @@
   },
   "download": {
     "title": "下载",
-    "subtitle": "所有下载均指向官方仓库的最新稳定版本。建议先在 PC 上安装 Sunshine，再到设备上安装 Moonlight。",
+    "subtitle": "所有下载均来自 temstream_release v0.4 双镜像（默认 gitee，备用 github）。建议先在 PC 上安装 Sunshine，再到设备上安装 Moonlight。",
     "clientTitle": "Moonlight 客户端",
     "clientSubtitle": "运行在你想要玩游戏的设备上。Windows / Android 优先支持。",
     "serverTitle": "Sunshine 服务端",
@@ -53,45 +53,34 @@
     "version": "版本",
     "size": "大小",
     "downloadBtn": "下载",
+    "mirrorBtn": "备用镜像",
+    "mirrorHintZh": "主镜像速度慢？切换到 github 镜像下载",
+    "mirrorHintEn": "Mirror slow? Switch to the gitee mirror.",
     "viewAll": "查看全部版本",
     "items": {
       "moonlight-windows-x64": {
         "label": "Moonlight Windows 客户端",
         "platform": "Windows",
-        "arch": "x64",
-        "version": "v6.1.0"
+        "arch": "AMD64 (zip)",
+        "version": "v0.4"
       },
       "moonlight-android-apk": {
         "label": "Moonlight Android 客户端",
         "platform": "Android",
         "arch": "universal APK",
-        "version": "v12.1"
-      },
-      "moonlight-android-play": {
-        "label": "Moonlight Android (Google Play)",
-        "platform": "Android",
-        "arch": "Google Play",
-        "version": "v12.1"
+        "version": "v0.4"
       },
       "sunshine-windows-installer": {
-        "label": "Sunshine Windows 安装版",
+        "label": "Sunshine Windows 服务端",
         "platform": "Windows",
-        "arch": "AMD64",
-        "version": "Latest"
-      },
-      "sunshine-windows-portable": {
-        "label": "Sunshine Windows 便携版",
-        "platform": "Windows",
-        "arch": "AMD64",
-        "version": "Latest"
+        "arch": "AMD64 (installer)",
+        "version": "v0.4"
       }
     },
     "sizeMap": {
-      "moonlight-windows-x64": "约 25 MB",
-      "moonlight-android-apk": "约 6.5 MB",
-      "moonlight-android-play": "由 Google Play 分发",
-      "sunshine-windows-installer": "约 24 MB",
-      "sunshine-windows-portable": "约 24 MB"
+      "moonlight-windows-x64": "压缩包，含完整客户端",
+      "moonlight-android-apk": "通用 APK（含 ARM64 / x86_64）",
+      "sunshine-windows-installer": "Windows 安装版（含 ViGEmBus 等驱动）"
     }
   },
   "tutorial": {
