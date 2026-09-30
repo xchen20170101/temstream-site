@@ -84,32 +84,24 @@
     }
   },
   "tutorial": {
-    "title": "Set up your streaming environment from scratch",
-    "subtitle": "About 15 minutes from zero to playing PC games on your TV or phone.",
+    "title": "Safe and simple: stream with Sunshine in 4 steps",
+    "subtitle": "Powered by the temstream management portal — sign up and go. No plaintext credentials are ever stored, only hashes.",
     "steps": [
       {
-        "title": "Install Sunshine (the host)",
-        "desc": "Download and run the Sunshine Windows installer on your gaming PC. Make sure to keep the recommended driver components (e.g. ViGEmBus) checked."
+        "title": "Install Sunshine",
+        "desc": "Download and install Sunshine on your gaming PC. After install, right-click the Sunshine icon in the system tray and choose Config to open the configuration page."
       },
       {
-        "title": "First-time Web UI setup",
-        "desc": "After installation, open https://localhost:47990 in your browser, create a username and password, and enter the dashboard."
+        "title": "Register in the management portal",
+        "desc": "Fill in the form on the config page and submit your registration. The temstream portal only stores hash strings — no usernames or passwords are ever kept in plaintext, making it absolutely safe."
       },
       {
-        "title": "Add games or apps",
-        "desc": "In the Sunshine Applications page, add Steam, Epic, the desktop, or any other program you want to stream and set its cover art."
+        "title": "Restart Sunshine or the gaming PC",
+        "desc": "After registration, restart the Sunshine service (or simply reboot the gaming PC) so the new user takes effect."
       },
       {
-        "title": "Install Moonlight (the client)",
-        "desc": "On the device you want to stream to, download Moonlight: the Windows client or the Android APK / Google Play release."
-      },
-      {
-        "title": "Pair with a PIN",
-        "desc": "Add your PC in Moonlight (auto-discovered on LAN). The first connection shows a PIN — type it into the Sunshine Web UI to finish pairing."
-      },
-      {
-        "title": "(Optional) Stream over the internet",
-        "desc": "We recommend ZeroTier or Tailscale for remote access. Avoid exposing ports 47984, 47989 and 47990 directly."
+        "title": "Sign in on Moonlight and start streaming",
+        "desc": "Launch Moonlight on the device you want to play on, sign in with the account you just registered, and start streaming to your gaming PC."
       }
     ]
   },

@@ -84,32 +84,24 @@
     }
   },
   "tutorial": {
-    "title": "从零搭建你的串流环境",
-    "subtitle": "大约 15 分钟，你就能在客厅的电视或手机上玩到 PC 上的游戏。",
+    "title": "安全又简单：4 步搞定 Sunshine 串流",
+    "subtitle": "借助 temstream 自建管理门户，注册即用、配置零门槛，全程只存储 hash 字符串，绝无明文泄露。",
     "steps": [
       {
-        "title": "安装 Sunshine（服务端）",
-        "desc": "在游戏 PC 上下载并运行 Sunshine Windows 安装版，安装时勾选所需的驱动组件（ViGEmBus 等）。"
+        "title": "安装 Sunshine",
+        "desc": "在游戏 PC 上下载并安装 Sunshine；安装完成后右键系统托盘里的 Sunshine 图标，选择 Config 进入配置页。"
       },
       {
-        "title": "首次配置 Web UI",
-        "desc": "安装完成后，浏览器打开 https://localhost:47990，创建一个用户名与密码，进入主面板。"
+        "title": "在管理门户注册用户",
+        "desc": "在配置页中按提示填写信息并提交注册。temstream 管理门户只存储 hash 字符串，不会保存任何账号或密码明文，绝对安全。"
       },
       {
-        "title": "添加游戏或应用",
-        "desc": "在 Sunshine 的 Applications 页面，添加 Steam、Epic、桌面等你想串流的程序，并设置图标。"
+        "title": "重启 Sunshine 或游戏 PC",
+        "desc": "注册成功后，重启 Sunshine 服务（或直接重启游戏 PC），让新用户配置生效。"
       },
       {
-        "title": "安装 Moonlight（客户端）",
-        "desc": "在想要串流到的设备上下载 Moonlight：Windows 客户端或 Android APK / Google Play。"
-      },
-      {
-        "title": "配对 PIN",
-        "desc": "在 Moonlight 中添加 PC（局域网内可自动发现），首次连接会显示一个 PIN，回到 Sunshine Web UI 输入完成配对。"
-      },
-      {
-        "title": "（可选）公网串流",
-        "desc": "推荐使用 ZeroTier 或 Tailscale 组网，避免暴露 47984/47989/47990 等端口，简单又安全。"
+        "title": "登录 Moonlight 开始串流",
+        "desc": "在想要玩游戏的设备上打开 Moonlight，使用刚注册的账号登录，即可发现并串流到你的游戏 PC。"
       }
     ]
   },
