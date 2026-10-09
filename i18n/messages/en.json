@@ -125,6 +125,8 @@
       "vsSubtitle": "If you only want to know which card to tap, this table tells you everything.",
       "vs": {
         "colScenario": "Scenario",
+        "colWan": "Scenario ①",
+        "colLan": "Scenario ②",
         "colNeed": "What you need",
         "colPerf": "Quality / latency ceiling",
         "colSecurity": "Exposed to the public internet?",

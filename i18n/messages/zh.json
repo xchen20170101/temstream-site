@@ -125,6 +125,8 @@
       "vsSubtitle": "如果你只想知道现在应该点哪一张卡，看这张表就够了。",
       "vs": {
         "colScenario": "场景",
+        "colWan": "场景 ①",
+        "colLan": "场景 ②",
         "colNeed": "你需要准备什么",
         "colPerf": "画质 / 延迟上限",
         "colSecurity": "是否暴露到公网",

@@ -126,6 +126,8 @@ function SceneCard({
 
 interface VsTableProps {
   colScenario: string;
+  colWan: string;
+  colLan: string;
   colNeed: string;
   colPerf: string;
   colSecurity: string;
@@ -137,40 +139,45 @@ interface VsTableProps {
   lanSecurity: string;
 }
 
-function VsTable({ colScenario, colNeed, colPerf, colSecurity, wanNeed, wanPerf, wanSecurity, lanNeed, lanPerf, lanSecurity }: VsTableProps) {
+function VsTable({
+  colScenario,
+  colWan,
+  colLan,
+  colNeed,
+  colPerf,
+  colSecurity,
+  wanNeed,
+  wanPerf,
+  wanSecurity,
+  lanNeed,
+  lanPerf,
+  lanSecurity,
+}: VsTableProps) {
   return (
     <div className="mt-6 overflow-hidden rounded-xl border border-white/10">
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="border-b border-white/10 bg-white/[0.03]">
             <th className="px-4 py-3 font-medium text-slate-200">{colScenario}</th>
-            <th className="px-4 py-3 font-medium text-neon-violet">{`${colScenario} ①`} <span className="text-slate-400 font-normal">/ {colScenario} ②</span></th>
+            <th className="px-4 py-3 font-medium text-neon-violet">{colWan}</th>
+            <th className="px-4 py-3 font-medium text-neon-cyan">{colLan}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5 text-slate-300">
           <tr>
             <td className="px-4 py-3 align-top text-white">{colNeed}</td>
-            <td className="px-4 py-3">{wanNeed}</td>
+            <td className="px-4 py-3 align-top">{wanNeed}</td>
+            <td className="px-4 py-3 align-top bg-neon-cyan/[0.04]">{lanNeed}</td>
           </tr>
-          <tr className="align-top">
-            <td className="px-4 py-3 text-white">{colPerf}</td>
-            <td className="px-4 py-3">{wanPerf}</td>
+          <tr>
+            <td className="px-4 py-3 align-top text-white">{colPerf}</td>
+            <td className="px-4 py-3 align-top">{wanPerf}</td>
+            <td className="px-4 py-3 align-top bg-neon-cyan/[0.04]">{lanPerf}</td>
           </tr>
-          <tr className="align-top">
-            <td className="px-4 py-3 text-white">{colSecurity}</td>
-            <td className="px-4 py-3">{wanSecurity}</td>
-          </tr>
-          <tr className="border-t border-white/10 bg-neon-cyan/[0.03]">
-            <td className="px-4 py-3 align-top text-white">{colNeed}</td>
-            <td className="px-4 py-3">{lanNeed}</td>
-          </tr>
-          <tr className="bg-neon-cyan/[0.03] align-top">
-            <td className="px-4 py-3 text-white">{colPerf}</td>
-            <td className="px-4 py-3">{lanPerf}</td>
-          </tr>
-          <tr className="border-b border-white/10 bg-neon-cyan/[0.03] align-top">
-            <td className="px-4 py-3 text-white">{colSecurity}</td>
-            <td className="px-4 py-3">{lanSecurity}</td>
+          <tr>
+            <td className="px-4 py-3 align-top text-white">{colSecurity}</td>
+            <td className="px-4 py-3 align-top">{wanSecurity}</td>
+            <td className="px-4 py-3 align-top bg-neon-cyan/[0.04]">{lanSecurity}</td>
           </tr>
         </tbody>
       </table>
@@ -196,7 +203,7 @@ export default async function HomePage({
     vsTitle: string;
     vsSubtitle: string;
     vs: {
-      colScenario: string; colNeed: string; colPerf: string; colSecurity: string;
+      colScenario: string; colWan: string; colLan: string; colNeed: string; colPerf: string; colSecurity: string;
       wan: { need: string; perf: string; security: string };
       lan: { need: string; perf: string; security: string };
     };
@@ -370,6 +377,8 @@ export default async function HomePage({
               <p className="mb-4 text-center text-xs text-slate-500">{s.vsSubtitle}</p>
               <VsTable
                 colScenario={s.vs.colScenario}
+                colWan={s.vs.colWan}
+                colLan={s.vs.colLan}
                 colNeed={s.vs.colNeed}
                 colPerf={s.vs.colPerf}
                 colSecurity={s.vs.colSecurity}
