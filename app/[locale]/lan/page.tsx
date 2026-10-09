@@ -30,17 +30,6 @@ const LAN_ICONS: Record<string, React.ReactNode> = {
       <path d="M8 12h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
     </svg>
   ),
-  usage: (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-      <path
-        d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  ),
   faq: (
     <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
       <path
@@ -115,13 +104,6 @@ export default async function LanOverviewPage({
       icon: LAN_ICONS.tutorial,
     },
     {
-      href: `/${rawLocale}/lan-usage`,
-      title: t('cards.usage.title'),
-      desc: t('cards.usage.desc'),
-      cta: t('cards.cta'),
-      icon: LAN_ICONS.usage,
-    },
-    {
       href: `/${rawLocale}/lan-faq`,
       title: t('cards.faq.title'),
       desc: t('cards.faq.desc'),
@@ -154,7 +136,7 @@ export default async function LanOverviewPage({
       </section>
 
       <section className="container-x pb-20">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {cards.map((c) => (
             <OverviewCard key={c.href} {...c} />
           ))}
@@ -177,16 +159,16 @@ export default async function LanOverviewPage({
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neon-cyan" />
               <span>
                 {isEn
-                  ? 'Both devices on the same router / same Wi-Fi subnet. No management portal, no VPN, no port forwarding.'
-                  : '两端在同一个路由器 / 同一 Wi-Fi 子网下。免管理端、免 VPN、免端口转发。'}
+                  ? 'Both devices on the same reachable subnet (the same router works). On the Moonlight login page, type in Sunshine\'s LAN IP and the access password you set in Sunshine\'s configuration page — that\'s it.'
+                  : '两端在同一个可达子网（同一台路由器下即可）。打开 Moonlight 登录页，填入 Sunshine 的局域网 IP 与在 Sunshine 配置页面里设置的访问密码，即可直连。'}
               </span>
             </li>
             <li className="flex gap-2">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neon-cyan" />
               <span>
                 {isEn
-                  ? 'Nothing is exposed to the public internet — the smallest possible attack surface.'
-                  : '全程不暴露到公网，攻击面最小，是家用最推荐的方案。'}
+                  ? 'No management portal, no VPN, no port forwarding — and nothing exposed to the public internet.'
+                  : '免管理端、免 VPN、免端口转发，全程不暴露到公网，攻击面最小，是家用最推荐的方案。'}
               </span>
             </li>
           </ul>

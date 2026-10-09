@@ -1,0 +1,48 @@
+
+> temstream-site@0.1.0 dev D:\self_project\temstream-site
+> next dev
+
+   ▲ Next.js 15.3.2
+   - Local:        http://localhost:3000
+   - Network:      http://100.69.48.93:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ✓ Compiled /middleware in 124ms
+ ✓ Compiled (108 modules)
+ ○ Compiling /[locale] ...
+ ✓ Compiled /[locale] in 3.3s (901 modules)
+ GET /en 200 in 1682ms
+ GET /en 200 in 1688ms
+ GET /en 200 in 397ms
+ GET /en 200 in 409ms
+ GET /zh 200 in 88ms
+ GET /zh 200 in 85ms
+ ○ Compiling /[locale]/lan ...
+ ✓ Compiled /[locale]/lan in 586ms (907 modules)
+ GET /en/lan 200 in 1082ms
+ GET /en/lan 200 in 1230ms
+ GET /zh/lan 200 in 70ms
+ GET /zh/lan 200 in 142ms
+ ✓ Compiled /[locale]/lan-tutorial in 221ms (895 modules)
+ GET /en/lan-tutorial 200 in 657ms
+ GET /en/lan-tutorial 200 in 851ms
+ GET /zh/lan-tutorial 200 in 87ms
+ GET /zh/lan-tutorial 200 in 90ms
+ ✓ Compiled /[locale]/lan-faq in 210ms (897 modules)
+ GET /en/lan-faq 200 in 840ms
+ GET /en/lan-faq 200 in 854ms
+ GET /zh/lan-faq 200 in 83ms
+ GET /zh/lan-faq 200 in 164ms
+ ✓ Compiled /_not-found in 217ms (901 modules)
+ GET /en/lan-usage 404 in 347ms
+ GET /en/lan-usage 404 in 172ms
+ GET /zh/lan-usage 404 in 26ms
+ GET /zh/lan-usage 404 in 30ms
+ GET /zh/lan 200 in 141ms
+ GET /en/lan 200 in 148ms
+ GET /zh 200 in 266ms
+ GET /en 200 in 255ms
+ GET /en/lan 200 in 58ms
+ GET /en 200 in 142ms
+ ✓ Compiled in 40ms

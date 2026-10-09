@@ -199,7 +199,7 @@ export default async function HomePage({
     title: string;
     subtitle: string;
     wan: { eyebrow: string; title: string; tagline: string; desc: string; bullets: string[]; ctaPrimary: string; ctaSecondary: string; links: { tutorial: string; faq: string } };
-    lan: { eyebrow: string; title: string; tagline: string; desc: string; bullets: string[]; ctaPrimary: string; ctaSecondary: string; links: { tutorial: string; usage: string; faq: string } };
+    lan: { eyebrow: string; title: string; tagline: string; desc: string; bullets: string[]; ctaPrimary: string; ctaSecondary: string; links: { tutorial: string; faq: string } };
     vsTitle: string;
     vsSubtitle: string;
     vs: {
@@ -364,7 +364,6 @@ export default async function HomePage({
                 ctaSecondaryHref="/lan-tutorial"
                 links={[
                   { key: 'tutorial', label: s.lan.links.tutorial, href: '/lan-tutorial' },
-                  { key: 'usage', label: s.lan.links.usage, href: '/lan-usage' },
                   { key: 'faq', label: s.lan.links.faq, href: '/lan-faq' },
                 ]}
               />

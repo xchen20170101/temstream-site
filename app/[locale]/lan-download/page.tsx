@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import { downloads, mirrorUrl, primaryUrl, releasesUrlFor } from '@/lib/downloads';
+import { downloadsLan, mirrorUrl, primaryUrl, releasesUrlFor } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
 import { SectionContext } from '@/components/SectionContext';
 
@@ -136,8 +136,8 @@ export default async function LanDownloadPage({
     viewAll: t('viewAll'),
   };
 
-  const clients = downloads.filter((d) => d.kind === 'client');
-  const servers = downloads.filter((d) => d.kind === 'server');
+  const clients = downloadsLan.filter((d) => d.kind === 'client');
+  const servers = downloadsLan.filter((d) => d.kind === 'server');
 
   return (
     <>
