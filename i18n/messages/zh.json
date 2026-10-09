@@ -2,8 +2,7 @@
   "nav": {
     "home": "首页",
     "wan": "广域网",
-    "lan": "局域网",
-    "tagline": "Moonlight · Sunshine 中文指南"
+    "lan": "局域网"
   },
   "wanOverview": {
     "eyebrow": "广域网 (WAN) · 出门在外",
@@ -76,7 +75,7 @@
       },
       {
         "title": "网络传输",
-        "desc": "使用 NVIDIA GameStream 协议（Moonlight 开源实现）通过局域网或 ZeroTier / Tailscale / 自定义 VPN 传输。"
+        "desc": "使用 NVIDIA GameStream 协议（Moonlight 开源实现）通过局域网或 Tailscale 传输。"
       },
       {
         "title": "客户端解码",
@@ -441,7 +440,6 @@
     }
   },
   "footer": {
-    "tagline": "temstream · 一个非官方 Moonlight + Sunshine 中文指南站点",
     "disclaimer": "本站与 NVIDIA、LizardByte、Moonlight 官方团队无任何隶属关系。所有商标归各自所有者所有。"
   }
 }

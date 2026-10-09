@@ -174,8 +174,8 @@ export default async function WanOverviewPage({
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neon-violet" />
               <span>
                 {isEn
-                  ? 'A way to bridge networks: ZeroTier, Tailscale, a self-hosted VPN — or the temstream management portal.'
-                  : '打通两端的链路：ZeroTier / Tailscale / 自建 VPN，或部署 temstream 管理端。'}
+                  ? 'A way to bridge networks: Tailscale — or the temstream management portal.'
+                  : '打通两端的链路：Tailscale，或部署 temstream 管理端。'}
               </span>
             </li>
             <li className="flex gap-2">

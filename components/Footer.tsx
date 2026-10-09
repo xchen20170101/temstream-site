@@ -11,7 +11,6 @@ export function Footer({ locale }: { locale: string }) {
       <div className="container-x py-12">
         <div className="space-y-3">
           <Logo />
-          <p className="max-w-xs text-sm text-slate-400">{t('tagline')}</p>
           <p className="max-w-xs text-xs text-slate-500">{t('disclaimer')}</p>
         </div>
 

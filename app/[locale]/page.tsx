@@ -279,8 +279,8 @@ export default async function HomePage({
       title: locale === 'zh' ? '公网串流' : 'Stream anywhere',
       desc:
         locale === 'zh'
-          ? '通过 ZeroTier、Tailscale、NordVPN Meshnet 等软件定义网络即可穿透，无需暴露 Sunshine 端口。'
-          : 'Reach your PC from anywhere using ZeroTier, Tailscale or NordVPN Meshnet — no need to expose Sunshine ports.',
+          ? '通过 Tailscale 定义网络即可穿透，无需暴露 Sunshine 端口。'
+          : 'Reach your PC from anywhere using Tailscale — no need to expose Sunshine ports.',
       icon: (
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
           <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />

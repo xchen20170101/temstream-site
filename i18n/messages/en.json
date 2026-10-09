@@ -2,8 +2,7 @@
   "nav": {
     "home": "Home",
     "wan": "WAN",
-    "lan": "LAN",
-    "tagline": "Moonlight · Sunshine in Chinese"
+    "lan": "LAN"
   },
   "wanOverview": {
     "eyebrow": "Public internet (WAN) · Anywhere",
@@ -76,7 +75,7 @@
       },
       {
         "title": "Stream over the network",
-        "desc": "The NVIDIA GameStream protocol (reimplemented by Moonlight) carries the video over LAN or via ZeroTier, Tailscale, or a custom VPN."
+        "desc": "The NVIDIA GameStream protocol (reimplemented by Moonlight) carries the video over LAN or via Tailscale."
       },
       {
         "title": "Client decodes & plays",
@@ -441,7 +440,6 @@
     }
   },
   "footer": {
-    "tagline": "temstream · an unofficial Chinese-language Moonlight + Sunshine guide",
     "disclaimer": "This site is not affiliated with NVIDIA, LizardByte, or the Moonlight team. All trademarks belong to their respective owners."
   }
 }

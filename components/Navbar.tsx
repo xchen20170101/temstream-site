@@ -48,7 +48,6 @@ export function Navbar({ locale }: { locale: string }) {
       <div className="container-x flex h-16 items-center justify-between">
         <Link href={`/${locale}`} className="flex items-center" aria-label="temstream home">
           <Logo>temstream</Logo>
-          <span className="ml-3 hidden text-xs text-slate-400 md:inline">{t('tagline')}</span>
         </Link>
 
         <nav className="hidden items-stretch gap-1 md:flex" role="tablist">
