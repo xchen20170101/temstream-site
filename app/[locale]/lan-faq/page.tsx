@@ -1,14 +1,17 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 import { SectionContext } from '@/components/SectionContext';
 
-export default async function FaqPage({
+type Locale = (typeof routing.locales)[number];
+
+export default async function LanFaqPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('faq');
+  const t = await getTranslations('lanFaq');
   const items = t.raw('items') as { q: string; a: string }[];
   const quickRef = t.raw('quickRef') as {
     title: string;
@@ -24,7 +27,7 @@ export default async function FaqPage({
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>
           <p className="mt-3 text-slate-300">{t('subtitle')}</p>
         </div>
-        <SectionContext locale={locale} section="wan" />
+        <SectionContext locale={locale as Locale} section="lan" />
       </section>
 
       <section className="container-x pb-16">
@@ -32,7 +35,7 @@ export default async function FaqPage({
           {items.map((item, i) => (
             <details
               key={i}
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition open:border-white/20 open:bg-white/[0.05]"
+              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition open:border-neon-cyan/40 open:bg-white/[0.05]"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-white">
                 <span>{item.q}</span>

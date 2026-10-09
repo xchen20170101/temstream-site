@@ -24,28 +24,49 @@ temstream_site/
 ├─ app/
 │  ├─ [locale]/              # 国际化路由
 │  │  ├─ page.tsx            # 首页
-│  │  ├─ download/page.tsx   # 下载页
-│  │  ├─ tutorial/page.tsx   # 教程页
-│  │  └─ faq/page.tsx        # 常见问题
+│  │  ├─ download/page.tsx   # 广域网下载页（默认带管理端的全功能方案）
+│  │  ├─ tutorial/page.tsx   # 广域网教程
+│  │  ├─ faq/page.tsx        # 广域网常见问题
+│  │  ├─ wan/page.tsx            # 广域网概览（section landing，列出 /download /tutorial /faq）
+│  │  ├─ download/page.tsx       # 广域网下载
+│  │  ├─ tutorial/page.tsx       # 广域网教程
+│  │  ├─ faq/page.tsx            # 广域网常见问题
+│  │  ├─ lan/page.tsx            # 局域网概览（section landing，列出 /lan-download 等）
+│  │  ├─ lan-download/page.tsx  # 局域网下载（同一套二进制，面向最小方案）
+│  │  ├─ lan-tutorial/page.tsx  # 局域网教程（4 步：装 Sunshine → 建账号 → 装 Moonlight → 自动发现）
+│  │  ├─ lan-usage/page.tsx     # 局域网使用说明（同子网、配固定 IP、码率建议、休眠策略）
+│  │  └─ lan-faq/page.tsx       # 局域网常见问题（含「不需要管理端」「不需要端口映射」等常见误解）
 │  ├─ layout.tsx             # 根布局
 │  ├─ page.tsx               # 根路径 -> /zh 重定向
 │  ├─ not-found.tsx
 │  └─ globals.css            # Tailwind + 全局样式
-├─ components/               # Navbar / Footer / LocaleSwitcher / Logo
+├─ components/               # Navbar / Footer / LocaleSwitcher / Logo / SectionContext
 ├─ i18n/
 │  ├─ request.ts             # next-intl server 配置
 │  ├─ routing.ts             # locale 列表
 │  └─ messages/
-│     ├─ zh.json
-│     └─ en.json
+│     ├─ zh.json             # nav / home / download / tutorial / faq / wanOverview / lanOverview / lanDownload / lanTutorial / lanUsage / lanFaq / footer
+│     └─ en.json             # 英文版对应同样命名空间
 ├─ lib/
-│  └─ downloads.ts           # 下载清单（标签、版本、外链）
+│  └─ downloads.ts           # 下载清单（标签、版本、外链；广域网/局域网页共用）
 ├─ middleware.ts             # next-intl 路由中间件
 ├─ next.config.ts            # 静态导出 + i18n 插件
 ├─ vercel.json               # Vercel 项目配置
 ├─ tailwind.config.ts
 └─ tsconfig.json
 ```
+
+## 🧭 板块划分
+
+- **顶部 Nav**：`首页 · 广域网 · 局域网` 三个顶级入口，后两个分别是各自 section 的概览页。
+- **`/wan` 概览页 + `/download` `/tutorial` `/faq` 子页（广域网 / WAN）**——涉及管理端
+  账号注册 / 设备列表同步 / VPN 或 HTTPS 8443 之类的「跨网络」配置，适合要从外面远
+  程回家的用户。三个子页都自带 `SectionContext` 上下文条，标明「你正在浏览：广域网」。
+- **`/lan` 概览页 + `lan-*` 子页（局域网 / LAN）**——只在同一路由器下使用的最小方
+  案，不需要管理端、不需要端口映射，走 Sunshine 内置的 47984 / 47989 + mDNS 自动
+  发现。四个子页都自带 `SectionContext` 上下文条（cyan 配色），与广域网视觉区分。
+- **`SectionContext` 组件**：每个非首页的页头都会渲染「你正在浏览：xxx」+「返回
+  概览 / 切换到对侧 section」两个动作按钮，让用户在 WAN / LAN 之间清晰跳转。
 
 ## 🚀 本地开发
 

@@ -4,6 +4,182 @@ import { routing } from '@/i18n/routing';
 
 type Locale = (typeof routing.locales)[number];
 
+// ─── Scene card ───────────────────────────────────────────────────────────────
+
+type Bullet = string;
+
+interface SceneCardProps {
+  locale: Locale;
+  type: 'wan' | 'lan';
+  eyebrow: string;
+  title: string;
+  tagline: string;
+  desc: string;
+  bullets: Bullet[];
+  ctaPrimary: string;
+  ctaPrimaryHref: string;
+  ctaSecondary: string;
+  ctaSecondaryHref: string;
+  links: { key: string; label: string; href: string }[];
+}
+
+function SceneCard({
+  locale,
+  type,
+  eyebrow,
+  title,
+  tagline,
+  desc,
+  bullets,
+  ctaPrimary,
+  ctaPrimaryHref,
+  ctaSecondary,
+  ctaSecondaryHref,
+  links,
+}: SceneCardProps) {
+  const isLan = type === 'lan';
+  const accentFrom = isLan ? 'from-neon-cyan/25' : 'from-neon-violet/25';
+  const accentTo = isLan ? 'to-neon-cyan/5' : 'to-neon-pink/15';
+  const borderColor = isLan ? 'border-neon-cyan/25' : 'border-neon-violet/30';
+  const iconBg = isLan ? 'from-neon-cyan/30 to-neon-cyan/10' : 'from-neon-violet/30 to-neon-pink/10';
+  const iconText = isLan ? 'text-neon-cyan' : 'text-neon-violet';
+  const tagBg = isLan ? 'bg-neon-cyan/15 text-neon-cyan' : 'bg-neon-violet/15 text-neon-violet';
+  const accentBtn =
+    'inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-neon-violet to-neon-cyan px-5 py-2.5 text-sm font-semibold text-white shadow-neon transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-neon-cyan/60';
+
+  return (
+    <article
+      className={`relative flex flex-col rounded-2xl border ${borderColor} bg-gradient-to-br ${accentFrom} ${accentTo} p-6 backdrop-blur-sm transition hover:border-white/25`}
+    >
+      {/* Eyebrow chip */}
+      <span className={`mb-4 self-start rounded-full border border-white/10 px-2.5 py-1 text-xs font-medium ${tagBg}`}>
+        {eyebrow}
+      </span>
+
+      {/* Icon */}
+      <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${iconBg} ${iconText}`}>
+        {type === 'lan' ? (
+          // WiFi / Router icon
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
+            <path d="M5 13a10 10 0 0 1 14 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <path d="M8.5 16.5a5 5 0 0 1 7 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <path d="M12 20h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        ) : (
+          // Globe / internet icon
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
+        )}
+      </div>
+
+      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <p className="mt-1 text-sm font-medium text-slate-300">{tagline}</p>
+      <p className="mt-3 text-sm leading-relaxed text-slate-400">{desc}</p>
+
+      {/* Bullet list */}
+      <ul className="mt-4 space-y-2">
+        {bullets.map((b, i) => (
+          <li key={i} className="flex gap-2.5 text-sm text-slate-300">
+            <span
+              className={`mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full ${isLan ? 'bg-neon-cyan' : 'bg-neon-violet'}`}
+            />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTAs */}
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <Link href={`/${locale}${ctaPrimaryHref}`} className={accentBtn}>
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+            <path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          {ctaPrimary}
+        </Link>
+        <Link
+          href={`/${locale}${ctaSecondaryHref}`}
+          className="text-sm text-slate-400 underline-offset-4 transition hover:text-white hover:underline"
+        >
+          {ctaSecondary}
+        </Link>
+      </div>
+
+      {/* Small links row */}
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+        {links.map((l) => (
+          <Link
+            key={l.key}
+            href={`/${locale}${l.href}`}
+            className="text-xs text-slate-500 underline-offset-4 transition hover:text-slate-300 hover:underline"
+          >
+            {l.label}
+          </Link>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+// ─── VS table ────────────────────────────────────────────────────────────────
+
+interface VsTableProps {
+  colScenario: string;
+  colNeed: string;
+  colPerf: string;
+  colSecurity: string;
+  wanNeed: string;
+  wanPerf: string;
+  wanSecurity: string;
+  lanNeed: string;
+  lanPerf: string;
+  lanSecurity: string;
+}
+
+function VsTable({ colScenario, colNeed, colPerf, colSecurity, wanNeed, wanPerf, wanSecurity, lanNeed, lanPerf, lanSecurity }: VsTableProps) {
+  return (
+    <div className="mt-6 overflow-hidden rounded-xl border border-white/10">
+      <table className="w-full text-left text-sm">
+        <thead>
+          <tr className="border-b border-white/10 bg-white/[0.03]">
+            <th className="px-4 py-3 font-medium text-slate-200">{colScenario}</th>
+            <th className="px-4 py-3 font-medium text-neon-violet">{`${colScenario} ①`} <span className="text-slate-400 font-normal">/ {colScenario} ②</span></th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-white/5 text-slate-300">
+          <tr>
+            <td className="px-4 py-3 align-top text-white">{colNeed}</td>
+            <td className="px-4 py-3">{wanNeed}</td>
+          </tr>
+          <tr className="align-top">
+            <td className="px-4 py-3 text-white">{colPerf}</td>
+            <td className="px-4 py-3">{wanPerf}</td>
+          </tr>
+          <tr className="align-top">
+            <td className="px-4 py-3 text-white">{colSecurity}</td>
+            <td className="px-4 py-3">{wanSecurity}</td>
+          </tr>
+          <tr className="border-t border-white/10 bg-neon-cyan/[0.03]">
+            <td className="px-4 py-3 align-top text-white">{colNeed}</td>
+            <td className="px-4 py-3">{lanNeed}</td>
+          </tr>
+          <tr className="bg-neon-cyan/[0.03] align-top">
+            <td className="px-4 py-3 text-white">{colPerf}</td>
+            <td className="px-4 py-3">{lanPerf}</td>
+          </tr>
+          <tr className="border-b border-white/10 bg-neon-cyan/[0.03] align-top">
+            <td className="px-4 py-3 text-white">{colSecurity}</td>
+            <td className="px-4 py-3">{lanSecurity}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ─── Home page ────────────────────────────────────────────────────────────────
+
 export default async function HomePage({
   params,
 }: {
@@ -12,6 +188,19 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('home');
+  const s = t.raw('scenes') as {
+    title: string;
+    subtitle: string;
+    wan: { eyebrow: string; title: string; tagline: string; desc: string; bullets: string[]; ctaPrimary: string; ctaSecondary: string; links: { tutorial: string; faq: string } };
+    lan: { eyebrow: string; title: string; tagline: string; desc: string; bullets: string[]; ctaPrimary: string; ctaSecondary: string; links: { tutorial: string; usage: string; faq: string } };
+    vsTitle: string;
+    vsSubtitle: string;
+    vs: {
+      colScenario: string; colNeed: string; colPerf: string; colSecurity: string;
+      wan: { need: string; perf: string; security: string };
+      lan: { need: string; perf: string; security: string };
+    };
+  };
 
   const metrics = [
     { key: 'latency', value: t('metrics.latencyValue') },
@@ -125,18 +314,74 @@ export default async function HomePage({
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
               {t('heroSubtitle')}
             </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <Link href={`/${locale}/download`} className="btn-primary">
-                {t('ctaPrimary')}
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
-                  <path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
-              </Link>
-              <Link href={`/${locale}/tutorial`} className="btn-ghost">
-                {t('ctaSecondary')}
-              </Link>
-            </div>
           </div>
+
+          {/* ── Scene selection ─────────────────────────────────────────── */}
+          <section className="container-x py-16 sm:py-20" aria-labelledby="scenes-title">
+            <div className="mx-auto mb-10 max-w-2xl text-center">
+              <h2 id="scenes-title" className="text-2xl font-bold tracking-tight sm:text-3xl">
+                {s.title}
+              </h2>
+              <p className="mt-3 text-slate-300">{s.subtitle}</p>
+            </div>
+
+            <div className="grid gap-5 lg:grid-cols-2">
+              <SceneCard
+                locale={locale as Locale}
+                type="wan"
+                eyebrow={s.wan.eyebrow}
+                title={s.wan.title}
+                tagline={s.wan.tagline}
+                desc={s.wan.desc}
+                bullets={s.wan.bullets}
+                ctaPrimary={s.wan.ctaPrimary}
+                ctaPrimaryHref="/download"
+                ctaSecondary={s.wan.ctaSecondary}
+                ctaSecondaryHref="/tutorial"
+                links={[
+                  { key: 'tutorial', label: s.wan.links.tutorial, href: '/tutorial' },
+                  { key: 'faq', label: s.wan.links.faq, href: '/faq' },
+                ]}
+              />
+              <SceneCard
+                locale={locale as Locale}
+                type="lan"
+                eyebrow={s.lan.eyebrow}
+                title={s.lan.title}
+                tagline={s.lan.tagline}
+                desc={s.lan.desc}
+                bullets={s.lan.bullets}
+                ctaPrimary={s.lan.ctaPrimary}
+                ctaPrimaryHref="/lan-download"
+                ctaSecondary={s.lan.ctaSecondary}
+                ctaSecondaryHref="/lan-tutorial"
+                links={[
+                  { key: 'tutorial', label: s.lan.links.tutorial, href: '/lan-tutorial' },
+                  { key: 'usage', label: s.lan.links.usage, href: '/lan-usage' },
+                  { key: 'faq', label: s.lan.links.faq, href: '/lan-faq' },
+                ]}
+              />
+            </div>
+
+            <div className="mx-auto mt-8 max-w-3xl">
+              <p className="mb-3 text-center text-xs font-medium uppercase tracking-widest text-slate-500">
+                {s.vsTitle}
+              </p>
+              <p className="mb-4 text-center text-xs text-slate-500">{s.vsSubtitle}</p>
+              <VsTable
+                colScenario={s.vs.colScenario}
+                colNeed={s.vs.colNeed}
+                colPerf={s.vs.colPerf}
+                colSecurity={s.vs.colSecurity}
+                wanNeed={s.vs.wan.need}
+                wanPerf={s.vs.wan.perf}
+                wanSecurity={s.vs.wan.security}
+                lanNeed={s.vs.lan.need}
+                lanPerf={s.vs.lan.perf}
+                lanSecurity={s.vs.lan.security}
+              />
+            </div>
+          </section>
 
           <dl className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
             {metrics.map((m) => (
@@ -191,11 +436,14 @@ export default async function HomePage({
         </ol>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-          <Link href={`/${locale}/download`} className="btn-primary">
-            {t('ctaPrimary')}
+          <Link href={`/${locale}/wan`} className="btn-primary">
+            {locale === 'zh' ? '进入广域网' : 'Enter WAN mode'}
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+              <path d="M5 12h14m0 0-4-4m4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </Link>
-          <Link href={`/${locale}/tutorial`} className="btn-ghost">
-            {t('ctaSecondary')}
+          <Link href={`/${locale}/lan`} className="btn-ghost">
+            {locale === 'zh' ? '进入局域网' : 'Enter LAN mode'}
           </Link>
         </div>
       </section>

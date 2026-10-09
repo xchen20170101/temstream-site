@@ -1,10 +1,53 @@
 {
   "nav": {
     "home": "Home",
-    "download": "Download",
-    "tutorial": "Tutorial",
-    "faq": "FAQ",
+    "wan": "WAN",
+    "lan": "LAN",
     "tagline": "Moonlight · Sunshine in Chinese"
+  },
+  "wanOverview": {
+    "eyebrow": "Public internet (WAN) · Anywhere",
+    "title": "Stream your home PC from anywhere",
+    "subtitle": "Bridge the two ends with a VPN or the management portal — no Sunshine ports are ever exposed, so the setup works at any distance.",
+    "cards": {
+      "cta": "Open",
+      "download": {
+        "title": "Download",
+        "desc": "Sunshine (host) and Moonlight (client) v0.4 dual mirrors. Everything you need for the WAN setup lives here."
+      },
+      "tutorial": {
+        "title": "Tutorial",
+        "desc": "Four steps: register an account on the management portal, configure Sunshine, sign in on Moonlight, and start streaming."
+      },
+      "faq": {
+        "title": "FAQ",
+        "desc": "Account / device list / tunnel / black screen / offline — typical WAN troubleshooting."
+      }
+    }
+  },
+  "lanOverview": {
+    "eyebrow": "Home network (LAN) · Recommended",
+    "title": "Stream your living-room PC to any room",
+    "subtitle": "Just Sunshine + Moonlight. mDNS auto-discovery on the same router, easily 4K HDR / 120fps, nothing exposed to the public internet.",
+    "cards": {
+      "cta": "Open",
+      "download": {
+        "title": "Download",
+        "desc": "Sunshine + Moonlight v0.4 — the same binaries as the WAN page, ordered for LAN-first deployment."
+      },
+      "tutorial": {
+        "title": "Tutorial",
+        "desc": "Four steps from scratch: install Sunshine → set up an account → install Moonlight → auto-discover and stream."
+      },
+      "usage": {
+        "title": "Usage guide",
+        "desc": "Fixed IPs, bitrate caps, hardware encoding, Sunshine web UI — squeeze the LAN ceiling to the limit."
+      },
+      "faq": {
+        "title": "FAQ",
+        "desc": "Can't find the host, AV quarantine, multi-user, sleep / wake — typical LAN questions."
+      }
+    }
   },
   "home": {
     "heroEyebrow": "Open-source · Low-latency · Self-hosted game streaming",
@@ -39,7 +82,64 @@
         "title": "Client decodes & plays",
         "desc": "Moonlight on Windows, Android, iOS, Mac, Linux or TV decodes the video and sends your controller and keyboard input back to the host."
       }
-    ]
+    ],
+    "scenes": {
+      "title": "Pick your scenario, then jump in",
+      "subtitle": "Are you streaming inside one home network, or reaching your home PC from the public internet? The two setups use very different tools and links — pick the one you actually need, and every entry below maps to it.",
+      "wan": {
+        "eyebrow": "Scenario 1",
+        "title": "Stream over the public internet",
+        "tagline": "Play your home PC from anywhere in the world",
+        "desc": "Use Tailscale to put both ends on the same virtual subnet, and stand up the temstream management portal for public-internet access. Latency is higher than LAN, but as long as both networks are decent, picture quality is uncapped.",
+        "bullets": [
+          "No public IP / port forwarding — the VPN route is the most stable",
+          "Streams from any distance, even across cities",
+          "Manage multiple hosts centrally through the temstream portal"
+        ],
+        "ctaPrimary": "Get the apps (WAN)",
+        "ctaSecondary": "Read the WAN tutorial",
+        "links": {
+          "tutorial": "Tutorial",
+          "faq": "FAQ"
+        }
+      },
+      "lan": {
+        "eyebrow": "Scenario 2",
+        "title": "Stream over your home network",
+        "tagline": "Send your living-room PC to the bedroom / balcony / TV",
+        "desc": "Just Sunshine + Moonlight. No portal, no port forwarding. Direct same-subnet connection — easily hits 4K HDR @ 120fps. Lowest latency, highest picture quality. The recommended setup for home use.",
+        "bullets": [
+          "mDNS auto-discovery, zero config to start",
+          "Comfortably 4K 120fps / 150 Mbps over gigabit wired",
+          "No public exposure — smallest attack surface"
+        ],
+        "ctaPrimary": "Get the apps (LAN)",
+        "ctaSecondary": "Read the LAN tutorial",
+        "links": {
+          "tutorial": "Tutorial",
+          "usage": "Usage",
+          "faq": "FAQ"
+        }
+      },
+      "vsTitle": "The difference at a glance",
+      "vsSubtitle": "If you only want to know which card to tap, this table tells you everything.",
+      "vs": {
+        "colScenario": "Scenario",
+        "colNeed": "What you need",
+        "colPerf": "Quality / latency ceiling",
+        "colSecurity": "Exposed to the public internet?",
+        "wan": {
+          "need": "Sunshine + Moonlight + Tailscale , or add a management portal",
+          "perf": "Mid-to-high quality; latency depends on both internet links",
+          "security": "Depends on the plan; the VPN route avoids port exposure"
+        },
+        "lan": {
+          "need": "Just Sunshine + Moonlight, on the same router",
+          "perf": "Up to 4K 120fps / 150 Mbps; latency < 30ms",
+          "security": "Entirely on the subnet, nothing reaches the public internet"
+        }
+      }
+    }
   },
   "download": {
     "title": "Download",
@@ -190,10 +290,156 @@
       ]
     }
   },
+  "lanDownload": {
+    "title": "LAN download",
+    "subtitle": "For a LAN-only setup you only need two pieces of software — Sunshine (host) and Moonlight (client). The management portal is optional. These are the same v0.4 builds; install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "clientTitle": "Moonlight client (LAN)",
+    "clientSubtitle": "Runs on the device you want to play on. On LAN it auto-discovers Sunshine hosts on the same subnet via mDNS.",
+    "serverTitle": "Sunshine host (LAN)",
+    "serverSubtitle": "Runs on your gaming PC. It listens on ports 47984 / 47989 and broadcasts HTTP / mDNS packets to the local subnet.",
+    "platform": "Platform",
+    "arch": "Arch",
+    "version": "Version",
+    "size": "Size",
+    "downloadBtn": "Download",
+    "mirrorBtn": "Mirror",
+    "mirrorHintZh": "Main mirror slow? Switch to the gitee mirror.",
+    "mirrorHintEn": "Main mirror slow? Switch to the GitHub mirror.",
+    "viewAll": "View all releases",
+    "lanOnlyNote": "LAN note: the binaries on this page are identical to those on the Download page. What changes is the deployment order — direct same-subnet pairing, with no management portal in the loop. If you later need public-internet access, layer the management portal, a VPN, or a reverse proxy on top.",
+    "sizeMap": {
+      "moonlight-windows-x64": "Zip archive, full client",
+      "moonlight-android-apk": "Universal APK (ARM64 / x86_64)",
+      "sunshine-windows-installer": "Windows installer (includes ViGEmBus, etc.)"
+    }
+  },
+  "lanTutorial": {
+    "title": "Start LAN streaming in 4 steps",
+    "subtitle": "Just two pieces of software — no portal, no port forwarding. Everything stays on your local router.",
+    "steps": [
+      {
+        "title": "Install Sunshine on your gaming PC",
+        "desc": "Download and run the Sunshine Windows installer on your gaming PC; ViGEmBus (virtual gamepad driver) and friends are installed automatically. When setup finishes, a Sunshine icon appears in the system tray."
+      },
+      {
+        "title": "Create an account and note the LAN IP",
+        "desc": "Right-click the tray icon and choose \"Open Sunshine\" to open the built-in web UI (defaults to https://localhost:47984). The first launch asks you to set a username and password — this is the account Moonlight will use, remember it. In another window, run cmd and type ipconfig to find the gaming PC's LAN IP (usually 192.168.x.x or 10.x.x.x); write it down."
+      },
+      {
+        "title": "Install Moonlight on your client device",
+        "desc": "Install Moonlight on the device you want to play on: for Windows, unzip the zip archive; for Android, install the universal APK. Make sure that device is on the same router / same Wi-Fi subnet as the gaming PC (prefer 5GHz on phones)."
+      },
+      {
+        "title": "Moonlight auto-discovers and you're streaming",
+        "desc": "Open Moonlight — it scans the subnet via mDNS + UDP 47984 and lists Sunshine hosts automatically. Click your gaming PC, enter the username and password from step two, and the stream starts. If it doesn't show up, tap \"Add Host\" and enter the IP you noted."
+      }
+    ]
+  },
+  "lanUsage": {
+    "title": "LAN usage guide",
+    "subtitle": "Tune Sunshine and Moonlight for LAN — your quality ceiling is far higher than it is over the public internet.",
+    "section1Title": "1. Preparation — make sure both ends are on the same LAN",
+    "section1Body": "Connect both the gaming PC (Sunshine) and the client device (Moonlight) to the same home router:\n\n- Most reliable: gaming PC wired to a router LAN port, client device wired or on 5GHz Wi-Fi.\n- Fully wireless is fine, but phones and tablets should stick to 5GHz; 2.4GHz stutters on HD streams.\n- With several devices on the network, give your gaming PC a fixed IP in the router admin (DHCP reservation or static lease). When mDNS discovery fails, Moonlight can still add the host by IP.\n\nRouter-level features such as guest networks, AP isolation and client isolation often block mDNS broadcasts. If two devices sit on the same router but Moonlight can't see the host, switch those features off first.",
+    "section2Title": "2. Recommended quality — how high can LAN go?",
+    "section2Body": "On LAN, the only bottlenecks are hardware at both ends and your router — there is no internet cap. Reasonable starting points:\n\n- Gigabit wired + 1080p display: 4K HDR @ 60fps at 100–150 Mbps is fine; 1080p @ 120fps is effortless.\n- Gigabit wired + 4K display: drive the display's native resolution at 120fps; bitrate ~150–200 Mbps.\n- 5GHz Wi-Fi (signal ≥ -60 dBm): 1080p @ 60fps, 50–80 Mbps.\n- 2.4GHz Wi-Fi or long distance: drop to 720p / 30 Mbps. Smoothness wins over sharpness.\n\nIf you see periodic macroblocking or latency spikes, suspect wireless interference first (microwave oven, neighbour's Wi-Fi, metal obstructions) — wiring the gaming PC fixes it almost instantly.",
+    "section3Title": "3. What to do in the Sunshine web UI",
+    "section3Body": "Open https://[gaming PC's LAN IP]:47984 and sign in. The three pages you'll use most:\n\n① Users: at least one user (the account you created in step 2). Add more for family members. Avoid Chinese characters or special symbols in usernames.\n\n② Applications: register every game or shortcut you want to stream. Each entry needs a launch command (usually the full path to an exe / bat / shortcut) and a flag for whether to drop Sunshine's virtual display before launch.\n\n③ Configuration: hardware encoder, max bitrate, target resolution, software-encoder fallback. Start with defaults, stream for a few minutes, then tune.",
+    "section3TipsTitle": "Key configuration knobs",
+    "section3Tips": [
+      "encoder: prefer hardware. NVIDIA → NVENC, Intel → QuickSync, AMD → AMF; on machines with no discrete GPU you fall back to software (CPU-heavy).",
+      "fps: match your client display. 60Hz → 60, 120Hz → 120. Don't exceed the panel's refresh rate.",
+      "bitrate: wired LAN → 80–150 Mbps; 5GHz → 50–80 Mbps; 2.4GHz → ≤ 30 Mbps.",
+      "resolution: \"Match Client Resolution\" is usually enough; pin a fixed 4K only if you really mean it.",
+      "audio: defaults are fine. If you can't hear the game, set the gaming PC's default playback device to a real speaker / headset first."
+    ],
+    "section4Title": "4. Launching, exiting and sleeping",
+    "section4Body": "In Moonlight, select the Sunshine host and you'll see the Applications list. Tap a game and Sunshine launches it on the gaming PC; exiting the game returns to the desktop.\n\nTo end the streaming session, use Moonlight's exit button (not the Win key on your client) so Sunshine releases the session cleanly on the gaming PC.\n\nFor shutdown / sleep on the gaming PC, prefer Sunshine's Configuration → General → Idle Shutdown. Before enabling it, make sure no client is still connected — otherwise Moonlight will immediately raise \"Host Offline\".",
+    "section5Title": "5. Health-check checklist",
+    "section5Body": "Whenever you swap hardware, update GPU drivers or replace the router, run through this list:\n\n1. The Sunshine tray icon is still there (right-click → Config / Open Sunshine).\n2. The Sunshine web UI opens on another device using https://[LAN-IP]:47984.\n3. Moonlight auto-discovers Sunshine.\n4. Stream a lightweight game (e.g. Plants vs Zombies) for ~5 minutes; visually check picture and audio.\n5. Skim Sunshine / Moonlight logs for GPU-driver errors.\n\nIf any step fails, jump back to the matching section above."
+  },
+  "lanFaq": {
+    "title": "LAN FAQ",
+    "subtitle": "Common questions about same-subnet discovery, fixed IPs, bitrate choice, and local permissions.",
+    "items": [
+      {
+        "q": "Do I need the management portal for a LAN-only setup?",
+        "a": "No. For LAN-only setups Sunshine (on the gaming PC) and Moonlight (on the client device) are enough — no temstream management portal required.\n\nThe management portal only earns its place in cross-network / public-internet setups: when machines are not on the same subnet, or when you want to remote home from the public internet — that's when you deploy the portal and have Sunshine sync the device list up to it.\n\nIf you only need LAN: install Sunshine + Moonlight and follow the four-step tutorial above. Add the management portal, ZeroTier or Tailscale later if you need to extend beyond the LAN."
+      },
+      {
+        "q": "Moonlight can't find my gaming PC. What should I check first?",
+        "a": "Work through these in order — most issues are resolved by step 3:\n\n1. Same subnet: client device and gaming PC share the first three octets of their IP and the same default gateway (for example both 192.168.1.x or both 10.0.0.x).\n2. Firewall: Windows Defender allows Sunshine by default, but third-party AV or VPN clients often block UDP 47984 and TCP 47984/47989. Whitelist Sunshine and Moonlight, and open UDP+TCP ports 47984–48010.\n3. Sunshine is running: the tray icon is there, and right-click → Open Sunshine opens https://localhost:47984.\n\nIf it's still not listed, also check:\n\n- Router features such as guest network / AP isolation / client isolation — they block mDNS broadcasts and must be turned off.\n- Multiple NICs / VPN virtual adapters — Sunshine binds to one interface by IP; if it picks a virtual one, mDNS will not reach your client.\n- Gaming PC is asleep — wake it, or disable sleep in power settings."
+      },
+      {
+        "q": "Should I give the gaming PC a fixed IP? How?",
+        "a": "Strongly recommended. A fixed IP lets Moonlight fall back to \"Add Host\" even when mDNS fails; otherwise DHCP renewal can change the IP and leave you with a \"ghost host\" in Moonlight.\n\nBoth approaches work:\n\nRouter side (preferred): log in to the router admin, find \"DHCP reservation / static lease\", bind the gaming PC's MAC to a free IP (for example 192.168.1.20), restart the router.\n\nWindows side (fallback): Control Panel → Network and Sharing Center → adapter settings → IPv4 → \"Use the following IP address\". Fill in IP / subnet mask / gateway / DNS. Be careful — a wrong value means no network on that PC at all. Router-side is safer."
+      },
+      {
+        "q": "How high a resolution and framerate can LAN hit?",
+        "a": "LAN has no internet bandwidth cap; the only limits are hardware at both ends and the router. Practical ceilings:\n\n- Gigabit wired + common 1080p display: 4K HDR @ 60fps / 150 Mbps is fine; 1080p @ 120fps is easy.\n- Gigabit wired + 4K display: push the panel's native resolution + 120fps; 150–200 Mbps.\n- 5GHz Wi-Fi with strong signal: 1080p @ 60fps / 80 Mbps is comfortable; 4K often stutters.\n- 2.4GHz Wi-Fi or long distance: 720p / ≤ 30 Mbps. Smoothness wins over sharpness.\n\nIf your picture looks blurrier or jitters more than expected, raise the bitrate cap and confirm hardware encoding is enabled in Sunshine's Configuration page."
+      },
+      {
+        "q": "Do I need to expose ports on the router (port forwarding, DMZ)?",
+        "a": "No. This is an important security point:\n\n- On LAN: traffic stays inside the subnet. No router configuration is needed.\n- For public-internet access: that's when port forwarding / DMZ / reverse proxy enter the picture — they also expose a much wider attack surface. The recommended approach is to use ZeroTier / Tailscale / a self-hosted VPN to bring both endpoints onto the same virtual subnet, then follow the LAN flow unchanged.\n\nRule of thumb: opening Sunshine on a LAN does not require touching the router. If someone asks you to forward ports on the router, they're describing a public-internet setup — use the WAN solution, not the LAN one."
+      },
+      {
+        "q": "Why does the stream stutter or get blurry right after connecting?",
+        "a": "On LAN, \"stutter\" almost always comes from one of three places:\n\n1. Wireless signal swings: 5GHz attenuates sharply with distance and obstacles. Wiring the gaming PC, or moving the client closer to the router, usually fixes it immediately.\n2. Hardware encoder not active / falling back to software: open Sunshine's Configuration and check whether \"Using hardware encoder: YES\" is shown. NO means NVENC / QuickSync / AMF isn't kicking in — possibly a stale GPU driver, a broken VBus, or a disabled discrete GPU.\n3. Host resource exhaustion: large file copies, video encoding, many browser tabs — all make CPU/GPU oscillate. Stop them first.\n\nPragmatic order: try wired first, kill background jobs, then enforce hardware encoding. Most LAN streams return to their normal quality after these three checks."
+      },
+      {
+        "q": "Gaming PC went to sleep and Moonlight says \"Host Offline\". Now what?",
+        "a": "Two paths:\n\nWake from the client: enable Wake-on-LAN in Sunshine's Configuration → General, and allow Wake-on-LAN in the BIOS and NIC properties (Windows disables this by default — flip \"Allow this device to wake the computer\"). Moonlight's support is limited; in practice you usually need a separate WOL tool.\n\nDon't sleep at all: Power Options → \"Choose what the power buttons do\" → uncheck \"Turn on fast startup\" / set \"Sleep\" to \"Never\". This is the simplest route for a home gaming PC that's always on.\n\nFor power-saving on the go, prefer Sunshine's Idle Shutdown (auto-off after N minutes). Don't combine with WOL — when the PC wakes unexpectedly, every client will immediately raise \"Host Offline\"."
+      },
+      {
+        "q": "Antivirus or Windows Security has quarantined Sunshine / Moonlight. What now?",
+        "a": "temstream is fully open source, but some security products — especially those with \"application hardening\" features — flag Sunshine's Virtual Display Driver and ViGEmBus as suspicious.\n\nSteps:\n\n1. In AV / Windows Security → Protection history, restore Sunshine, ViGEmBus and the Virtual Display Driver, and allow them.\n2. Whitelist Sunshine.exe, SunshineSvc.exe, VirtualDisplayDriver.exe, vigembus.dll, plus Moonlight.exe on Windows clients.\n3. In Windows Defender Firewall → Inbound Rules, add two rules allowing UDP+TCP ports 47984–48010, scoped to \"Private\" networks only.\n4. Restart the Sunshine service and try again.\n\nIf it still blocks, consider switching AV — false positives are common in gaming scenarios, and many community users end up relying on Windows Defender plus a manual whitelist, which is the most stable combination."
+      },
+      {
+        "q": "Can multiple people stream over LAN at the same time?",
+        "a": "Yes. Sunshine supports multiple concurrent client sessions by default (the actual ceiling depends on the gaming PC's hardware — CPU/GPU get squeezed when multiple 4K sessions run side by side).\n\nMulti-user setup:\n\n1. In Sunshine → Users, add one user per household member.\n2. Each client's Moonlight logs in with its own account; the same Sunshine host responds to several logins simultaneously.\n3. Each user adds the Sunshine host through \"Add Host\" — they all share the same host.\n4. For two households sharing, give the gaming PC a wired gigabit link and put the clients on a separate VLAN or enterprise AP so two 4K streams don't fight for bandwidth.\n\nNote: a single Moonlight client cannot open two sessions to the same Sunshine host — multiple instances on the same client only see its previous session. Stagger usage."
+      },
+      {
+        "q": "LAN is working great. How do I add public-internet access?",
+        "a": "Your local configuration stays as is — the missing piece is \"external reachability\". Two common paths:\n\nA) VPN route: deploy a ZeroTier / Tailscale / WireGuard node on (or next to) the gaming PC; have the client device join the same VPN; in Moonlight's \"Add Host\" use the VPN IP, port 47984. The experience is nearly identical to LAN, with ~20–50 ms extra latency.\n\nB) Management-portal route: stand up a portal server; have Sunshine sync the device list to it; clients connect to the portal first, then to the host. No VPN needed, but the portal has to be reachable from clients (public IP / reverse proxy / 8443), and accounts must be registered in the portal too.\n\nBoth can coexist: the same Sunshine instance is reachable directly by LAN Moonlight clients and reports itself to the portal at the same time, so external users see it through the portal while local users keep the LAN-fast path."
+      }
+    ],
+    "quickRef": {
+      "title": "LAN quick reference",
+      "phenomenon": "Symptom",
+      "action": "What to do first",
+      "rows": [
+        {
+          "phenomenon": "Moonlight can't find the gaming PC",
+          "action": "Confirm same subnet; allow UDP+TCP 47984–48010; confirm Sunshine is running; turn off router AP/client isolation."
+        },
+        {
+          "phenomenon": "Connects but laggy / blurry picture",
+          "action": "Wire the gaming PC; switch the client to 5GHz; raise Sunshine's bitrate cap and confirm hardware encoding."
+        },
+        {
+          "phenomenon": "Suddenly disconnects after a few hours",
+          "action": "Bind the gaming PC a fixed IP (DHCP reservation on the router); remove the old entry in Moonlight and re-add by IP."
+        },
+        {
+          "phenomenon": "Moonlight says \"Unauthorized / wrong password\"",
+          "action": "Reset the password in Sunshine → Users; verify the username exists on the client side."
+        },
+        {
+          "phenomenon": "Gaming PC went to sleep, client reports Host Offline",
+          "action": "Disable sleep in Windows Power Options, or enable Sunshine's Idle Shutdown. Don't combine WOL with Idle Shutdown."
+        },
+        {
+          "phenomenon": "AV quarantined Sunshine / Virtual Display Driver",
+          "action": "Whitelist Sunshine.exe, ViGEmBus and the VDisplay driver; open firewall ports 47984–48010."
+        },
+        {
+          "phenomenon": "Need public-internet access",
+          "action": "Use ZeroTier / Tailscale as a VPN overlay, or stand up the management portal — not a LAN problem."
+        }
+      ]
+    }
+  },
   "footer": {
     "tagline": "temstream · an unofficial Chinese-language Moonlight + Sunshine guide",
-    "disclaimer": "This site is not affiliated with NVIDIA, LizardByte, or the Moonlight team. All trademarks belong to their respective owners.",
-    "officialLinks": "Official",
-    "communityLinks": "Community"
+    "disclaimer": "This site is not affiliated with NVIDIA, LizardByte, or the Moonlight team. All trademarks belong to their respective owners."
   }
 }

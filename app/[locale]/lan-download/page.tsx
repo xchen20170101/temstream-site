@@ -116,14 +116,14 @@ function DownloadCard({
   );
 }
 
-export default async function DownloadPage({
+export default async function LanDownloadPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('download');
+  const t = await getTranslations('lanDownload');
   const labels = {
     platform: t('platform'),
     arch: t('arch'),
@@ -146,7 +146,13 @@ export default async function DownloadPage({
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>
           <p className="mt-3 text-slate-300">{t('subtitle')}</p>
         </div>
-        <SectionContext locale={locale} section="wan" />
+        <SectionContext locale={locale as Locale} section="lan" />
+      </section>
+
+      <section className="container-x pb-12">
+        <div className="glass-card border-neon-cyan/30 bg-neon-cyan/[0.04]">
+          <p className="text-sm leading-relaxed text-slate-200">{t('lanOnlyNote')}</p>
+        </div>
       </section>
 
       <section className="container-x pb-12">

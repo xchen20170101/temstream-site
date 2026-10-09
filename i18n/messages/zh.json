@@ -1,10 +1,53 @@
 {
   "nav": {
     "home": "首页",
-    "download": "下载",
-    "tutorial": "教程",
-    "faq": "常见问题",
+    "wan": "广域网",
+    "lan": "局域网",
     "tagline": "Moonlight · Sunshine 中文指南"
+  },
+  "wanOverview": {
+    "eyebrow": "广域网 (WAN) · 出门在外",
+    "title": "广域网串流：出门在外也要玩家里电脑",
+    "subtitle": "通过 VPN 或管理端把两端打通，全程不暴露 Sunshine 端口，适合任意距离串流。",
+    "cards": {
+      "cta": "进入",
+      "download": {
+        "title": "下载",
+        "desc": "Sunshine（服务端）与 Moonlight（客户端）v0.4 双镜像下载。广域网方案的所有软件包都在这一页。"
+      },
+      "tutorial": {
+        "title": "教程",
+        "desc": "4 步注册管理端账号、配置 Sunshine、用 Moonlight 登录并开始串流。"
+      },
+      "faq": {
+        "title": "常见问题",
+        "desc": "账号 / 设备列表 / 隧道 / 黑屏 / 离线 等典型广域网排错问题。"
+      }
+    }
+  },
+  "lanOverview": {
+    "eyebrow": "局域网 (LAN) · 家用首选",
+    "title": "局域网串流：把客厅 PC 串到任意房间",
+    "subtitle": "只用 Sunshine + Moonlight，同一台路由器下 mDNS 自动发现，4K HDR / 120fps 拉到顶，零公网暴露。",
+    "cards": {
+      "cta": "进入",
+      "download": {
+        "title": "下载",
+        "desc": "Sunshine + Moonlight v0.4 同一套安装包，按局域网优先顺序给出。"
+      },
+      "tutorial": {
+        "title": "教程",
+        "desc": "4 步从零开始：装 Sunshine → 设账号 → 装 Moonlight → 自动发现并串流。"
+      },
+      "usage": {
+        "title": "使用说明",
+        "desc": "固定 IP、码率上限、硬件编码、Sunshine 网页配置项——把局域网画质压榨到极致。"
+      },
+      "faq": {
+        "title": "常见问题",
+        "desc": "找不到主机 / 杀软隔离 / 多用户 / 睡眠唤醒 等典型局域网问题。"
+      }
+    }
   },
   "home": {
     "heroEyebrow": "开源 · 低延迟 · 自托管游戏串流",
@@ -39,7 +82,64 @@
         "title": "客户端解码",
         "desc": "Moonlight 在 Windows / Android / iOS / Mac / Linux / TV 上解码视频，并将手柄与键鼠输入回传给服务端。"
       }
-    ]
+    ],
+    "scenes": {
+      "title": "先选场景，再点对应入口",
+      "subtitle": "你在家连同一台路由器，还是人在外面要远程回家？两种场景用的工具、走的链路完全不同——选对了之后下面所有入口都对应到你需要的那一套。",
+      "wan": {
+        "eyebrow": "场景一",
+        "title": "广域网串流",
+        "tagline": "出门在外也要玩家里电脑",
+        "desc": "通过 Tailscale 把两端拉到同一虚拟子网，通过 temstream 管理端做公网访问。延迟比局域网高一些，但只要两端网络过得去，画质不受互联网带宽限制。",
+        "bullets": [
+          "无需公网 IP / 端口映射，VPN 路线最稳",
+          "支持任意距离串流，跨城市也能玩",
+          "可用 temstream 管理端统一管理多台主机"
+        ],
+        "ctaPrimary": "下载（广域网）",
+        "ctaSecondary": "广域网教程",
+        "links": {
+          "tutorial": "教程",
+          "faq": "常见问题"
+        }
+      },
+      "lan": {
+        "eyebrow": "场景二",
+        "title": "局域网串流",
+        "tagline": "把客厅 PC 串到卧室 / 阳台 / 电视",
+        "desc": "只用 Sunshine + Moonlight，免管理端、免端口映射。同子网直连，画质可拉到 4K HDR @ 120fps，延迟最低、画质最高，是家用最推荐的方案。",
+        "bullets": [
+          "mDNS 自动发现游戏 PC，零配置上手",
+          "千兆有线下轻松 4K 120fps / 150 Mbps",
+          "完全免公网暴露，攻击面最小"
+        ],
+        "ctaPrimary": "下载（局域网）",
+        "ctaSecondary": "局域网教程",
+        "links": {
+          "tutorial": "教程",
+          "usage": "使用说明",
+          "faq": "常见问题"
+        }
+      },
+      "vsTitle": "两张卡的差别，一眼版",
+      "vsSubtitle": "如果你只想知道现在应该点哪一张卡，看这张表就够了。",
+      "vs": {
+        "colScenario": "场景",
+        "colNeed": "你需要准备什么",
+        "colPerf": "画质 / 延迟上限",
+        "colSecurity": "是否暴露到公网",
+        "wan": {
+          "need": "Sunshine + Moonlight + Tailscale ，或再加一台管理端",
+          "perf": "中–高画质；延迟受两端互联网链路影响",
+          "security": "取决于方案，VPN 路线免端口暴露"
+        },
+        "lan": {
+          "need": "Sunshine + Moonlight 即可，同一台路由器下",
+          "perf": "可拉到 4K 120fps / 150 Mbps；延迟 < 30ms",
+          "security": "完全在子网内，不暴露到公网"
+        }
+      }
+    }
   },
   "download": {
     "title": "下载",
@@ -190,10 +290,156 @@
       ]
     }
   },
+  "lanDownload": {
+    "title": "局域网下载",
+    "subtitle": "局域网场景下只需要 Sunshine（服务端）和 Moonlight（客户端）两套软件；管理端在局域网中是可选的。下面是同一套 v0.4 安装包，按局域网优先排序：先在游戏 PC 上装 Sunshine，再到客户端设备上装 Moonlight。",
+    "clientTitle": "Moonlight 客户端（局域网）",
+    "clientSubtitle": "运行在你想玩游戏的设备上；局域网里它会通过 mDNS 自动扫描同一子网内的 Sunshine 主机。",
+    "serverTitle": "Sunshine 服务端（局域网）",
+    "serverSubtitle": "运行在你的游戏 PC 上。它会监听 47984 / 47989 端口，并把 HTTP / mDNS 报文广播到当前子网。",
+    "platform": "平台",
+    "arch": "架构",
+    "version": "版本",
+    "size": "大小",
+    "downloadBtn": "下载",
+    "mirrorBtn": "备用镜像",
+    "mirrorHintZh": "主镜像速度慢？切换到 github 镜像下载",
+    "mirrorHintEn": "Mirror slow? Switch to the gitee mirror.",
+    "viewAll": "查看全部版本",
+    "lanOnlyNote": "局域网说明：本页安装包与下载页完全相同；区别在于本节按「同一子网直连、不需要管理端」的最小方案给出顺序。如果之后还要从外网远程串流，再去部署管理端 / VPN / 反向代理。",
+    "sizeMap": {
+      "moonlight-windows-x64": "压缩包，含完整客户端",
+      "moonlight-android-apk": "通用 APK（含 ARM64 / x86_64）",
+      "sunshine-windows-installer": "Windows 安装版（含 ViGEmBus 等驱动）"
+    }
+  },
+  "lanTutorial": {
+    "title": "局域网 4 步快速开始",
+    "subtitle": "只装 Sunshine 与 Moonlight，免管理端、免端口映射，全程在同一台路由器下完成。",
+    "steps": [
+      {
+        "title": "在游戏 PC 上安装 Sunshine",
+        "desc": "下载 Sunshine Windows 安装版并在游戏 PC 上完成安装（默认会一并装上 ViGEmBus 虚拟手柄驱动）。安装完成后系统托盘会出现 Sunshine 图标。"
+      },
+      {
+        "title": "设置登录账号并记下局域网 IP",
+        "desc": "右键托盘图标选择「Open Sunshine」打开内置网页（默认 https://localhost:47984）。首次进入会要求创建一个用户名和密码——这就是之后 Moonlight 登录用的账号，请牢记。同时在另一窗口运行 cmd、输入 ipconfig，把游戏 PC 的局域网 IP（一般是 192.168.x.x 或 10.x.x.x）记下来。"
+      },
+      {
+        "title": "在客户端设备上安装 Moonlight",
+        "desc": "在你想看画面的另一台设备上安装 Moonlight：Windows 客户端用 zip 包解压即可，Android 设备装通用 APK。装好后保证该设备与游戏 PC 在同一台路由器 / 同一 Wi-Fi 子网内（手机优选 5GHz 频段）。"
+      },
+      {
+        "title": "Moonlight 自动发现并开始串流",
+        "desc": "打开 Moonlight，它会通过 mDNS + UDP 47984 在子网内自动扫描 Sunshine。看到「游戏 PC 名字」后点一下，输入第二步设置的用户名和密码即可开始串流。如果列表中没有出现，可以手动 Add Host，填写第二步记下的 IP 地址。"
+      }
+    ]
+  },
+  "lanUsage": {
+    "title": "局域网使用说明",
+    "subtitle": "把 Sunshine 与 Moonlight 调到最适合局域网的设置，把画质压榨到极致。",
+    "section1Title": "一、准备：保证两端在同一局域网",
+    "section1Body": "把游戏 PC（Sunshine）和客户端设备（Moonlight）连到同一台家用路由器即可：\n\n- 最稳的方式：游戏 PC 用网线直连路由器的 LAN 口，客户端也用网线或接 5GHz Wi-Fi。\n- 完全无线也可以，但建议手机 / 平板只接 5GHz；2.4GHz 下高清画质会经常打嗝。\n- 多设备环境建议在路由器后台给游戏 PC 绑一个固定 IP（DHCP 静态分配 / 保留地址），Moonlight 找不到主机时也可以手动输入固定 IP。\n\n路由器层面的 ACL / 访客网络 / AP 隔离常会阻断 mDNS 广播——如果设备在同一个路由器下但 Moonlight 死活找不到主机，请先关掉这些功能。",
+    "section2Title": "二、推荐画质：局域网到底能开多高",
+    "section2Body": "局域网瓶颈只看两端硬件和路由器，不受互联网带宽限制。下面是常见组合下的稳妥设置：\n\n- 千兆有线 + 1080p 显示器：4K HDR @ 60fps、码率 100–150 Mbps 完全没问题；1080p @ 120fps 也几乎不费力。\n- 千兆有线 + 4K 显示器：可以跑到显示器原生分辨率 + 120fps，码率 150–200 Mbps。\n- 5GHz Wi-Fi（信号 ≥ -60dBm）：建议 1080p @ 60fps、码率 50–80 Mbps。\n- 2.4GHz Wi-Fi 或远距离：建议降到 720p / 30Mbps，流畅度优先于清晰度。\n\n如果出现周期性马赛克或延迟尖峰，优先怀疑无线干扰（微波炉、邻居 Wi-Fi、金属阻挡）；把游戏 PC 也接网线往往立竿见影。",
+    "section3Title": "三、Sunshine 网页里要做什么",
+    "section3Body": "访问 https://【游戏 PC 的局域网 IP】:47984，输入第二步设置的用户名密码登录。重点配置三个页面：\n\n① Users：至少有一个用户（即第二步创建的账号），可以再加几个家庭成员。注意用户名不要含中文和特殊字符。\n\n② Applications：把你希望串流的游戏 / 桌面加进来。每一项需要填一个「启动命令」（一般是 exe / bat / 快捷方式 的完整路径），支持设置是否需要在开始前关闭 Sunshine 内置的桌面虚拟显示器。\n\n③ Configuration：硬件编码、码率上限、分辨率、回退软件编码等关键开关都在这里。建议先用默认配置串流一次，再根据实际表现微调。",
+    "section3TipsTitle": "几个关键配置项",
+    "section3Tips": [
+      "encoder：硬件编码优先。NVIDIA 选 NVENC，Intel 选 QuickSync，AMD 选 AMF；无独立显卡时回退到 software（CPU 会比较吃）。",
+      "fps：依客户端显示器而定。60Hz 显示器开 60；120Hz 显示器可开 120；不要超过显示器刷新率。",
+      "bitrate：有线局域网建议 80–150 Mbps；5GHz 无线建议 50–80 Mbps；2.4GHz 建议 ≤ 30 Mbps。",
+      "resolution：开「Match Client Resolution」一般够用；想固定 4K 输出就手动选定。",
+      "audio：默认走 Sunshine 麦克风直通；如果听不到游戏声，先在游戏 PC 上把默认播放设备切到真实扬声器 / 耳机再试。"
+    ],
+    "section4Title": "四、启动游戏、退出、休眠",
+    "section4Body": "在 Moonlight 主页选 Sunshine 主机进入后，会列出 Applications 里添加的游戏。点击游戏名即可在游戏 PC 上启动游戏；退出游戏会回到桌面。\n\n想结束本次串流：在 Moonlight 客户端用退出键（不是直接按电脑上的 Win 键）正常退出；这样游戏 PC 端的 Sunshine 会释放会话，回到原始状态。\n\n游戏 PC 上的关机 / 休眠建议在 Sunshine 网页「Configuration → General」里启用 Idle Shutdown，但设置前确保所有客户端已断连——否则 Moonlight 端会立刻报警『Host Offline』。",
+    "section5Title": "五、健康检查清单",
+    "section5Body": "每次更换硬件、升级显卡驱动或换路由器之后，建议跑一遍下面的清单：\n\n1. 游戏 PC 上 Sunshine 托盘图标是否还在（右键能看到 Config / Open Sunshine）；\n2. Sunshine 网页能否用 https://【局域网 IP】:47984 在另一台机器上打开；\n3. Moonlight 能不能自动发现 Sunshine；\n4. 选一个轻量级游戏（如《植物大战僵尸》）串流 5 分钟，肉眼检查画面与声音；\n5. 看 Sunshine / Moonlight 日志，重点看是否出现 GPU 驱动报错。\n\n任何一步异常，回到本节对应段落排查即可。"
+  },
+  "lanFaq": {
+    "title": "局域网常见问题",
+    "subtitle": "围绕同一子网、自动发现、固定 IP、码率选择、本地权限等典型局域网问题。",
+    "items": [
+      {
+        "q": "局域网场景下需要装管理端吗？",
+        "a": "不需要。局域网里只要 Sunshine（游戏 PC 上）和 Moonlight（客户端设备上）就够了，整套流程不需要 temstream 管理端。\n\n管理端是为「跨网络 / 外网」准备的：当多台机器不在同一子网，或者要从公网远程回家时，才需要部署管理端并让 Sunshine 把设备列表同步过去。\n\n因此如果你只用局域网：只装 Sunshine + Moonlight，按本节 4 步教程即可。如果将来要扩展到外网，再去部署管理端或使用 ZeroTier / Tailscale 等 VPN。"
+      },
+      {
+        "q": "Moonlight 死活找不到游戏 PC，先查哪几样？",
+        "a": "按这个顺序排查（多数问题在这三步就解决）：\n\n1. 同子网：客户端设备与游戏 PC 的 IP 前三段相同、网关相同。例如都是 192.168.1.x 或都是 10.0.0.x。\n2. 防火墙：Windows Defender 防火墙默认放行 Sunshine，但部分第三方杀毒 / VPN 客户端会拦截 UDP 47984、TCP 47984/47989。把 Sunshine 与 Moonlight 加入白名单、放行 47984–48010 端口（UDP+TCP）。\n3. Sunshine 在运行：右下角托盘图标在，右键 → Open Sunshine 能打开 https://localhost:47984。\n\n以上都确认还是找不到，再检查：\n\n- 路由器访客网络 / AP 隔离 / 客户端隔离 —— 这些功能会阻断 mDNS 广播，需要关掉；\n- 多个网卡 / VPN 虚拟网卡 —— Sunshine 默认按 IP 选择接口，被错误绑定到虚拟网卡可能收不到 UDP 广播；\n- 游戏 PC 进入睡眠 —— 唤醒后再试，或在电源设置里禁用睡眠。"
+      },
+      {
+        "q": "能给游戏 PC 绑固定 IP 吗？怎么绑？",
+        "a": "强烈建议绑定。固定 IP 让 Moonlight 即便 mDNS 失败也能通过 Add Host 手动添加主机；否则 DHCP 续约后 IP 变化，Moonlight 列表里就会出现「幽灵主机」。\n\n两种绑法都常用：\n\n路由器侧（推荐）：登录家用路由器后台，找到「DHCP 静态分配 / 地址预留」，把游戏 PC 的 MAC 地址绑到一个不冲突的 IP（如 192.168.1.20），重启路由器生效。\n\nWindows 自带（备选）：控制面板 → 网络和共享中心 → 适配器设置 → 当前网卡 → 属性 → IPv4 → 选「使用下面的 IP 地址」，手动填 IP / 子网掩码 / 默认网关 / DNS。要小心：填错会导致整个 PC 无网，路由器侧更安全。"
+      },
+      {
+        "q": "局域网能跑到多高的画质和帧率？",
+        "a": "局域网没有互联网带宽瓶颈，主要看两端硬件 + 路由器。常见上限参考：\n\n- 千兆有线 + 普通 1080p 显示器：4K HDR @ 60fps / 150 Mbps 都没问题，1080p @ 120fps 也轻松。\n- 千兆有线 + 4K 显示器：可以跑到显示器原生分辨率 + 120fps，码率 150–200 Mbps。\n- 5GHz Wi-Fi（信号好）：1080p @ 60fps / 80 Mbps 比较稳；上 4K 多半会出现偶发卡顿。\n- 2.4GHz Wi-Fi 或远距离：720p / 30Mbps 以下更稳，流畅优先于清晰。\n\n如果你看到的画面比预期糊 / 抖动，先到 Sunshine 网页里把码率上限调高、编码器改成硬件编码试试。"
+      },
+      {
+        "q": "需要把端口暴露到公网（端口映射 / DMZ）吗？",
+        "a": "不需要。这是个非常重要的安全要点：\n\n- 局域网里：所有流量的目的地都是同一子网内的设备，不需要任何路由器配置。\n- 公网访问：这才是需要端口转发 / DMZ / 反向代理的场景，但同时引入了很大攻击面。temstream 推荐的做法是先用 ZeroTier / Tailscale / 自建 VPN 把两端拉到同一个虚拟子网，然后照搬局域网流程。\n\n简单记：局域网开 Sunshine 是不需要碰路由器配置的；如果有人让你在路由器上转发端口，那是在做公网访问，请用专门的「广域网方案」而不是局域网方案。"
+      },
+      {
+        "q": "为什么一连上就卡 / 画面突然变糊？",
+        "a": "在局域网里「卡」几乎只来自三类原因：\n\n1. 无线信号波动：5GHz 信号随距离、阻挡大幅衰减。把游戏 PC 接网线，或把客户端拉到路由器附近，问题通常立刻消失。\n2. 编码器没工作 / 回退到软件编码：打开 Sunshine 网页 → Configuration，看顶部是否显示「Using hardware encoder: YES」。如果显示 NO，说明 NVENC / QuickSync / AMF 没生效，可能是显卡驱动异常、VBUS 损坏或被独显禁用了。\n3. 系统资源被打满：游戏 PC 后台跑着大文件拷贝、压缩、浏览器一堆标签，CPU/GPU 都在抖。先停掉后台再串流。\n\n排除法建议：先有线、关掉所有后台、硬件编码开启，三步逐一恢复，串流表现通常就能回到 LAN 应有的水平。"
+      },
+      {
+        "q": "游戏 PC 进入睡眠后 Moonlight 提示「主机离线」，怎么办？",
+        "a": "两条路：\n\n让客户端来唤醒：在 Sunshine 网页 Configuration → General 里启用「Wake-on-LAN」，并在 BIOS 与网卡属性里允许通过局域网唤醒（Windows 默认关闭，需要打开「允许此设备唤醒计算机」）。Moonlight 端的支持有限，多数情况下还需要一个独立的 WOL 工具。\n\n不让它睡：电源设置（控制面板 → 电源选项 → 选择电源按钮的功能 → 更改当前不可用的设置 → 把「睡眠」设为「从不」）。这是最直接的方式，适合家用始终开机的游戏 PC。\n\n如果只是想出门时省电，切到 Sunshine 的 Idle Shutdown（达到空闲时长自动关机 / 休眠）。但不推荐搭配 WOL 二者同时使用——一旦被误唤醒，所有客户端都会跳出来说「主机离线」。"
+      },
+      {
+        "q": "杀毒软件 / 安全中心把 Sunshine 或 Moonlight 隔离了，怎么处理？",
+        "a": "temstream 全套都是开源软件，但有些安全产品（特别是带「应用加固」功能的）会把 Sunshine 的虚拟显示器驱动（Virtual Display Driver）、ViGEmBus 之类识别成可疑项目并加入隔离区。\n\n处理步骤：\n\n1. 在杀软 / Windows 安全中心 → 隔离 / 威胁历史，把 Sunshine、ViGEmBus、Virtual Display Driver 全部「恢复并允许」；\n2. 把下列可执行文件加入白名单：Sunshine.exe、SunshineSvc.exe、VirtualDisplayDriver.exe、vigembus.dll；Moonlight.exe（如果用 Windows 客户端）；\n3. 在 Windows Defender 防火墙 → 入站规则，新增两条 UDP+TCP 端口 47984-48010 的「允许」规则，作用域只勾「专用」网络；\n4. 重新启动 Sunshine 服务，再次串流。\n\n如果仍旧被拦截，可能需要切到另外一个杀软（毕竟杀软误杀在游戏场景里很常见）；社区里很多人最终只保留 Windows Defender 配合手动白名单，反而最稳。"
+      },
+      {
+        "q": "可以在局域网里给多人同时串流吗？",
+        "a": "可以。Sunshine 默认同时支持多个客户端会话（具体取决于游戏 PC 的硬件：CPU/GPU 在多人同时 4K 串流时会吃紧）。\n\n多用户配置要点：\n\n1. Sunshine → Users 里给每个家庭成员各加一个用户；\n2. 给每个客户端设备的 Moonlight 登录各自的账号（同一份 Sunshine 主机可同时响应多个登录）；\n3. 每个用户各自在 Moonlight 上 Add Host，共享同一个 Sunshine 主机即可；\n4. 如果两家共用，建议游戏 PC 用千兆有线 + 路由器单独划 VLAN 或接企业级 AP，避免 4K 双开会撞带宽。\n\n注意：Moonlight 客户端不能同时把同一台 Sunshine 主机打开两个会话——同一客户端的多开只能看到自己上一次的会话，请错开使用。"
+      },
+      {
+        "q": "局域网跑得好好的，突然要从外面远程回家，要怎么改？",
+        "a": "本地化设置一行都不动；要补的是「外部连通性」。常见两条路：\n\nA) VPN 路线：游戏 PC 上或路由器上部署 ZeroTier / Tailscale / WireGuard 节点；客户端设备加入同一个 VPN 网络；Moonlight Add Host 时填 VPN IP，端口仍是 47984。整体体验与局域网几乎一样，只是延迟会多 20–50ms。\n\nB) 管理端路线：单独搭一台管理端服务器，让 Sunshine 把设备列表报到管理端上；客户端先连管理端、再去对应的主机。这种方案下不需要 VPN，但需要管理端能被客户端直接访问（公网 IP / 反代 / 8443 端口），账号也在管理端注册一遍。\n\n这两条路各有取舍，可以共存：同一台 Sunshine 既可以被局域网设备直接 Moonlight 访问，又可以同时把自身报到管理端，对外网用户呈现。"
+      }
+    ],
+    "quickRef": {
+      "title": "局域网一页速查",
+      "phenomenon": "现象",
+      "action": "先做什么",
+      "rows": [
+        {
+          "phenomenon": "Moonlight 找不到游戏 PC",
+          "action": "确认同子网；放行 UDP+TCP 47984-48010；确认 Sunshine 在运行；关闭路由器「客户端隔离 / AP 隔离」"
+        },
+        {
+          "phenomenon": "能连上但延迟高 / 画面糊",
+          "action": "游戏 PC 改网线；客户端走 5GHz；阳光里把码率调高、确认走的是硬件编码"
+        },
+        {
+          "phenomenon": "过几小时突然连不上",
+          "action": "游戏 PC 绑固定 IP（路由器 DHCP 静态分配）；Moonlight 列表里删掉旧的、按 IP 重新添加"
+        },
+        {
+          "phenomenon": "Moonlight 报「未授权 / 密码错误」",
+          "action": "Sunshine → Users 重置密码；客户端确认账号存在"
+        },
+        {
+          "phenomenon": "游戏 PC 睡眠后客户端提示「主机离线」",
+          "action": "电源选项禁用睡眠，或启用 Sunshine 的 Idle Shutdown；不建议同时开 WOL"
+        },
+        {
+          "phenomenon": "杀软隔离 Sunshine / Virtual Display Driver",
+          "action": "在杀软白名单里加上 Sunshine.exe、ViGEmBus、VDisplay 驱动；防火墙放行 47984-48010"
+        },
+        {
+          "phenomenon": "外网访问",
+          "action": "不在局域网范围；用 ZeroTier/Tailscale 走 VPN，或另搭管理端"
+        }
+      ]
+    }
+  },
   "footer": {
     "tagline": "temstream · 一个非官方 Moonlight + Sunshine 中文指南站点",
-    "disclaimer": "本站与 NVIDIA、LizardByte、Moonlight 官方团队无任何隶属关系。所有商标归各自所有者所有。",
-    "officialLinks": "官方资源",
-    "communityLinks": "社区"
+    "disclaimer": "本站与 NVIDIA、LizardByte、Moonlight 官方团队无任何隶属关系。所有商标归各自所有者所有。"
   }
 }
