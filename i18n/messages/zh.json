@@ -145,47 +145,22 @@
   },
   "download": {
     "title": "下载",
-    "subtitle": "所有下载均来自 temstream_release v0.4 双镜像（默认 gitee，备用 github）。建议先在 PC 上安装 Sunshine，再到设备上安装 Moonlight。",
+    "subtitle": "所有下载均来自 temstream_release v0.4 双镜像（默认 gitee，备用 github）。建议先在游戏 PC 上安装 Sunshine，再到客户端设备上安装 Moonlight。",
     "seoTitle": "下载 Sunshine 服务端与 Moonlight 客户端 · temstream",
     "seoDescription": "Sunshine Windows 服务端与 Moonlight Windows / Android 客户端 v0.4 双镜像下载（gitee + GitHub）。广域网方案官方构建，建议先装 Sunshine 再装 Moonlight。",
     "clientTitle": "Moonlight 客户端",
     "clientSubtitle": "运行在你想要玩游戏的设备上。Windows / Android 优先支持。",
     "serverTitle": "Sunshine 服务端",
     "serverSubtitle": "运行在你的游戏 PC 上。Windows 当前为唯一官方支持的 PC 服务端。",
-    "platform": "平台",
-    "arch": "架构",
-    "version": "版本",
-    "size": "大小",
     "downloadBtn": "下载",
     "mirrorBtn": "备用镜像",
     "mirrorHintZh": "主镜像速度慢？切换到 github 镜像下载",
     "mirrorHintEn": "Mirror slow? Switch to the gitee mirror.",
     "viewAll": "查看全部版本",
-    "items": {
-      "moonlight-windows-x64": {
-        "label": "Moonlight Windows 客户端",
-        "platform": "Windows",
-        "arch": "AMD64 (zip)",
-        "version": "v0.4"
-      },
-      "moonlight-android-apk": {
-        "label": "Moonlight Android 客户端",
-        "platform": "Android",
-        "arch": "universal APK",
-        "version": "v0.4"
-      },
-      "sunshine-windows-installer": {
-        "label": "Sunshine Windows 服务端",
-        "platform": "Windows",
-        "arch": "AMD64 (installer)",
-        "version": "v0.4"
-      }
-    },
-    "sizeMap": {
-      "moonlight-windows-x64": "压缩包，含完整客户端",
-      "moonlight-android-apk": "通用 APK（含 ARM64 / x86_64）",
-      "sunshine-windows-installer": "Windows 安装版（含 ViGEmBus 等驱动）"
-    }
+    "primaryFrom": "主镜像：",
+    "jumpNavAria": "页内跳转",
+    "installOrderTitle": "建议安装顺序",
+    "installOrderBody": "① 先在游戏 PC 上装 Sunshine。② 再到客户端设备（手机 / 另一台电脑）装 Moonlight，登录后即可串流。"
   },
   "tutorial": {
     "title": "安全又简单：4 步搞定 Sunshine 串流",
@@ -307,21 +282,16 @@
     "clientSubtitle": "运行在你想玩游戏的设备上；打开后在其登录页直接填入 Sunshine 的局域网 IP 与访问密码即可连接。",
     "serverTitle": "Sunshine 服务端（局域网）",
     "serverSubtitle": "运行在你的游戏 PC 上。它会监听局域网端口，并把 HTTP 服务暴露给同一子网内的 Moonlight。",
-    "platform": "平台",
-    "arch": "架构",
-    "version": "版本",
-    "size": "大小",
     "downloadBtn": "下载",
     "mirrorBtn": "备用镜像",
     "mirrorHintZh": "主镜像速度慢？切换到 github 镜像下载",
     "mirrorHintEn": "Mirror slow? Switch to the gitee mirror.",
     "viewAll": "查看全部版本",
     "lanOnlyNote": "局域网说明：本页安装包与下载页完全相同；区别在于本节按「同一子网直连、不需要管理端」的最小方案给出顺序。如果之后还要从外网远程串流，再去部署管理端 / VPN / 反向代理。",
-    "sizeMap": {
-      "moonlight-windows-x64": "压缩包，含完整客户端",
-      "moonlight-android-apk": "通用 APK（含 ARM64 / x86_64）",
-      "sunshine-windows-installer": "Windows 安装版（含 ViGEmBus 等驱动）"
-    }
+    "primaryFrom": "主镜像：",
+    "jumpNavAria": "页内跳转",
+    "installOrderTitle": "建议安装顺序",
+    "installOrderBody": "① 先在游戏 PC 上装 Sunshine 并设置访问密码。② 在客户端设备的 Moonlight 登录页直接填入 Sunshine 的局域网 IP 与密码即可。"
   },
   "lanTutorial": {
     "title": "局域网 4 步快速开始",

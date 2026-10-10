@@ -152,40 +152,15 @@
     "clientSubtitle": "Runs on the device you want to play on. Windows and Android are first-class targets.",
     "serverTitle": "Sunshine host",
     "serverSubtitle": "Runs on your gaming PC. Windows is the only officially supported PC host today.",
-    "platform": "Platform",
-    "arch": "Arch",
-    "version": "Version",
-    "size": "Size",
     "downloadBtn": "Download",
     "mirrorBtn": "Mirror",
     "mirrorHintZh": "Mirror slow? Switch to the gitee mirror.",
     "mirrorHintEn": "Main mirror slow? Switch to the GitHub mirror.",
     "viewAll": "View all releases",
-    "items": {
-      "moonlight-windows-x64": {
-        "label": "Moonlight Windows client",
-        "platform": "Windows",
-        "arch": "AMD64 (zip)",
-        "version": "v0.4"
-      },
-      "moonlight-android-apk": {
-        "label": "Moonlight Android client",
-        "platform": "Android",
-        "arch": "universal APK",
-        "version": "v0.4"
-      },
-      "sunshine-windows-installer": {
-        "label": "Sunshine Windows host",
-        "platform": "Windows",
-        "arch": "AMD64 (installer)",
-        "version": "v0.4"
-      }
-    },
-    "sizeMap": {
-      "moonlight-windows-x64": "Zip archive, full client",
-      "moonlight-android-apk": "Universal APK (ARM64 / x86_64)",
-      "sunshine-windows-installer": "Windows installer (includes ViGEmBus, etc.)"
-    }
+    "primaryFrom": "Primary:",
+    "jumpNavAria": "On this page",
+    "installOrderTitle": "Suggested install order",
+    "installOrderBody": "① Install Sunshine on your gaming PC. ② Then install Moonlight on your client device (phone or another PC) and sign in to start streaming."
   },
   "tutorial": {
     "title": "Safe and simple: stream with Sunshine in 4 steps",
@@ -307,21 +282,16 @@
     "clientSubtitle": "Runs on the device you want to play on. Open the login page, type in Sunshine's LAN IP and access password, and you're in.",
     "serverTitle": "Sunshine host (LAN)",
     "serverSubtitle": "Runs on your gaming PC. It listens on its LAN port and exposes an HTTP service to Moonlight on the same subnet.",
-    "platform": "Platform",
-    "arch": "Arch",
-    "version": "Version",
-    "size": "Size",
     "downloadBtn": "Download",
     "mirrorBtn": "Mirror",
     "mirrorHintZh": "Main mirror slow? Switch to the gitee mirror.",
     "mirrorHintEn": "Main mirror slow? Switch to the GitHub mirror.",
     "viewAll": "View all releases",
     "lanOnlyNote": "LAN note: the binaries on this page are identical to those on the Download page. What changes is the deployment order — direct same-subnet pairing, with no management portal in the loop. If you later need public-internet access, layer the management portal, a VPN, or a reverse proxy on top.",
-    "sizeMap": {
-      "moonlight-windows-x64": "Zip archive, full client",
-      "moonlight-android-apk": "Universal APK (ARM64 / x86_64)",
-      "sunshine-windows-installer": "Windows installer (includes ViGEmBus, etc.)"
-    }
+    "primaryFrom": "Primary:",
+    "jumpNavAria": "On this page",
+    "installOrderTitle": "Suggested install order",
+    "installOrderBody": "① Install Sunshine on your gaming PC and set an access password. ② On the client device, open Moonlight and type Sunshine's LAN IP + password on the login page."
   },
   "lanTutorial": {
     "title": "Start LAN streaming in 4 steps",
