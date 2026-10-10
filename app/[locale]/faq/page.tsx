@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { makeAlternates, ogLocale } from '@/lib/seo';
+import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel, pageCrumbLabel } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
 import { JsonLd } from '@/lib/jsonld';
-import { buildFaqPageSchema, type Locale } from '@/lib/jsonld-schemas';
+import { buildFaqPageSchema, buildBreadcrumbListSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -59,6 +59,18 @@ export default async function FaqPage({
       <JsonLd
         data={buildFaqPageSchema(items, locale as Locale, '/faq', t('title'), t('subtitle'))}
         id="faq-schema"
+      />
+      {/* BreadcrumbList JSON-LD. WAN FAQ: "Home / WAN / FAQ". */}
+      <JsonLd
+        data={buildBreadcrumbListSchema(
+          [
+            { path: '', name: homeCrumbLabel(locale) },
+            { path: '/wan', name: sectionCrumbLabel(locale, 'wan') },
+            { path: '/faq', name: pageCrumbLabel(locale, 'faq') },
+          ],
+          locale as Locale,
+        )}
+        id="faq-breadcrumb"
       />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">

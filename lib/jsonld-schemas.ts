@@ -26,7 +26,7 @@
  *   proprietary components, this needs to become an `Offer` plus a
  *   per-component license.
  */
-import { SITE_URL } from './site-config';
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_LOGO_PATH } from './site-config';
 
 /* ─── Shared types ──────────────────────────────────────────────────────── */
 
@@ -196,5 +196,120 @@ export function buildSoftwareApplicationSchema(
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
     },
+  };
+}
+
+/* ─── Organization ───────────────────────────────────────────────────────── */
+
+/**
+ * Build the site-wide `Organization` JSON-LD payload. Mount this from
+ * the locale-less root layout so the same entity is published once
+ * across every page; Google's knowledge graph builder deduplicates by
+ * `url` + `name` so a single canonical payload is enough.
+ *
+ * Why this is conservative:
+ *
+ * - We do not include `logo` dimensions. Schema.org docs make
+ *   dimensions optional, and supplying wrong ones is a soft quality
+ *   signal. The icon is square; if you need width/height later,
+ *   re-render the icon at the exact pixel size and add it here.
+ * - We do not include `address` / `founder` / `foundingDate` /
+ *   `contactPoint`. temstream is an unofficial community project;
+ *   we do not have a registered business address to publish. Adding
+ *   invented values here is the kind of thing Google's manual
+ *   action team flags.
+ * - We do not list `sameAs` (social profile URLs) until the project
+ *   actually has a GitHub org / Twitter / Bilibili account to point
+ *   at. Empty arrays / placeholders are worse than no array.
+ */
+export function buildOrganizationSchema(): Thing {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_URL}#organization`,
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}${SITE_LOGO_PATH}`,
+    description: SITE_DESCRIPTION,
+  };
+}
+
+/* ─── WebSite ────────────────────────────────────────────────────────────── */
+
+/**
+ * Build a per-locale `WebSite` JSON-LD payload. This is the schema
+ * that powers the "sitelinks search box" rich result in Google.
+ *
+ * `SearchAction` is intentionally omitted: temstream has no on-site
+ * search engine, so pointing `potentialAction.target` at a
+ * non-existent search template would either 404 the user or — worse
+ * — let Google index a search-results page that we never render.
+ * When/if we add a search route, re-introduce `potentialAction` with
+ * a real URL template like `/<locale>/search?q={search_term_string}`.
+ *
+ * `@id` uses the locale-specific root so that the Chinese and
+ * English WebSite payloads are treated as separate entities by the
+ * knowledge graph; this is what Google's documentation recommends
+ * for multi-locale sites.
+ */
+export function buildWebSiteSchema(locale: Locale): Thing {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/${locale}#website`,
+    inLanguage: locale,
+    name: locale === 'zh' ? 'temstream · Moonlight + Sunshine 中文指南' : `${SITE_NAME} · Moonlight + Sunshine guide`,
+    url: `${SITE_URL}/${locale}`,
+    description: SITE_DESCRIPTION,
+    publisher: { '@id': `${SITE_URL}#organization` },
+  };
+}
+
+/* ─── BreadcrumbList ──────────────────────────────────────────────────────── */
+
+export interface BreadcrumbInput {
+  /**
+   * Locale-free path under the site root, e.g. `/wan` or `/download`.
+   * Pass the empty string `''` for the locale root (the home page).
+   */
+  path: string;
+  /**
+   * Localized display name for the crumb. Use the same text shown
+   * in the visible breadcrumb UI so visible-vs-schema mismatches
+   * never happen.
+   */
+  name: string;
+}
+
+/**
+ * Build a `BreadcrumbList` JSON-LD payload. Each input becomes one
+ * `ListItem` with sequential `position` (1-indexed, mandatory).
+ *
+ * Convention used by this site:
+ *   - Crumb 1: locale root ("首页" / "Home")
+ *   - Crumb 2: section root ("广域网" / "WAN" or "局域网" / "LAN")
+ *   - Crumb 3: leaf page ("下载" / "Download", etc.)
+ *
+ * The `item` URL is resolved against `SITE_URL` so the breadcrumb
+ * points at a canonical absolute URL even on the Vercel preview
+ * domain.
+ */
+export function buildBreadcrumbListSchema(
+  items: BreadcrumbInput[],
+  locale: Locale,
+): Thing {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    inLanguage: locale,
+    itemListElement: items.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      // `item` (not `url`) is the Schema.org-recognised property for
+      // the breadcrumb target URL; the validator (Google's Rich
+      // Results Test) flags `ListItem` nodes that use `url` instead.
+      item: `${SITE_URL}/${locale}${c.path}`,
+    })),
   };
 }

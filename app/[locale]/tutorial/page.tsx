@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { makeAlternates, ogLocale } from '@/lib/seo';
+import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel, pageCrumbLabel } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
 import { JsonLd } from '@/lib/jsonld';
-import { buildHowToSchema, type Locale } from '@/lib/jsonld-schemas';
+import { buildHowToSchema, buildBreadcrumbListSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -59,6 +59,19 @@ export default async function TutorialPage({
           t('subtitle'),
         )}
         id="tutorial-schema"
+      />
+      {/* BreadcrumbList JSON-LD. WAN tutorial: "Home / WAN /
+          Tutorial". */}
+      <JsonLd
+        data={buildBreadcrumbListSchema(
+          [
+            { path: '', name: homeCrumbLabel(locale) },
+            { path: '/wan', name: sectionCrumbLabel(locale, 'wan') },
+            { path: '/tutorial', name: pageCrumbLabel(locale, 'tutorial') },
+          ],
+          locale as Locale,
+        )}
+        id="tutorial-breadcrumb"
       />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">

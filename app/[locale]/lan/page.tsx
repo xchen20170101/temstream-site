@@ -2,9 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionContext } from '@/components/SectionContext';
-import { makeAlternates, ogLocale } from '@/lib/seo';
-
-type Locale = 'en' | 'zh';
+import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel } from '@/lib/seo';
+import { JsonLd } from '@/lib/jsonld';
+import { buildBreadcrumbListSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -145,6 +145,18 @@ export default async function LanOverviewPage({
 
   return (
     <>
+      {/* BreadcrumbList JSON-LD. LAN overview sits one level below
+          the home page, so the trail is "Home / LAN". */}
+      <JsonLd
+        data={buildBreadcrumbListSchema(
+          [
+            { path: '', name: homeCrumbLabel(locale) },
+            { path: '/lan', name: sectionCrumbLabel(locale, 'lan') },
+          ],
+          locale as Locale,
+        )}
+        id="lan-breadcrumb"
+      />
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 grid-bg" aria-hidden />
         <div className="absolute inset-0 bg-hero-radial" aria-hidden />

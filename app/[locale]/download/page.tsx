@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { downloads, mirrorUrl, primaryUrl, releasesUrlFor } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
-import { makeAlternates, ogLocale } from '@/lib/seo';
+import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel, pageCrumbLabel } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
 import { JsonLd } from '@/lib/jsonld';
-import { buildSoftwareApplicationSchema, type Locale } from '@/lib/jsonld-schemas';
+import { buildSoftwareApplicationSchema, buildBreadcrumbListSchema, type Locale } from '@/lib/jsonld-schemas';
 
 /**
  * Map each `DownloadItem.id` to a Schema.org `operatingSystem`
@@ -212,6 +212,19 @@ export default async function DownloadPage({
           '/download',
         )}
         id="download-schema"
+      />
+      {/* BreadcrumbList JSON-LD. WAN download sits two levels
+          below the home page: "Home / WAN / Download". */}
+      <JsonLd
+        data={buildBreadcrumbListSchema(
+          [
+            { path: '', name: homeCrumbLabel(locale) },
+            { path: '/wan', name: sectionCrumbLabel(locale, 'wan') },
+            { path: '/download', name: pageCrumbLabel(locale, 'download') },
+          ],
+          locale as Locale,
+        )}
+        id="download-breadcrumb"
       />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">

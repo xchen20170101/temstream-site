@@ -47,3 +47,51 @@ export function localeUrlPairs(path: string): { locale: Locale; url: string }[] 
     url: `${SITE_URL}/${l}${normalised}`,
   }));
 }
+
+/* ─── Breadcrumb label helpers ───────────────────────────────────────────── */
+
+/**
+ * Short, stable breadcrumb label for the locale root. Used in the
+ * JSON-LD `BreadcrumbList` payload; the same string is reused by
+ * every page so visible-vs-schema text never diverges.
+ *
+ * The visible UI does not currently render a breadcrumb trail; the
+ * schema is published ahead of the visual component so Google can
+ * start recognising the site hierarchy as soon as possible.
+ */
+export function homeCrumbLabel(locale: string): string {
+  return locale === 'zh' ? '首页' : 'Home';
+}
+
+/**
+ * Short breadcrumb label for a top-level section. The full `title`
+ * field on `wanOverview` / `lanOverview` is sentence-length and reads
+ * awkwardly in a breadcrumb (e.g. "广域网串流：出门在外也要玩家里
+ * 电脑"); these short labels fit.
+ */
+export function sectionCrumbLabel(
+  locale: string,
+  section: 'wan' | 'lan',
+): string {
+  if (section === 'wan') {
+    return locale === 'zh' ? '广域网' : 'WAN';
+  }
+  return locale === 'zh' ? '局域网' : 'LAN';
+}
+
+/**
+ * Short breadcrumb label for a leaf page. Mirrors the visible H1
+ * title as closely as a breadcrumb can — the i18n `title` field for
+ * `tutorial` is "安全又简单：4 步搞定 Sunshine 串流" which is too
+ * long, so we keep a deliberately short label here.
+ */
+export function pageCrumbLabel(
+  locale: string,
+  key: 'download' | 'tutorial' | 'faq',
+): string {
+  const map: Record<'zh' | 'en', Record<'download' | 'tutorial' | 'faq', string>> = {
+    zh: { download: '下载', tutorial: '教程', faq: '常见问题' },
+    en: { download: 'Download', tutorial: 'Tutorial', faq: 'FAQ' },
+  };
+  return map[locale === 'zh' ? 'zh' : 'en'][key];
+}

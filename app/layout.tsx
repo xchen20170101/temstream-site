@@ -3,6 +3,8 @@ import './globals.css';
 import { routing } from '@/i18n/routing';
 import { SITE_URL } from '@/lib/site-config';
 import { ogLocale } from '@/lib/seo';
+import { JsonLd } from '@/lib/jsonld';
+import { buildOrganizationSchema } from '@/lib/jsonld-schemas';
 
 /**
  * Root layout only renders `<html>`/`<body>` inside `app/[locale]/layout.tsx`
@@ -66,6 +68,39 @@ export const metadata: Metadata = {
     icon: '/icon',
     apple: '/apple-icon',
   },
+  // Search-engine ownership tokens. Each platform returns a per-site
+  // token after the verification step (HTML tag, DNS TXT, or file
+  // upload). We read from `NEXT_PUBLIC_*` env vars so the same code
+  // path works in local dev (no token → no meta tag) and in
+  // production (token present → meta tag emitted).
+  //
+  // To activate: set the relevant env var in Vercel
+  // (Project → Settings → Environment Variables) and redeploy.
+  //
+  //   - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` → Google Search Console
+  //   - `NEXT_PUBLIC_BAIDU_SITE_VERIFICATION` → 百度搜索资源平台
+  //   - `NEXT_PUBLIC_BING_SITE_VERIFICATION`  → Bing Webmaster Tools
+  //   - `NEXT_PUBLIC_YANDEX_VERIFICATION`     → Yandex Webmaster
+  //
+  // Both Baidu and Bing are set under `other` because Next.js's
+  // `MetadataVerification` type only ships typed keys for `google`,
+  // `yahoo`, `yandex`, and `me`. `other` still renders the
+  // `<meta name="<key>-site-verification" content="…">` tag that
+  // each platform's verification tool expects.
+  verification: (() => {
+    const out: NonNullable<Metadata['verification']> = {};
+    const g = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+    const b = process.env.NEXT_PUBLIC_BAIDU_SITE_VERIFICATION;
+    const bi = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+    const y = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION;
+    if (g) out.google = g;
+    if (y) out.yandex = y;
+    const other: Record<string, string> = {};
+    if (b) other['baidu-site-verification'] = b;
+    if (bi) other['msvalidate.01'] = bi;
+    if (Object.keys(other).length > 0) out.other = other;
+    return Object.keys(out).length > 0 ? out : undefined;
+  })(),
 };
 
 /**
@@ -85,6 +120,17 @@ export const viewport: Viewport = {
 // Root layout is intentionally empty: the [locale]/layout.tsx renders the
 // <html> and <body> per locale (required pattern for next-intl + static
 // export).
+//
+// We still mount the global `Organization` JSON-LD here so the same
+// site-identity payload is published on every page. Google's
+// knowledge-graph builder deduplicates by `url` + `name`, so a single
+// canonical payload is enough — we don't need to re-render it per
+// page or per locale.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      {children}
+      <JsonLd data={buildOrganizationSchema()} id="organization-schema" />
+    </>
+  );
 }
