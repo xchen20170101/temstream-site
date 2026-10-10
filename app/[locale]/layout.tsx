@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { JsonLd } from '@/lib/jsonld';
-import { buildWebSiteSchema, type Locale } from '@/lib/jsonld-schemas';
+import { buildOrganizationSchema, buildWebSiteSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -28,13 +28,21 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        {/* Per-locale `WebSite` JSON-LD. Mounted in the locale
-            layout (not the root layout) because the schema needs
-            the active locale for its `inLanguage` and `@id`
-            fields. The global `Organization` is mounted in the
-            root layout, so every page already inherits a
-            `publisher` relationship via the `WebSite.publisher`
-            `@id` we set there. */}
+        {/* Site-wide JSON-LD payloads. Both the `Organization` (global
+            site identity) and the per-locale `WebSite` schema are
+            mounted here inside `<body>` because the root layout does
+            not render `<html>` or `<body>` (next-intl + static-export
+            pattern), and the document tree only allows a single
+            root. Co-locating the two payloads in the body keeps the
+            rendered HTML valid; Google accepts JSON-LD in either
+            `<head>` or `<body>`. The `Organization` payload is
+            deduplicated by Google's knowledge-graph builder, so the
+            same canonical schema is published exactly once per
+            page. */}
+        <JsonLd
+          data={buildOrganizationSchema()}
+          id="organization-schema"
+        />
         <JsonLd
           data={buildWebSiteSchema(locale as Locale)}
           id="website-schema"

@@ -3,8 +3,6 @@ import './globals.css';
 import { routing } from '@/i18n/routing';
 import { SITE_URL } from '@/lib/site-config';
 import { ogLocale } from '@/lib/seo';
-import { JsonLd } from '@/lib/jsonld';
-import { buildOrganizationSchema } from '@/lib/jsonld-schemas';
 
 /**
  * Root layout only renders `<html>`/`<body>` inside `app/[locale]/layout.tsx`
@@ -121,16 +119,22 @@ export const viewport: Viewport = {
 // <html> and <body> per locale (required pattern for next-intl + static
 // export).
 //
-// We still mount the global `Organization` JSON-LD here so the same
-// site-identity payload is published on every page. Google's
-// knowledge-graph builder deduplicates by `url` + `name`, so a single
-// canonical payload is enough — we don't need to re-render it per
-// page or per locale.
+// The global `Organization` JSON-LD is mounted in the locale layout's
+// <body> instead of here. A previous version of this layout returned
+//
+//     <>
+//       {children}
+//       <JsonLd data={buildOrganizationSchema()} ... />
+//     </>
+//
+// which on the client expanded to a fragment with two top-level children
+// — the locale's `<html>` and a sibling `<script>` — and the browser
+// rejected the second one with `HierarchyRequestError: Only one element
+// on document allowed`. Co-locating both JSON-LD payloads in the locale
+// body keeps every page's `<head>` / `<body> /<script>` structure
+// valid. Google's knowledge-graph builder deduplicates by `url` + `name`,
+// so a single canonical payload per locale is enough — we don't need
+// to re-render it per page.
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <JsonLd data={buildOrganizationSchema()} id="organization-schema" />
-    </>
-  );
+  return <>{children}</>;
 }
