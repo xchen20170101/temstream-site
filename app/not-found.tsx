@@ -1,6 +1,16 @@
 import Link from 'next/link';
 import { routing } from '@/i18n/routing';
 
+/**
+ * Root-level 404 fallback. Only renders for URLs that don't match any
+ * locale prefix at all (e.g. `/foo-bar`). The actual locale-aware
+ * 404 lives in `app/[locale]/not-found.tsx` and is preferred whenever
+ * the route resolves a locale.
+ *
+ * The link points at the default locale's home (`/zh`) since we can't
+ * read the user's locale from this file — next-intl only exposes
+ * locale context under `app/[locale]/`.
+ */
 export default function NotFound() {
   return (
     <main className="flex min-h-screen items-center justify-center px-6">

@@ -428,5 +428,11 @@
   },
   "footer": {
     "disclaimer": "This site is not affiliated with NVIDIA, LizardByte, or the Moonlight team. All trademarks belong to their respective owners."
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "desc": "The page you're looking for doesn't exist or has been moved.",
+    "back": "Back to home"
   }
 }
