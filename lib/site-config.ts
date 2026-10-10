@@ -3,12 +3,18 @@
  *
  * `SITE_URL` is read from the build-time environment variable
  * `NEXT_PUBLIC_SITE_URL` so that a custom production domain (e.g.
- * `https://temstream.app`) can override the Vercel preview domain without
- * code changes. Falls back to the Vercel preview domain if unset.
+ * `https://temstream.cloud`) can override the Vercel preview domain without
+ * code changes. Falls back to the custom production domain if unset.
+ *
+ * The fallback is intentionally `https://temstream.cloud` rather than the
+ * Vercel preview domain: temstream-site.vercel.app is not reachable from
+ * mainland China (Baidu/Bing-CN crawlers get timeouts and visitors get
+ * blocked), so sitemap + OG + hreflang must point at the China-friendly
+ * domain by default.
  */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
-  'https://temstream-site.vercel.app';
+  'https://temstream.cloud';
 
 /**
  * Locale-free pathname for every page that should appear in `sitemap.xml`
