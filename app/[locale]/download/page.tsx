@@ -1,12 +1,39 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { routing } from '@/i18n/routing';
 import { downloads, mirrorUrl, primaryUrl, releasesUrlFor } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
 import { makeAlternates, ogLocale } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
+import { JsonLd } from '@/lib/jsonld';
+import { buildSoftwareApplicationSchema, type Locale } from '@/lib/jsonld-schemas';
 
-type Locale = (typeof routing.locales)[number];
+/**
+ * Map each `DownloadItem.id` to a Schema.org `operatingSystem`
+ * value. We hand-roll this (rather than reading it from a config
+ * file) because the upstream Sunshine / Moonlight version strings
+ * don't change often and a wrong value here is a soft quality
+ * signal in Google's eye. Keep the list short and human-readable.
+ */
+const OS_BY_DOWNLOAD_ID: Record<string, string> = {
+  'moonlight-windows-x64': 'Windows 10, Windows 11',
+  'moonlight-android-apk': 'Android 8.0',
+  'sunshine-windows-installer': 'Windows 10, Windows 11',
+};
+
+function buildAppSchemas(items: DownloadItem[], locale: Locale, path: string) {
+  return items.map((item) =>
+    buildSoftwareApplicationSchema({
+      id: item.id,
+      name: item.label[locale],
+      platform: item.platform,
+      version: item.version,
+      downloadUrl: primaryUrl(item, locale),
+      operatingSystem: OS_BY_DOWNLOAD_ID[item.id] ?? item.platform,
+      pagePath: path,
+      locale,
+    }),
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -172,6 +199,20 @@ export default async function DownloadPage({
 
   return (
     <>
+      {/* SoftwareApplication JSON-LD. One entry per downloadable
+          binary (Moonlight Windows, Moonlight Android, Sunshine
+          Windows) so each becomes eligible for the software-app
+          rich result. We deliberately do NOT emit
+          `aggregateRating`: we have no real user rating source and
+          inventing one would be a manual action. */}
+      <JsonLd
+        data={buildAppSchemas(
+          [...clients, ...servers],
+          locale as Locale,
+          '/download',
+        )}
+        id="download-schema"
+      />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>

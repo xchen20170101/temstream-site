@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { routing } from '@/i18n/routing';
 import { makeAlternates, ogLocale } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
-
-type Locale = (typeof routing.locales)[number];
+import { JsonLd } from '@/lib/jsonld';
+import { buildFaqPageSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -53,6 +52,13 @@ export default async function LanFaqPage({
 
   return (
     <>
+      {/* FAQPage JSON-LD. Same shape as the WAN FAQ page so that the
+          LAN FAQ also shows up under "People also ask" for queries
+          like "Moonlight LAN can't connect" or "Sunshine LAN password". */}
+      <JsonLd
+        data={buildFaqPageSchema(items, locale as Locale, '/lan-faq', t('title'), t('subtitle'))}
+        id="lan-faq-schema"
+      />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>

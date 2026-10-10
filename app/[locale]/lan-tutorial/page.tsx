@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { routing } from '@/i18n/routing';
 import { makeAlternates, ogLocale } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
-
-type Locale = (typeof routing.locales)[number];
+import { JsonLd } from '@/lib/jsonld';
+import { buildHowToSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -47,6 +46,20 @@ export default async function LanTutorialPage({
 
   return (
     <>
+      {/* HowTo JSON-LD for the LAN tutorial. Step names are the
+          `title` field, step text is the `desc` field — same mapping
+          as the WAN tutorial so the schema validators see consistent
+          structure across both pages. */}
+      <JsonLd
+        data={buildHowToSchema(
+          steps.map((s) => ({ name: s.title, text: s.desc })),
+          locale as Locale,
+          '/lan-tutorial',
+          t('title'),
+          t('subtitle'),
+        )}
+        id="lan-tutorial-schema"
+      />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>

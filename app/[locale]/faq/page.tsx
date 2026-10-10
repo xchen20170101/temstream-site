@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { makeAlternates, ogLocale } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
+import { JsonLd } from '@/lib/jsonld';
+import { buildFaqPageSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -50,6 +52,14 @@ export default async function FaqPage({
 
   return (
     <>
+      {/* FAQPage JSON-LD: turns the Q&A list into a Google "People also
+          ask" rich result. The `mainEntity` items mirror the visible
+          `<details>` blocks one-to-one so the visible text and the
+          schema never disagree (a mismatch is a soft quality signal). */}
+      <JsonLd
+        data={buildFaqPageSchema(items, locale as Locale, '/faq', t('title'), t('subtitle'))}
+        id="faq-schema"
+      />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>

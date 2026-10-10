@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { makeAlternates, ogLocale } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
+import { JsonLd } from '@/lib/jsonld';
+import { buildHowToSchema, type Locale } from '@/lib/jsonld-schemas';
 
 export async function generateMetadata({
   params,
@@ -44,6 +46,20 @@ export default async function TutorialPage({
 
   return (
     <>
+      {/* HowTo JSON-LD. Maps the four steps of the WAN tutorial to
+          a `HowToStep` array so the page is eligible for the
+          step-by-step rich result. `totalTime` is omitted because we
+          do not have a verified estimate. */}
+      <JsonLd
+        data={buildHowToSchema(
+          steps.map((s) => ({ name: s.title, text: s.desc })),
+          locale as Locale,
+          '/tutorial',
+          t('title'),
+          t('subtitle'),
+        )}
+        id="tutorial-schema"
+      />
       <section className="container-x pt-12 pb-10 sm:pt-16">
         <div className="mx-auto mb-8 max-w-2xl text-center">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('title')}</h1>
