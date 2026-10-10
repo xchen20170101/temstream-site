@@ -1,8 +1,42 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
+import { makeAlternates, ogLocale } from '@/lib/seo';
 
 type Locale = (typeof routing.locales)[number];
+
+// Per-page SEO metadata. Pulls `seoTitle` / `seoDescription` from the
+// `home` namespace (falling back to `heroTitle` / `heroSubtitle` if a
+// future translator drops the SEO fields) and wires up canonical +
+// hreflang alternates for the home page.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations('home');
+  const title = t.has('seoTitle') ? t('seoTitle') : t('heroTitle');
+  const description = t.has('seoDescription') ? t('seoDescription') : t('heroSubtitle');
+  return {
+    title,
+    description,
+    alternates: makeAlternates(locale, ''),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      locale: ogLocale(locale),
+      url: `/${locale}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  };
+}
 
 // ─── Scene card ───────────────────────────────────────────────────────────────
 

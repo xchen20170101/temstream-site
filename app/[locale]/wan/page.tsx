@@ -1,8 +1,38 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionContext } from '@/components/SectionContext';
+import { makeAlternates, ogLocale } from '@/lib/seo';
 
 type Locale = 'en' | 'zh';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations('wanOverview');
+  const title = t.has('seoTitle') ? t('seoTitle') : t('title');
+  const description = t.has('seoDescription') ? t('seoDescription') : t('subtitle');
+  return {
+    title,
+    description,
+    alternates: makeAlternates(locale, '/wan'),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      locale: ogLocale(locale),
+      url: `/${locale}/wan`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  };
+}
 
 interface OverviewCardData {
   href: string;

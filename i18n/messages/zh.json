@@ -8,6 +8,8 @@
     "eyebrow": "广域网 (WAN) · 出门在外",
     "title": "广域网串流：出门在外也要玩家里电脑",
     "subtitle": "通过 VPN 或管理端把两端打通，全程不暴露 Sunshine 端口，适合任意距离串流。",
+    "seoTitle": "广域网串流指南 · 出门在外也能玩家里电脑",
+    "seoDescription": "广域网（WAN）场景下用 Moonlight + Sunshine 远程串流游戏 PC 的完整方案：无需公网 IP / 端口映射，支持 Tailscale VPN 与管理端两种方式，适合任意距离串流。",
     "cards": {
       "cta": "进入",
       "download": {
@@ -28,6 +30,8 @@
     "eyebrow": "局域网 (LAN) · 家用首选",
     "title": "局域网串流：把客厅 PC 串到任意房间",
     "subtitle": "只用 Sunshine + Moonlight，在 Moonlight 登录页填入 Sunshine 的局域网 IP 与访问密码即可开始串流。同子网直连，4K HDR / 120fps 拉到顶，零公网暴露。",
+    "seoTitle": "局域网串流指南 · 同子网直连，最低延迟",
+    "seoDescription": "局域网（LAN）场景下用 Sunshine 服务端 + Moonlight 客户端直连串流：免管理端、免端口映射、免公网暴露，4K HDR @ 120fps / 150 Mbps，延迟 < 30ms，家用首选。",
     "cards": {
       "cta": "进入",
       "download": {
@@ -48,6 +52,8 @@
     "heroEyebrow": "开源 · 低延迟 · 自托管游戏串流",
     "heroTitle": "把客厅的 PC 游戏，串流到你的每一块屏幕",
     "heroSubtitle": "temstream 基于 Moonlight 与 Sunshine 构建，跨平台、低延迟、完全免费——在家用局域网，或者在公网玩你自己的游戏库。",
+    "seoTitle": "temstream · Moonlight + Sunshine 中文指南",
+    "seoDescription": "temstream 是一个开源 Moonlight + Sunshine 中文站点，提供跨平台（Windows / Android / iOS / macOS / Linux / TV）低延迟游戏串流方案的下载、教程与常见问题。",
     "ctaPrimary": "立即下载",
     "ctaSecondary": "查看教程",
     "metrics": {
@@ -140,6 +146,8 @@
   "download": {
     "title": "下载",
     "subtitle": "所有下载均来自 temstream_release v0.4 双镜像（默认 gitee，备用 github）。建议先在 PC 上安装 Sunshine，再到设备上安装 Moonlight。",
+    "seoTitle": "下载 Sunshine 服务端与 Moonlight 客户端 · temstream",
+    "seoDescription": "Sunshine Windows 服务端与 Moonlight Windows / Android 客户端 v0.4 双镜像下载（gitee + GitHub）。广域网方案官方构建，建议先装 Sunshine 再装 Moonlight。",
     "clientTitle": "Moonlight 客户端",
     "clientSubtitle": "运行在你想要玩游戏的设备上。Windows / Android 优先支持。",
     "serverTitle": "Sunshine 服务端",
@@ -182,6 +190,8 @@
   "tutorial": {
     "title": "安全又简单：4 步搞定 Sunshine 串流",
     "subtitle": "借助 temstream 自建管理门户，注册即用、配置零门槛，全程只存储 hash 字符串，绝无明文泄露。",
+    "seoTitle": "广域网串流教程 · 4 步开始 Sunshine 串流",
+    "seoDescription": "Sunshine 串流 4 步教程：安装服务端 → 注册管理门户账号 → 重启生效 → Moonlight 登录开串。全程只存储 hash，无明文凭证。",
     "steps": [
       {
         "title": "安装 Sunshine",
@@ -204,6 +214,8 @@
   "faq": {
     "title": "常见问题",
     "subtitle": "面向日常用户的使用与排错指南。账号、配对、网络等问题多数可自己处理；涉及不到的配置请在被串流电脑的 Sunshine Web 控制台核对。",
+    "seoTitle": "广域网串流常见问题 · Sunshine 排错指南",
+    "seoDescription": "Sunshine 广域网串流的常见问题与排错：账号 / 设备列表为空 / 隧道未就绪 / 离线 / 黑屏 / 无声 / 共享磁盘。附一页速查表。",
     "items": [
       {
         "q": "这套系统要装哪些软件？分别装在哪台机器上？",
@@ -289,6 +301,8 @@
   "lanDownload": {
     "title": "局域网下载",
     "subtitle": "局域网场景下只需要 Sunshine（服务端）和 Moonlight（客户端）两套软件；管理端在局域网中是可选的。下面是同一套 v0.4 安装包，按局域网优先排序：先在游戏 PC 上装 Sunshine，再到客户端设备上装 Moonlight。",
+    "seoTitle": "局域网 Sunshine + Moonlight 下载 · temstream",
+    "seoDescription": "局域网场景下 Sunshine + Moonlight v0.4 安装包，按局域网优先顺序给出。先在游戏 PC 装 Sunshine，再到客户端设备装 Moonlight，登录页填 IP+密码即连。",
     "clientTitle": "Moonlight 客户端（局域网）",
     "clientSubtitle": "运行在你想玩游戏的设备上；打开后在其登录页直接填入 Sunshine 的局域网 IP 与访问密码即可连接。",
     "serverTitle": "Sunshine 服务端（局域网）",
@@ -312,6 +326,8 @@
   "lanTutorial": {
     "title": "局域网 4 步快速开始",
     "subtitle": "只装 Sunshine 与 Moonlight，免管理端、免端口映射，全程在同子网内完成。",
+    "seoTitle": "局域网串流教程 · 4 步 IP+密码直连",
+    "seoDescription": "局域网 4 步串流：装 Sunshine → 设访问密码 → 装 Moonlight → 登录页填 IP+密码。免管理端、免端口映射、免公网暴露，延迟最低，画质最高。",
     "steps": [
       {
         "title": "在游戏 PC 上安装 Sunshine",
@@ -334,6 +350,8 @@
   "lanFaq": {
     "title": "局域网常见问题",
     "subtitle": "围绕同子网可达、固定 IP、密码登录、码率选择、本地权限等典型局域网问题。",
+    "seoTitle": "局域网串流常见问题 · 同子网排错",
+    "seoDescription": "局域网串流的常见问题与排错：连不上、密码、固定 IP、码率、杀软隔离、多用户、睡眠唤醒等，附一页速查表。",
     "items": [
       {
         "q": "局域网场景下需要装管理端吗？",

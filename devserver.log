@@ -46,3 +46,17 @@
  GET /en/lan 200 in 58ms
  GET /en 200 in 142ms
  ✓ Compiled in 40ms
+ ✓ Compiled in 199ms (375 modules)
+ ✓ Compiled in 105ms (375 modules)
+ ✓ Compiled in 104ms (469 modules)
+ ✓ Compiled in 93ms (375 modules)
+ ✓ Compiled in 94ms (469 modules)
+ ✓ Compiled in 185ms (375 modules)
+ ✓ Compiled in 113ms (375 modules)
+ ✓ Compiled in 99ms (375 modules)
+ ✓ Compiled in 157ms (375 modules)
+ ✓ Compiled in 95ms (375 modules)
+ ✓ Compiled in 87ms (375 modules)
+ ✓ Compiled in 84ms (375 modules)
+ ✓ Compiled in 102ms (375 modules)
+ ✓ Compiled in 85ms (375 modules)

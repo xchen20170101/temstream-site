@@ -8,6 +8,8 @@
     "eyebrow": "Public internet (WAN) · Anywhere",
     "title": "Stream your home PC from anywhere",
     "subtitle": "Bridge the two ends with a VPN or the management portal — no Sunshine ports are ever exposed, so the setup works at any distance.",
+    "seoTitle": "Stream your home PC from anywhere · temstream",
+    "seoDescription": "Stream your gaming PC over the public internet (WAN) with Moonlight + Sunshine — no public IP, no port forwarding. Works with Tailscale or the temstream management portal, at any distance.",
     "cards": {
       "cta": "Open",
       "download": {
@@ -28,6 +30,8 @@
     "eyebrow": "Home network (LAN) · Recommended",
     "title": "Stream your living-room PC to any room",
     "subtitle": "Just Sunshine + Moonlight. Open Moonlight's login page, type in Sunshine's LAN IP and access password, and start streaming. Direct same-subnet, easily 4K HDR / 120fps, nothing exposed to the public internet.",
+    "seoTitle": "Home-network streaming guide · Same-subnet, lowest latency",
+    "seoDescription": "Stream from your gaming PC to any room on the same subnet with Sunshine + Moonlight. No portal, no port forwarding, no public exposure. Comfortably 4K HDR @ 120fps / 150 Mbps, latency under 30 ms. The recommended setup for home.",
     "cards": {
       "cta": "Open",
       "download": {
@@ -48,6 +52,8 @@
     "heroEyebrow": "Open-source · Low-latency · Self-hosted game streaming",
     "heroTitle": "Stream your living-room PC to every screen you own",
     "heroSubtitle": "temstream is a Chinese-language guide to Moonlight and Sunshine — free, cross-platform, and low-latency game streaming over your home network or the public internet.",
+    "seoTitle": "temstream · Moonlight + Sunshine Chinese-language guide",
+    "seoDescription": "temstream is a Chinese-language guide to Moonlight and Sunshine — open-source, low-latency, self-hosted game streaming for Windows / Android / iOS / macOS / Linux / TV. Downloads, tutorials, and FAQ included.",
     "ctaPrimary": "Get the apps",
     "ctaSecondary": "Read the tutorial",
     "metrics": {
@@ -140,6 +146,8 @@
   "download": {
     "title": "Download",
     "subtitle": "All builds ship from the temstream_release v0.4 dual mirrors (gitee by default, GitHub as backup). Install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "seoTitle": "Download Sunshine host & Moonlight client · temstream",
+    "seoDescription": "Sunshine Windows host and Moonlight Windows / Android client v0.4 from the dual mirrors (gitee + GitHub). Official WAN build. Install Sunshine on the gaming PC first, then Moonlight on your client device.",
     "clientTitle": "Moonlight client",
     "clientSubtitle": "Runs on the device you want to play on. Windows and Android are first-class targets.",
     "serverTitle": "Sunshine host",
@@ -182,6 +190,8 @@
   "tutorial": {
     "title": "Safe and simple: stream with Sunshine in 4 steps",
     "subtitle": "Powered by the temstream management portal — sign up and go. No plaintext credentials are ever stored, only hashes.",
+    "seoTitle": "WAN streaming tutorial · 4 steps to start Sunshine",
+    "seoDescription": "Start Sunshine streaming in 4 steps: install the host → register on the management portal → restart to apply → sign in on Moonlight and stream. Only hashes are stored — no plaintext credentials.",
     "steps": [
       {
         "title": "Install Sunshine",
@@ -204,6 +214,8 @@
   "faq": {
     "title": "Frequently asked questions",
     "subtitle": "A user-facing guide to everyday usage and troubleshooting. Most account, pairing and network issues can be handled on your own; for anything beyond that, check the Sunshine web console on the streamed PC.",
+    "seoTitle": "WAN streaming FAQ · Sunshine troubleshooting",
+    "seoDescription": "Sunshine / Moonlight WAN troubleshooting: account errors, empty device list, tunnel not ready, host shows offline, black screen, no sound, shared drive. With a one-page quick reference.",
     "items": [
       {
         "q": "What software does the system need, and where should each piece be installed?",
@@ -289,6 +301,8 @@
   "lanDownload": {
     "title": "LAN download",
     "subtitle": "For a LAN-only setup you only need two pieces of software — Sunshine (host) and Moonlight (client). The management portal is optional. These are the same v0.4 builds; install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "seoTitle": "LAN Sunshine + Moonlight download · temstream",
+    "seoDescription": "Sunshine + Moonlight v0.4 binaries for LAN-only setups, ordered for LAN-first deployment. Install Sunshine on the gaming PC, then Moonlight on the client device — type IP + password on the login page and stream.",
     "clientTitle": "Moonlight client (LAN)",
     "clientSubtitle": "Runs on the device you want to play on. Open the login page, type in Sunshine's LAN IP and access password, and you're in.",
     "serverTitle": "Sunshine host (LAN)",
@@ -312,6 +326,8 @@
   "lanTutorial": {
     "title": "Start LAN streaming in 4 steps",
     "subtitle": "Just two pieces of software — no portal, no port forwarding. Everything happens on the same subnet.",
+    "seoTitle": "LAN streaming tutorial · 4 steps, IP + password",
+    "seoDescription": "Start LAN streaming in 4 steps: install Sunshine → set the access password → install Moonlight → type IP + password on the login page. No portal, no port forwarding, no public exposure. Lowest latency, highest quality.",
     "steps": [
       {
         "title": "Install Sunshine on your gaming PC",
@@ -334,6 +350,8 @@
   "lanFaq": {
     "title": "LAN FAQ",
     "subtitle": "Same-subnet reachability, fixed IP, password login, bitrate choice, and local permissions — typical LAN questions.",
+    "seoTitle": "LAN streaming FAQ · Same-subnet troubleshooting",
+    "seoDescription": "LAN streaming troubleshooting: won't connect, forgot password, fixed IP, bitrate, AV quarantine, multi-user, sleep / wake. With a one-page quick reference.",
     "items": [
       {
         "q": "Do I need the management portal for a LAN-only setup?",
