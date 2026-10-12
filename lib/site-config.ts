@@ -82,3 +82,20 @@ export const SITE_PAGES = [
 ] as const;
 
 export type SitePath = (typeof SITE_PAGES)[number];
+
+/**
+ * Locale-free pathnames that should appear in `sitemap.xml` for the
+ * default locale only (zh). These pages are intentionally not
+ * localised — the corresponding `/en/<path>` route returns a 404 in
+ * the page itself, and a parallel en sitemap entry would either
+ * point at a broken page or need a per-locale filter elsewhere.
+ *
+ * Add new zh-only paths here and `app/sitemap.ts` will pick them up
+ * automatically.
+ */
+export const ZH_ONLY_PAGES = [
+  '/box',
+  '/box-faq',
+] as const;
+
+export type ZhOnlyPath = (typeof ZH_ONLY_PAGES)[number];

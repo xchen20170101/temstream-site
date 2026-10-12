@@ -220,6 +220,69 @@ function VsTable({
   );
 }
 
+// ─── Box promo banner ────────────────────────────────────────────────────────
+
+/**
+ * 首页"预装盒子独家"banner。仅在中文首页渲染（父组件用 `locale === 'zh'`
+ * 短路），点击后跳转到 `/zh/box` 高级特性说明页。
+ *
+ * 设计要点：
+ * - amber 调暖色光晕，与 WAN（violet）/ LAN（cyan）区分开
+ * - 文案简短，不抢 SceneCard 的视线，但要让访客一眼看到"硬件独占"
+ * - 双特性行：USBIP + Samba，让用户对号入座
+ */
+function BoxPromoBanner({ locale }: { locale: Locale }) {
+  return (
+    <aside
+      className="container-x mt-10"
+      aria-label="预装盒子高级特性"
+    >
+      <Link
+        href={`/${locale}/box`}
+        className="group block overflow-hidden rounded-2xl border border-neon-amber/35 bg-gradient-to-r from-neon-amber/15 via-neon-amber/5 to-transparent p-5 backdrop-blur transition hover:border-neon-amber/60 hover:from-neon-amber/20 sm:p-6"
+      >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-4">
+            {/* 盒型图标 */}
+            <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-neon-amber/40 to-neon-amber-deep/40 text-white shadow-neon-amber">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
+                <rect x="3" y="5" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M3 10h18" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="7" cy="13.5" r="0.9" fill="currentColor" />
+                <path d="M8 20h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </span>
+            <div className="min-w-0">
+              <p className="mb-1 inline-flex items-center gap-1.5 rounded-full border border-neon-amber/30 bg-neon-amber/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-neon-amber-soft">
+                <span className="h-1 w-1 animate-pulseGlow rounded-full bg-neon-amber" />
+                预装 Moonlight 客户端专属
+              </p>
+              <h3 className="text-base font-semibold text-white sm:text-lg">
+                USBIP · 借盒子 USB 给游戏 PC ｜ Samba · 把盒子存储挂给游戏 PC
+              </h3>
+              <p className="mt-1 text-sm text-slate-300">
+                盒子预装 Moonlight 客户端专属功能 —— USBIP 和 Samba 随客户端系统层面集成，公开版 Moonlight 客户端拿不到这些能力。
+              </p>
+            </div>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-gradient-to-r from-neon-amber to-neon-amber-soft px-4 py-2 text-sm font-semibold text-bg-base shadow-neon-amber transition group-hover:brightness-110 sm:self-auto">
+            查看预装盒子高级特性
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none">
+              <path
+                d="M5 12h14m0 0-4-4m4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </div>
+      </Link>
+    </aside>
+  );
+}
+
 // ─── Home page ────────────────────────────────────────────────────────────────
 
 export default async function HomePage({
@@ -425,6 +488,11 @@ export default async function HomePage({
               />
             </div>
           </section>
+
+          {/* 预装盒子专区入口：仅中文首页显示。
+              英文首页不展示这个 banner，避免把"硬件独占"的卖点
+              推给暂未提供英文文档的访客。 */}
+          {locale === 'zh' && <BoxPromoBanner locale={locale as Locale} />}
 
           <dl className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
             {metrics.map((m) => (

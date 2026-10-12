@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export type SectionKey = 'wan' | 'lan';
+export type SectionKey = 'wan' | 'lan' | 'box';
 
 interface SectionContextProps {
   locale: string;
@@ -23,23 +23,39 @@ interface SectionContextProps {
  * page header, with `container-x` and a comfortable top spacing.
  */
 export function SectionContext({ locale, section, switchHref }: SectionContextProps) {
+  const isBox = section === 'box';
   const isWan = section === 'wan';
-  const other: SectionKey = isWan ? 'lan' : 'wan';
-  const labels = isWan
+  const isLan = section === 'lan';
+  // `box` is a 预装盒子-only zh-locale page; resolve the "other" target
+  // to the box overview root (not lan/wan) so the switch link never
+  // bounces an English visitor away from a missing cross-section.
+  const other: SectionKey = isWan ? 'lan' : isLan ? 'wan' : 'wan';
+  // box section has no en copy — the page 404s in /en. Hard-code the
+  // zh labels here so the component still renders correctly when the
+  // surrounding layout is /zh.
+  const labels = isBox
     ? {
-        sectionName: '广域网 (WAN)',
-        sectionShort: 'WAN',
-        desc: '出门在外也要玩家里电脑 —— VPN / 管理端 / 公网访问',
-        switchTo: '切换到 局域网',
-        overview: '广域网概览',
+        sectionName: '预装盒子',
+        sectionShort: 'Box',
+        desc: '预装 Moonlight 客户端专属特性（USBIP + Samba）—— 把盒子 USB 和存储借给游戏 PC',
+        switchTo: '返回首页',
+        overview: '盒子概览',
       }
-    : {
-        sectionName: '局域网 (LAN)',
-        sectionShort: 'LAN',
-        desc: '客厅 PC 串到卧室 / 阳台 / 电视 —— 同子网直连，最快最稳',
-        switchTo: '切换到 广域网',
-        overview: '局域网概览',
-      };
+    : isWan
+      ? {
+          sectionName: '广域网 (WAN)',
+          sectionShort: 'WAN',
+          desc: '出门在外也要玩家里电脑 —— VPN / 管理端 / 公网访问',
+          switchTo: '切换到 局域网',
+          overview: '广域网概览',
+        }
+      : {
+          sectionName: '局域网 (LAN)',
+          sectionShort: 'LAN',
+          desc: '客厅 PC 串到卧室 / 阳台 / 电视 —— 同子网直连，最快最稳',
+          switchTo: '切换到 广域网',
+          overview: '局域网概览',
+        };
   const labelsEn = isWan
     ? {
         sectionName: 'Public internet (WAN)',
@@ -55,23 +71,33 @@ export function SectionContext({ locale, section, switchHref }: SectionContextPr
         switchTo: 'Switch to WAN',
         overview: 'LAN overview',
       };
-  const useEn = locale === 'en';
-  const t = useEn ? labelsEn : labels;
+  // box 档只在中文站出现，强制走 zh 文案；en 标签只为兜底。
+  const useEn = !isBox && locale === 'en';
+  const t = isBox ? labels : useEn ? labelsEn : labels;
 
-  // Accent colors: WAN = violet/pink, LAN = cyan
-  const accentBorder = isWan
-    ? 'border-neon-violet/35'
-    : 'border-neon-cyan/35';
-  const accentBg = isWan
-    ? 'from-neon-violet/20 via-neon-violet/5 to-transparent'
-    : 'from-neon-cyan/20 via-neon-cyan/5 to-transparent';
-  const badgeBg = isWan
-    ? 'from-neon-violet/35 to-neon-pink/25 text-white'
-    : 'from-neon-cyan/35 to-neon-cyan/15 text-white';
-  const accentText = isWan ? 'text-neon-violet' : 'text-neon-cyan';
+  // 调色板：WAN = violet/pink，LAN = cyan，Box = amber（硬件专属的暖色调）
+  const accentBorder = isBox
+    ? 'border-neon-amber/40'
+    : isWan
+      ? 'border-neon-violet/35'
+      : 'border-neon-cyan/35';
+  const accentBg = isBox
+    ? 'from-neon-amber/25 via-neon-amber/5 to-transparent'
+    : isWan
+      ? 'from-neon-violet/20 via-neon-violet/5 to-transparent'
+      : 'from-neon-cyan/20 via-neon-cyan/5 to-transparent';
+  const badgeBg = isBox
+    ? 'from-neon-amber/40 to-neon-amber-soft/25 text-white shadow-neon-amber'
+    : isWan
+      ? 'from-neon-violet/35 to-neon-pink/25 text-white'
+      : 'from-neon-cyan/35 to-neon-cyan/15 text-white';
+  const accentText = isBox ? 'text-neon-amber' : isWan ? 'text-neon-violet' : 'text-neon-cyan';
 
-  // Default "switch to" target goes to the other section's overview page
-  const resolvedSwitchHref = switchHref ?? `/${locale}/${other}`;
+  // Default "switch to" target: box 档跳首页（en 模式下页面已 404，
+  // 这里仅在 zh locale 才会真正渲染），其它档跳对侧 section 概览页。
+  const resolvedSwitchHref = isBox
+    ? `/${locale}`
+    : (switchHref ?? `/${locale}/${other}`);
 
   return (
     <div
@@ -84,7 +110,15 @@ export function SectionContext({ locale, section, switchHref }: SectionContextPr
         <span
           className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${badgeBg} shadow-neon`}
         >
-          {isWan ? (
+          {isBox ? (
+            // 盒子 / 主机图标
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+              <rect x="3" y="5" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M3 10h18" stroke="currentColor" strokeWidth="1.6" />
+              <circle cx="7" cy="13.5" r="0.9" fill="currentColor" />
+              <path d="M8 20h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          ) : isWan ? (
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
               <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
               <path

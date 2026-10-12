@@ -404,5 +404,86 @@
     "title": "Page not found",
     "desc": "The page you're looking for doesn't exist or has been moved.",
     "back": "Back to home"
+  },
+  "boxOverview": {
+    "eyebrow": "Pre-loaded Box · Official hardware",
+    "title": "Two exclusive advanced features on the pre-loaded box",
+    "subtitle": "Lend the box's USB ports and storage to the gaming PC — the PC borrows USB devices over USBIP and mounts the box's shared drive, while Moonlight handles the stream as usual.",
+    "seoTitle": "Pre-loaded Box Advanced Features · USBIP & Samba · temstream",
+    "seoDescription": "The pre-loaded box offers two exclusive advanced features: USBIP and Samba. Lend the box's USB ports and storage to your gaming PC. Public Moonlight clients don't have these capabilities.",
+    "exclusiveBanner": "Exclusive to the pre-loaded Moonlight client · Public Moonlight clients don't have these features",
+    "usbiptitle": "USBIP: Borrow USB devices remotely",
+    "usbipTagline": "USB over IP — devices plugged into the box work on the gaming PC as if they were local",
+    "usbipDesc": "USBIP is a \"USB over IP\" technology: it lets devices plugged into the pre-loaded box (software dongles, U-keys, external sound cards, drawing tablets, etc.) be borrowed over the network by the gaming PC. The gaming PC treats them exactly like locally attached devices — plug-and-play recognition, normal use, normal removal — while the Moonlight client continues receiving the streamed picture as usual. Keyboard, mouse and gamepad HID input is handled by Moonlight's built-in input emulation and does not go through USBIP.",
+    "usbipScenesTitle": "Three most common borrowing scenarios",
+    "usbipScenes": [
+      "External sound card across devices: Plug a Focusrite / Yamaha / similar pro audio interface into the box (in the study), and borrow it on the gaming PC in the living room via USBIP — the gaming PC outputs audio through the box's sound card with very low latency, ideal for streaming while connected to speakers or studio headphones.",
+      "Software dongle sharing: HASP dongles or U-keys for industry or design software plugged into the box can be borrowed by multiple gaming PCs, eliminating \"who has the dongle now\" chaos.",
+      "Pro peripherals: USBIP forwards non-HID professional USB devices — drawing tablets / pen displays, MIDI keyboards / mixing consoles, dedicated industrial controllers, adapters and more — letting the gaming PC use these peripherals from the box during a stream. Note: USB storage devices (USB sticks, portable HDDs, external enclosures, etc.) are handled by the Samba shared drive, not by USBIP."
+    ],
+    "sambaTitle": "Samba: Lend the box's storage to the gaming PC",
+    "sambaTagline": "SMB mount during streaming — gaming PC reads/writes box storage, unmounts when the session ends",
+    "sambaDesc": "Samba is a cross-platform file sharing protocol natively supported by Windows, macOS, Linux and Android (the kind you see in Windows \"Network Neighborhood\"). The pre-loaded box exposes its built-in storage as an SMB service: during an active streaming session, the gaming PC can mount it as a local drive for read/write access — just like Sunshine's built-in shared disk, it's a temporary mount that automatically disconnects when the stream ends.",
+    "sambaScenesTitle": "Three most common sharing scenarios",
+    "sambaScenes": [
+      "Localize your game library: Store tens of GBs of game ISOs, Steam libraries or emulator ROMs in the box's shared drive. During streaming, the gaming PC reads and runs games directly from the box — no large local storage needed on the gaming PC itself. The box doubles as a NAS.",
+      "Save mods, screenshots and replay recordings directly to the box: During streaming, write game mods, screenshots and replays straight to the box's shared drive, saving local space on the gaming PC. The files remain on the box after the stream ends and are ready for the next session.",
+      "Multiple PCs share one game library: Several gaming PCs simultaneously mount the box's shared drive during their own streaming sessions and share the same game files. Install a game once, everyone uses it."
+    ],
+    "sambaVsSunshine": "How this differs from Sunshine's built-in \"shared disk\" (the direction is completely reversed):",
+    "sambaVsSunshineRows": [
+      "Direction reversed: Sunshine's built-in shared disk goes from gaming PC → client (files on the gaming PC are shared to the client during a stream). Our Samba goes from box → gaming PC (the box's files are shared to the gaming PC).",
+      "When available: Both are mounted during active streaming sessions and automatically disconnect when the stream ends. Neither supports a persistent mount.",
+      "Protocol standard: Samba uses standard SMB — Windows, macOS, Linux and Android all mount it natively without any client install. Sunshine's built-in shared disk uses Moonlight's private channel and only works during streaming sessions."
+    ],
+    "compareTitle": "At a glance: DIY setup vs. pre-loaded box",
+    "compareSubtitle": "USBIP and Samba are exclusive to the pre-loaded Moonlight client on the box. Public Moonlight clients don't have these capabilities.",
+    "compareColFeat": "Feature",
+    "compareColOpensource": "DIY setup (Sunshine + public Moonlight client)",
+    "compareColBox": "Pre-loaded box",
+    "compareUsbip": "USBIP: Borrow USB devices remotely",
+    "compareSamba": "Samba: Shared drive during streaming",
+    "compareTunnel": "WAN / public-internet streaming",
+    "compareLan": "Same-subnet direct streaming",
+    "compareTunnelDesc": "Tailscale / management portal",
+    "compareLanDesc": "IP + password on the login page",
+    "ctaTitle": "Pre-loaded box details",
+    "ctaSubtitle": "Purchase info, specs and support details will be updated at launch. In the meantime, check the FAQ below.",
+    "ctaBtn": "Learn about the box",
+    "faqLink": "See the FAQ first",
+    "whatYouNeedTitle": "What you need to get started",
+    "whatYouNeed": [
+      "A pre-loaded box (Moonlight client pre-installed at the factory; USBIP / Samba only take effect during streaming and must be toggled on in the box's settings).",
+      "A gaming PC (another machine on the same LAN): runs Sunshine as the streaming host; when you want to use USBIP / Samba, configure the gaming PC accordingly.",
+      "A wired connection or stable Wi-Fi (5 GHz is more stable) connecting both the box and the gaming PC to your home router."
+    ]
+  },
+  "boxFaq": {
+    "title": "Pre-loaded box FAQ",
+    "subtitle": "The most common questions: \"Can I make do without the box?\", \"Can I add these features?\", \"Is Samba secure?\"",
+    "seoTitle": "Pre-loaded box FAQ · USBIP / Samba · temstream",
+    "seoDescription": "Pre-loaded box questions: how to get started without the box, whether USBIP / Samba can be added to a public Moonlight client, Samba security and permissions, concurrency and latency.",
+    "items": [
+      {
+        "q": "The pre-loaded box hasn't arrived yet / isn't at hand. Can I use my phone or PC as a Moonlight client in the meantime?",
+        "a": "Yes. The pre-loaded box runs a Moonlight client, which behaves exactly the same as the public Moonlight client you install on a phone, laptop or TV — same Moonlight, same way of connecting to the gaming PC for streaming.\n\nYou can:\n\n1. Install Sunshine on the gaming PC (this is the streaming host — it's mandatory).\n2. Install the public Moonlight client on any device (phone, laptop, TV, tablet) and stream directly following the LAN or WAN tutorials on this site.\n3. Once the pre-loaded box arrives, swap the client device for the box (which already has Moonlight pre-installed).\n\nOne thing to be clear about: USBIP and Samba are exclusive to the **box's pre-installed Moonlight client** — the public Moonlight client does not have these two capabilities, no matter what device it's installed on. You have to wait for the box and use the Moonlight client that comes with it to enable them."
+      },
+      {
+        "q": "I've already set up Sunshine on my own. Can I add USBIP / Samba?",
+        "a": "No — and the issue isn't on the Sunshine side. These two features are not provided by Sunshine; they are exclusive capabilities of the box's pre-installed Moonlight client.\n\nUSBIP and Samba are integrated into the box's pre-installed Moonlight client at the system level (USBIP as a kernel module extension, Samba as a persistent SMB service). The public Moonlight client — whether installed on a phone, PC, TV or Raspberry Pi — does not have these two features. They're not a matter of \"missing a plugin\"; the Moonlight client itself simply doesn't include them.\n\nIf you only need to \"borrow a USB device\":\n\n- On Windows, try USB Network Gate or VirtualHere (usually paid licenses).\n- On Linux, you can install the usbip client directly, but configuration is involved and requires a Linux host as the USB server.\n\nIf you only need \"file sharing\":\n\n- Windows has built-in \"Advanced Sharing\".\n- macOS has built-in \"File Sharing\".\n- Linux can run a samba service.\n\nBut none of these give you the plug-and-play, always-on, multi-PC mounting, pre-installed Moonlight client experience. If you want these two features, the only path is buying the box."
+      },
+      {
+        "q": "Is the Samba shared drive secure? How do I set permissions?",
+        "a": "Samba's security is guaranteed at two levels:\n\n1. Network level: The Samba service is open to the LAN only by default and is not port-forwarded to WAN. The pre-loaded box also does not expose any WAN ports for Samba.\n2. Protocol level: Samba uses username/password authentication. The box ships with a fixed account shared by all devices; the password is shown once during first boot — please record it. You can change the password later in the box admin panel under the \"shared drive\" settings. The box does not provide per-device permission management, nor does it support read-only accounts.\n\nDay-to-day advice:\n\n- Change the shared drive password regularly in the box admin panel.\n- Keep important data in non-shared directories — don't put it directly in the shared drive.\n\nIf a public device (a child's laptop, a guest's phone) only needs temporary access, a practical workaround is to keep only read-only assets in the shared drive, and rotate the password to revoke access afterwards."
+      },
+      {
+        "q": "Borrowing the box's USB over USBIP to the gaming PC — is the latency high? Will it slow down game streaming?",
+        "a": "Short answer: it uses very little overhead and almost never affects game streaming quality.\n\nUSBIP borrows a USB device's control rights, not its real-time data stream. Gamepad presses, keyboard/mouse signals and dongle authentication are all tiny amounts of data (a few KB), completely negligible against a 4K streaming bitrate of 80–150 Mbps.\n\nLatency:\n\n- On LAN, USBIP adds roughly 1–3 ms — imperceptible for gamepad input.\n- Over VPN (cross-network), latency rises to 10–30 ms. This may feel slightly sluggish for FPS or fighting games, but most AAA single-player, RPG and simulation titles are unaffected.\n\nIf a borrowed USB device causes dropped frames, it's almost always the device's own power or driver issue — not USBIP's fault. Try a powered USB hub or a different port on the box."
+      },
+      {
+        "q": "How many gaming PCs can mount the box's Samba shared drive simultaneously? Any concurrency limits?",
+        "a": "Samba has no hard concurrency limit, but real-world experience depends on three things:\n\n1. Box hardware: The pre-loaded box ships with enough performance to support 4–8 gaming PCs mounting and reading/writing simultaneously. Beyond that, large-file concurrent copies will compete for bandwidth.\n2. LAN bandwidth: On gigabit wired, 4 simultaneous read/write streams still saturate the box's disk speed. On 2.4 GHz Wi-Fi, keep it to 2 or fewer.\n3. File sizes in the shared drive: Copying 100+ GB of assets to multiple gaming PCs simultaneously is best spread across time to avoid network congestion.\n\nFor everyday home use (2–3 gaming PCs + TV + PC + phone + tablet), 4–5 devices mounting simultaneously is the most stable state. For studio or small-team use, plan your directories and permissions in advance, and put frequently read/written assets on a dedicated high-speed SSD share if needed."
+      }
+    ]
   }
 }

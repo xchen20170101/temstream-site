@@ -18,6 +18,11 @@ const config: Config = {
           cyan: '#22d3ee',
           pink: '#ec4899',
           green: '#34d399',
+          // 预装盒子板块专用琥珀色调：与广域网（violet）、局域网（cyan）
+          // 拉开视觉距离，让"硬件独占"在站内一眼可辨。
+          amber: '#f59e0b',
+          'amber-soft': '#fbbf24',
+          'amber-deep': '#b45309',
         },
       },
       fontFamily: {
@@ -32,6 +37,9 @@ const config: Config = {
       boxShadow: {
         neon: '0 0 30px -5px rgba(139, 92, 246, 0.45)',
         'neon-cyan': '0 0 30px -5px rgba(34, 211, 238, 0.55)',
+        // 预装盒子板块专用阴影：与 cyan/violet 平行但走暖色光谱，
+        // 在深色底色上以琥珀光晕突出"硬件专属"调性。
+        'neon-amber': '0 0 30px -5px rgba(245, 158, 11, 0.55)',
       },
       keyframes: {
         pulseGlow: {

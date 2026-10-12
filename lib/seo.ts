@@ -68,13 +68,22 @@ export function homeCrumbLabel(locale: string): string {
  * field on `wanOverview` / `lanOverview` is sentence-length and reads
  * awkwardly in a breadcrumb (e.g. "广域网串流：出门在外也要玩家里
  * 电脑"); these short labels fit.
+ *
+ * The `box` section is a zh-only page; passing it for an `en` locale
+ * is a programmer error (the corresponding page 404s in `/en`), so
+ * we return the zh label regardless and let the caller (if any) bail
+ * out before reaching here. Today the breadcrumb JSON-LD is only
+ * emitted on `/zh/box`, so this branch is effectively zh-only.
  */
 export function sectionCrumbLabel(
   locale: string,
-  section: 'wan' | 'lan',
+  section: 'wan' | 'lan' | 'box',
 ): string {
   if (section === 'wan') {
     return locale === 'zh' ? '广域网' : 'WAN';
+  }
+  if (section === 'box') {
+    return '预装盒子';
   }
   return locale === 'zh' ? '局域网' : 'LAN';
 }

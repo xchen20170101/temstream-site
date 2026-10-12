@@ -6,15 +6,22 @@ import { useTranslations } from 'next-intl';
 import { Logo } from './Logo';
 import { LocaleSwitcher } from './LocaleSwitcher';
 
-type SectionTone = 'default' | 'wan' | 'lan';
+type SectionTone = 'default' | 'wan' | 'lan' | 'box';
 
 type NavLink = {
   href: string;
-  key: 'home' | 'wan' | 'lan';
+  /**
+   * Translation key. Restricted to the union the i18n `nav` namespace
+   * actually defines; pass `null` for entries that are locale-conditional
+   * (e.g. `box` is only present in the zh translation), in which case
+   * the entry is only rendered when the translation exists.
+   */
+  key: 'home' | 'wan' | 'lan' | 'box' | null;
   /**
    * Visual style hint. `wan` renders with the violet accent and `lan` with
    * the cyan accent, so the two sections read as parallel rather than as
-   * sibling list items.
+   * sibling list items. `box` uses amber to mark the 预装盒子 section as
+   * a hardware-only zh-locale page.
    */
   tone: SectionTone;
 };
@@ -23,6 +30,7 @@ const links: NavLink[] = [
   { href: '/', key: 'home', tone: 'default' },
   { href: '/wan', key: 'wan', tone: 'wan' },
   { href: '/lan', key: 'lan', tone: 'lan' },
+  { href: '/box', key: 'box', tone: 'box' },
 ];
 
 /**
@@ -52,6 +60,13 @@ export function Navbar({ locale }: { locale: string }) {
 
         <nav className="hidden items-stretch gap-1 md:flex" role="tablist">
           {links.map((link, idx) => {
+            // Locale-conditional entries (e.g. `box` only exists in zh
+            // translations) are skipped entirely on locales whose
+            // translation does not provide the key. This keeps the
+            // English navbar identical to its pre-box shape.
+            if (link.key !== null && !t.has(link.key)) {
+              return null;
+            }
             // Insert a thin vertical separator before the first non-default
             // entry so the boundary between sections is visible.
             const showSeparator = idx > 0 && links[idx - 1].tone !== link.tone;
@@ -65,7 +80,9 @@ export function Navbar({ locale }: { locale: string }) {
                   normalized === '/faq'
                 : link.tone === 'lan'
                   ? normalized === '/lan' || normalized.startsWith('/lan-')
-                  : normalized === link.href;
+                  : link.tone === 'box'
+                    ? normalized === '/box' || normalized.startsWith('/box-')
+                    : normalized === link.href;
 
             // Per-tone style bundles. Active variants get a solid fill +
             // a 2px bottom indicator in the section colour so the tab reads
@@ -95,6 +112,22 @@ export function Navbar({ locale }: { locale: string }) {
                     }
                   : {
                       tab: 'text-neon-cyan/70 hover:text-neon-cyan hover:bg-neon-cyan/10',
+                      bar: 'bg-transparent',
+                      idleText: '',
+                    };
+              }
+              if (link.tone === 'box') {
+                // 预装盒子档：amber 调暖色，与 WAN/LAN 区分开。
+                // 该档只在 zh locale 渲染（导航前一步的 t.has 检查已过滤），
+                // 所以这里无须区分 en 文案。
+                return active
+                  ? {
+                      tab: 'bg-neon-amber/25 text-white shadow-[0_0_18px_-4px_rgba(245,158,11,0.6)]',
+                      bar: 'bg-neon-amber shadow-[0_0_10px_rgba(245,158,11,0.9)]',
+                      idleText: 'text-neon-amber/80',
+                    }
+                  : {
+                      tab: 'text-neon-amber/70 hover:text-neon-amber hover:bg-neon-amber/10',
                       bar: 'bg-transparent',
                       idleText: '',
                     };
