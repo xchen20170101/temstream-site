@@ -32,8 +32,12 @@ export const metadata: Metadata = {
     '远程串流',
     'temstream',
   ],
+  // 站点级默认值（每个页面都会被 generateMetadata 覆盖）。这里刻意不写
+  // `canonical: '/'`：`/` 是 308 跳转到 `/zh` 的入口，把它当 canonical 会让
+  // 忘记写 alternates 的新页面指向一个"会重定向的 URL"。指向 `/zh` 才是
+  // 真实返回 200 的地址。
   alternates: {
-    canonical: '/',
+    canonical: '/zh',
     languages: {
       'zh': '/zh',
       'en': '/en',
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
       '开源、低延迟、自托管的游戏串流方案。Windows / Android 客户端 + Windows 服务端一键下载。',
     type: 'website',
     locale: ogLocale(routing.defaultLocale),
-    url: '/',
+    url: '/zh',
     siteName: 'temstream',
     // Resolved against `metadataBase` above. The actual file is generated
     // by `app/opengraph-image.tsx`.
@@ -58,10 +62,9 @@ export const metadata: Metadata = {
     description: '开源、低延迟、自托管的游戏串流方案。Windows / Android 客户端 + Windows 服务端一键下载。',
     images: ['/opengraph-image'],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  // 不设置站点级 `robots`：默认就是 index,follow，而在这里写死会在 404 页面
+  // 上叠出一条 `index, follow`，与 Next.js 为 notFound() 自动注入的
+  // `noindex` 相互矛盾（`/en/box` 这类 zh-only 页面就吃过这个亏）。
   icons: {
     icon: '/icon',
     apple: '/apple-icon',

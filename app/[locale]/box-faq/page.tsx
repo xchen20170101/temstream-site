@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionContext } from '@/components/SectionContext';
@@ -13,7 +13,8 @@ import {
 /**
  * 预装盒子 FAQ 页 (zh-only)。
  *
- * 与 `/box` 概览页一样：英文模式下 redirect 到 `/zh` 首页。
+ * 与 `/box` 概览页一致：英文模式返回 **404** 而不是重定向到 `/zh` 首页
+ * （原因详见 `app/[locale]/box/page.tsx` 的文件头注释）。
  */
 export async function generateMetadata({
   params,
@@ -22,10 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (locale === 'en') {
-    return {
-      title: 'temstream',
-      robots: { index: false, follow: false },
-    };
+    notFound();
   }
   setRequestLocale(locale);
   const t = await getTranslations('boxFaq');
@@ -34,7 +32,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: makeAlternates(locale, '/box-faq'),
+    alternates: makeAlternates(locale, '/box-faq', ['zh']),
     openGraph: {
       title,
       description,
@@ -58,7 +56,7 @@ export default async function BoxFaqPage({
   const { locale: rawLocale } = await params;
 
   if (rawLocale === 'en') {
-    redirect('/zh');
+    notFound();
   }
 
   setRequestLocale(rawLocale);

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SectionContext } from '@/components/SectionContext';
@@ -10,13 +10,19 @@ import { buildBreadcrumbListSchema, type Locale } from '@/lib/jsonld-schemas';
 /**
  * 预装盒子高级特性说明页 (zh-only)。
  *
- * 关键行为：英文站点 (`/en/box`) 在 `generateMetadata` 之前直接重定向到
- * `/zh` 首页，让英文访客看到的是"这个特性不在英文站提供"，而不是
- * 渲染一个没有任何翻译的回退。SEO 上只发布 `/zh/box` 一条 URL —— 见
- * `app/sitemap.ts` 的 `ZH_ONLY_PAGES` 处理。
+ * 关键行为：英文站点 (`/en/box`) 直接返回 **404**（`notFound()`），而不是
+ * 重定向到 `/zh` 首页。
  *
- * `redirect()` 抛出 `NEXT_REDIRECT` 信号，会被 Next.js 路由层拦截
- * 处理为 HTTP 30x；下面的渲染代码在 /en 路径下永远不会被执行。
+ * 为什么不是 redirect：
+ * - 首页重定向是跨语言 + 跨层级的跳转，Google 明确不建议（"不要把用户重定向
+ *   到首页"），语义上等于软 404；
+ * - 每一次 `redirect()` 都会让 `/en/box` 进入 Search Console 的
+ *   「网页会自动重定向（Page with redirect）」报表 —— 这正是本次告警的来源；
+ * - 该 URL 既不在 sitemap 里、也不再出现在任何 en 页面导航中（`en.json` 无
+ *   `nav.box` 键），404 是最诚实的信号：英文站没有这个页面。
+ *
+ * SEO 上只发布 `/zh/box` 一条 URL —— 见 `app/sitemap.ts` 的 `ZH_ONLY_PAGES`
+ * 处理，以及 `makeAlternates(locale, '/box', ['zh'])` 的 locale 白名单。
  */
 export async function generateMetadata({
   params,
@@ -25,12 +31,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (locale === 'en') {
-    // 在 en 路径下不输出 metadata —— 页面会被 redirect 拦截，metadata
-    // 仅作为兜底 SEO 信号，避免被爬虫误判。
-    return {
-      title: 'temstream',
-      robots: { index: false, follow: false },
-    };
+    // 英文站无此页：连同 metadata 一起 404，避免继承到别的 canonical。
+    notFound();
   }
   setRequestLocale(locale);
   const t = await getTranslations('boxOverview');
@@ -39,9 +41,9 @@ export async function generateMetadata({
   return {
     title,
     description,
-    // 自指 canonical 到 /zh/box —— 不输出 en 替代，避免将不可达
+    // 自指 canonical 到 /zh/box —— 不输出 en 替代，避免将不存在的
     // 英文 URL 暴露给搜索引擎。
-    alternates: makeAlternates(locale, '/box'),
+    alternates: makeAlternates(locale, '/box', ['zh']),
     openGraph: {
       title,
       description,
@@ -117,12 +119,10 @@ export default async function BoxOverviewPage({
 }) {
   const { locale: rawLocale } = await params;
 
-  // 英文模式：直接重定向到 /zh 首页。这条 redirect 会在 /en/box 路径
-  // 下立即生效，页面渲染代码不会执行 —— 所以下面的 `setRequestLocale`
-  // 和 `getTranslations` 都不会被调用，也就不依赖 en.json 中的
-  // `boxOverview` 命名空间。
+  // 英文模式：直接 404。这个 URL 在英文站不存在（见文件头说明），
+  // 不做任何重定向 —— 让 Search Console 看到的是一个干净、确定的 404。
   if (rawLocale === 'en') {
-    redirect('/zh');
+    notFound();
   }
 
   setRequestLocale(rawLocale);
@@ -136,7 +136,7 @@ export default async function BoxOverviewPage({
   return (
     <>
       {/* BreadcrumbList JSON-LD. 仅在 /zh 路径下渲染：英文模式已被
-          上面的 `redirect()` 拦截，JSON-LD 不会污染 /en 输出。 */}
+          上面的 `notFound()` 拦截，JSON-LD 不会污染 /en 输出。 */}
       <JsonLd
         data={buildBreadcrumbListSchema(
           [

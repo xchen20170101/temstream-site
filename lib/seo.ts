@@ -18,19 +18,36 @@ export function ogLocale(locale: string): OgLocale {
  *
  * Returns a value suitable for `metadata.alternates`. Pass an empty string
  * for `path` to refer to the locale root (home page).
+ *
+ * `availableLocales` — the locales in which this specific page actually
+ * exists. Defaults to every site locale. Pages that are zh-only (e.g.
+ * `/box`) MUST pass `['zh']`: emitting an `en` alternate for a URL that
+ * answers with a redirect or a 404 makes Google crawl a broken hreflang
+ * target, which is one of the ways URLs end up in the "网页会自动重定向"
+ * bucket.
  */
-export function makeAlternates(locale: string, path: string): NonNullable<Metadata['alternates']> {
+export function makeAlternates(
+  locale: string,
+  path: string,
+  availableLocales: readonly string[] = routing.locales,
+): NonNullable<Metadata['alternates']> {
   const normalised = path === '' ? '' : path;
   const canonical = `${SITE_URL}/${locale}${normalised}`;
 
   const languages: Record<string, string> = {};
-  for (const l of routing.locales) {
+  for (const l of availableLocales) {
     languages[l] = `${SITE_URL}/${l}${normalised}`;
   }
-  // x-default points at the site's default-locale version of the same page,
-  // which is how Google/Bing pick the canonical when no Accept-Language
+  // x-default points at the site's default-locale version of the same page
+  // when that version exists, otherwise at the only version there is.
+  // This is how Google/Bing pick the canonical when no Accept-Language
   // signal is available.
-  languages['x-default'] = `${SITE_URL}/${routing.defaultLocale}${normalised}`;
+  const xDefault = availableLocales.includes(routing.defaultLocale)
+    ? routing.defaultLocale
+    : availableLocales[0];
+  if (xDefault) {
+    languages['x-default'] = `${SITE_URL}/${xDefault}${normalised}`;
+  }
 
   return { canonical, languages };
 }

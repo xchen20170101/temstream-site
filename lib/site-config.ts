@@ -2,19 +2,34 @@
  * Site-wide constants for SEO / sitemap / canonical URLs.
  *
  * `SITE_URL` is read from the build-time environment variable
- * `NEXT_PUBLIC_SITE_URL` so that a custom production domain (e.g.
- * `https://temstream.cloud`) can override the Vercel preview domain without
- * code changes. Falls back to the custom production domain if unset.
+ * `NEXT_PUBLIC_SITE_URL` so that the production host can be changed without
+ * code changes. Falls back to `https://www.temstream.cloud`, which is the
+ * **primary host actually serving 200**.
  *
- * The fallback is intentionally `https://temstream.cloud` rather than the
- * Vercel preview domain: temstream-site.vercel.app is not reachable from
+ * IMPORTANT — the `www` prefix is not cosmetic:
+ * `temstream.cloud` (apex) is configured in Vercel to 308-redirect to
+ * `www.temstream.cloud`. If this constant (or `NEXT_PUBLIC_SITE_URL`)
+ * points at the apex, then *every* URL we publish — sitemap `<loc>`,
+ * `rel=canonical`, `hreflang`, OpenGraph `og:url`, JSON-LD `@id`,
+ * `robots.txt` `Host`/`Sitemap` — resolves to a URL that redirects.
+ * Google then reports the whole site under "网页会自动重定向 /
+ * Page with redirect" and refuses to index any of it, because the URL
+ * it was told is canonical is not the URL that returns 200.
+ *
+ * So: this value must always be the host that serves 200 directly,
+ * i.e. the `www` one. If you ever flip the primary domain back to the
+ * apex in Vercel (Domains → make apex primary, www → redirect), you
+ * must flip this constant (and the env var) at the same time.
+ *
+ * The fallback is intentionally the custom domain rather than the Vercel
+ * preview domain: temstream-site.vercel.app is not reachable from
  * mainland China (Baidu/Bing-CN crawlers get timeouts and visitors get
  * blocked), so sitemap + OG + hreflang must point at the China-friendly
  * domain by default.
  */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
-  'https://temstream.cloud';
+  'https://www.temstream.cloud';
 
 /**
  * Site-wide identity constants used by global Schema.org payloads
