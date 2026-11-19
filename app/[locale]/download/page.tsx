@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { downloads, primaryUrl } from '@/lib/downloads';
+import { downloads, primaryUrl, WAN_TAG } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
+import { resolveSizes } from '@/lib/download-sizes';
 import { DownloadCard } from '@/components/DownloadCard';
 import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel, pageCrumbLabel } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
@@ -83,6 +84,10 @@ export default async function DownloadPage({
 
   const clients = downloads.filter((d) => d.kind === 'client');
   const servers = downloads.filter((d) => d.kind === 'server');
+
+  // Real asset sizes for this release tag. Resolves to a partial/empty map
+  // if upstream is unreachable — cards then simply omit the size.
+  const sizes = await resolveSizes(downloads, WAN_TAG, locale);
 
   return (
     <>
@@ -167,6 +172,7 @@ export default async function DownloadPage({
               locale={locale as Locale}
               labels={labels}
               stepNumber={1}
+              sizeBytes={sizes[item.fileName]}
             />
           ))}
           <aside className="glass-card flex flex-col justify-center gap-2 text-sm text-slate-300">
@@ -201,6 +207,7 @@ export default async function DownloadPage({
               locale={locale as Locale}
               labels={labels}
               stepNumber={2}
+              sizeBytes={sizes[item.fileName]}
             />
           ))}
         </div>

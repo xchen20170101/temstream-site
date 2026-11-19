@@ -22,8 +22,9 @@ export type DownloadCardLabels = {
  * Notes:
  *   - The old `<dl>` triple of platform/arch/version was redundant
  *     with the header subtitle and has been removed.
- *   - The "size (field)" was a dead i18n key; we now show the real
- *     byte count from `item.sizeBytes`.
+ *   - The "size (field)" was a dead i18n key; the size chip now shows
+ *     the real byte count passed in via `sizeBytes`, and disappears
+ *     entirely when that lookup failed upstream.
  *   - The mirror hostname used to be crammed inside the button. It
  *     now lives on a quieter footer line so the button stays calm.
  */
@@ -32,12 +33,19 @@ export function DownloadCard({
   locale,
   labels,
   stepNumber,
+  sizeBytes,
 }: {
   item: DownloadItem;
   locale: Locale;
   labels: DownloadCardLabels;
   /** ① ② … install-order hint shown as a badge in the top-right. */
   stepNumber?: number;
+  /**
+   * Real asset size in bytes, resolved from upstream release metadata.
+   * Omitted when the lookup failed — in that case the card renders no
+   * size at all (no "unknown", no guess).
+   */
+  sizeBytes?: number;
 }) {
   const label = item.label[locale];
   const description = item.packageLabel[locale];
@@ -54,7 +62,7 @@ export function DownloadCard({
     /* keep raw string if URL parsing fails */
   }
 
-  const sizeLabel = formatSize(item.sizeBytes);
+  const sizeLabel = formatSize(sizeBytes);
 
   return (
     <article className="download-card group relative flex flex-col gap-5 overflow-hidden">
@@ -74,7 +82,7 @@ export function DownloadCard({
 
       <ul className="download-meta flex flex-wrap items-center justify-center gap-2 text-xs">
         <li className="chip font-mono">{item.version}</li>
-        <li className="chip font-mono">{sizeLabel}</li>
+        {sizeLabel && <li className="chip font-mono">{sizeLabel}</li>}
         <li className="chip">{item.arch}</li>
       </ul>
 
@@ -98,7 +106,9 @@ export function DownloadCard({
             />
           </svg>
           {labels.downloadBtn}
-          <span className="ml-1 text-xs font-mono opacity-80">· {sizeLabel}</span>
+          {sizeLabel && (
+            <span className="ml-1 text-xs font-mono opacity-80">· {sizeLabel}</span>
+          )}
         </a>
       </div>
 

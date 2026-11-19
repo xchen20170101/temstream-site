@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { downloadsLan, primaryUrl } from '@/lib/downloads';
+import { downloadsLan, primaryUrl, LAN_TAG } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
+import { resolveSizes } from '@/lib/download-sizes';
 import { DownloadCard } from '@/components/DownloadCard';
 import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel, pageCrumbLabel } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
@@ -81,6 +82,10 @@ export default async function LanDownloadPage({
 
   const clients = downloadsLan.filter((d) => d.kind === 'client');
   const servers = downloadsLan.filter((d) => d.kind === 'server');
+
+  // LAN assets are a different build from the WAN ones, so sizes must be
+  // resolved against the LAN tag rather than reused from the WAN page.
+  const sizes = await resolveSizes(downloadsLan, LAN_TAG, locale);
 
   return (
     <>
@@ -162,6 +167,7 @@ export default async function LanDownloadPage({
               locale={locale as Locale}
               labels={labels}
               stepNumber={1}
+              sizeBytes={sizes[item.fileName]}
             />
           ))}
           <aside className="glass-card flex flex-col justify-center gap-2 text-sm text-slate-300">
@@ -196,6 +202,7 @@ export default async function LanDownloadPage({
               locale={locale as Locale}
               labels={labels}
               stepNumber={2}
+              sizeBytes={sizes[item.fileName]}
             />
           ))}
         </div>

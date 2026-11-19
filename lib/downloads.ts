@@ -7,8 +7,13 @@ export type DownloadItem = {
   platform: string;
   arch: string;
   version: string;
-  /** Approximate download size in bytes. Renders as KB/MB in the UI. */
-  sizeBytes: number;
+  /**
+   * Release asset file name. This is the join key used to look up the
+   * real byte size from the upstream release metadata — sizes are NOT
+   * hardcoded here (see `lib/download-sizes.ts`). If the lookup fails,
+   * the card simply omits the size instead of showing a guess.
+   */
+  fileName: string;
   /**
    * Short human-readable description of the package (used as the
    * card body text — NOT a duplicate of `arch`). E.g. "Zip archive,
@@ -34,21 +39,24 @@ export type DownloadItem = {
 const GITHUB_RELEASES = 'https://github.com/xchen20170101/temstream_release/releases';
 const GITEE_RELEASES = 'https://gitee.com/davidchen01/temstream_release/releases';
 
-/** LAN-specific release tag. */
-const LAN_TAG = 'lan_v0.4';
+/**
+ * WAN release tag. Exported because the real file sizes are resolved
+ * per tag at request time (`lib/download-sizes.ts`) — the tag is the
+ * authoritative pointer to the asset list, so a new release only needs
+ * this constant bumped.
+ */
+export const WAN_TAG = 'v0.4';
+
+/** LAN-specific release tag (independently rotated from the WAN tag). */
+export const LAN_TAG = 'lan_v0.4';
 
 /**
- * Approximate package sizes (rounded) for the v0.4 build. They are
- * used purely for the "12 MB" pill in the download card so visitors
- * have a sense of how heavy each download is before clicking. Keep
- * these conservative (round up) so we never under-report.
+ * Sizes used to be hardcoded per item, and they had drifted badly (the
+ * cards claimed 15/8/12 MB while the real v0.4 assets are ~55/47/79 MB).
+ * Each item now only declares its asset `fileName`; the real byte count
+ * comes from the upstream release metadata at render time, and an
+ * unknown size is omitted rather than guessed.
  */
-const SIZE = {
-  moonlightWindowsX64: 15 * 1024 * 1024, // ~15 MB
-  moonlightAndroidApk: 8 * 1024 * 1024, //  ~8 MB
-  sunshineWindowsInstaller: 12 * 1024 * 1024, // ~12 MB
-};
-
 export const downloads: DownloadItem[] = [
   {
     id: 'moonlight-windows-x64',
@@ -60,13 +68,13 @@ export const downloads: DownloadItem[] = [
     platform: 'Windows',
     arch: 'AMD64 (zip)',
     version: 'v0.4',
-    sizeBytes: SIZE.moonlightWindowsX64,
+    fileName: 'moonlight-windows-amd64.zip',
     packageLabel: {
       zh: '压缩包，含完整客户端',
       en: 'Zip archive, full client',
     },
-    urlZh: `${GITEE_RELEASES}/download/v0.4/moonlight-windows-amd64.zip`,
-    urlEn: `${GITHUB_RELEASES}/download/v0.4/moonlight-windows-amd64.zip`,
+    urlZh: `${GITEE_RELEASES}/download/${WAN_TAG}/moonlight-windows-amd64.zip`,
+    urlEn: `${GITHUB_RELEASES}/download/${WAN_TAG}/moonlight-windows-amd64.zip`,
     releasesUrlZh: GITEE_RELEASES,
     releasesUrlEn: GITHUB_RELEASES,
   },
@@ -80,13 +88,13 @@ export const downloads: DownloadItem[] = [
     platform: 'Android',
     arch: 'universal APK',
     version: 'v0.4',
-    sizeBytes: SIZE.moonlightAndroidApk,
+    fileName: 'temstream.apk',
     packageLabel: {
       zh: '通用 APK（含 ARM64 / x86_64）',
       en: 'Universal APK (ARM64 / x86_64)',
     },
-    urlZh: `${GITEE_RELEASES}/download/v0.4/temstream.apk`,
-    urlEn: `${GITHUB_RELEASES}/download/v0.4/temstream.apk`,
+    urlZh: `${GITEE_RELEASES}/download/${WAN_TAG}/temstream.apk`,
+    urlEn: `${GITHUB_RELEASES}/download/${WAN_TAG}/temstream.apk`,
     releasesUrlZh: GITEE_RELEASES,
     releasesUrlEn: GITHUB_RELEASES,
   },
@@ -100,13 +108,13 @@ export const downloads: DownloadItem[] = [
     platform: 'Windows',
     arch: 'AMD64 (installer)',
     version: 'v0.4',
-    sizeBytes: SIZE.sunshineWindowsInstaller,
+    fileName: 'Sunshine-Windows-AMD64-installer.exe',
     packageLabel: {
       zh: 'Windows 安装版（含 ViGEmBus 等驱动）',
       en: 'Windows installer (includes ViGEmBus, etc.)',
     },
-    urlZh: `${GITEE_RELEASES}/download/v0.4/Sunshine-Windows-AMD64-installer.exe`,
-    urlEn: `${GITHUB_RELEASES}/download/v0.4/Sunshine-Windows-AMD64-installer.exe`,
+    urlZh: `${GITEE_RELEASES}/download/${WAN_TAG}/Sunshine-Windows-AMD64-installer.exe`,
+    urlEn: `${GITHUB_RELEASES}/download/${WAN_TAG}/Sunshine-Windows-AMD64-installer.exe`,
     releasesUrlZh: GITEE_RELEASES,
     releasesUrlEn: GITHUB_RELEASES,
   },
@@ -128,7 +136,7 @@ export const downloadsLan: DownloadItem[] = [
     platform: 'Windows',
     arch: 'AMD64 (zip)',
     version: 'v0.4',
-    sizeBytes: SIZE.moonlightWindowsX64,
+    fileName: 'moonlight-windows-amd64.zip',
     packageLabel: {
       zh: '压缩包，含完整客户端',
       en: 'Zip archive, full client',
@@ -148,7 +156,7 @@ export const downloadsLan: DownloadItem[] = [
     platform: 'Android',
     arch: 'universal APK',
     version: 'v0.4',
-    sizeBytes: SIZE.moonlightAndroidApk,
+    fileName: 'temstream.apk',
     packageLabel: {
       zh: '通用 APK（含 ARM64 / x86_64）',
       en: 'Universal APK (ARM64 / x86_64)',
@@ -168,7 +176,7 @@ export const downloadsLan: DownloadItem[] = [
     platform: 'Windows',
     arch: 'AMD64 (installer)',
     version: 'v0.4',
-    sizeBytes: SIZE.sunshineWindowsInstaller,
+    fileName: 'Sunshine-Windows-AMD64-installer.exe',
     packageLabel: {
       zh: 'Windows 安装版（含 ViGEmBus 等驱动）',
       en: 'Windows installer (includes ViGEmBus, etc.)',
@@ -200,15 +208,32 @@ export function releasesUrlFor(item: DownloadItem, locale: string): string | und
 }
 
 /**
- * Format a byte count as a human-readable size. Always uses MB above
- * 1 MB to keep cards visually consistent (we don't show "9.4 MB" on
- * one card and "12 MB" on another).
+ * Format a real byte count as a human-readable size.
+ *
+ * Returns `null` when the size is unknown so callers can render nothing
+ * at all — we never fall back to "unknown" / "0 B" / a guessed number.
+ *
+ * Precision: above 1 GB one decimal, above 1 MB one decimal with a
+ * trailing `.0` trimmed (46.6 MB stays 46.6 MB, 12.0 MB becomes 12 MB),
+ * below 1 MB whole KB.
  */
-export function formatSize(bytes: number): string {
-  if (bytes >= 1024 * 1024) {
-    const mb = bytes / (1024 * 1024);
-    return `${Math.round(mb)} MB`;
+export function formatSize(bytes: number | null | undefined): string | null {
+  if (typeof bytes !== 'number' || !Number.isFinite(bytes) || bytes <= 0) {
+    return null;
   }
-  const kb = bytes / 1024;
-  return `${Math.round(kb)} KB`;
+  if (bytes >= 1024 * 1024 * 1024) {
+    return `${trimZero(bytes / (1024 * 1024 * 1024))} GB`;
+  }
+  if (bytes >= 1024 * 1024) {
+    return `${trimZero(bytes / (1024 * 1024))} MB`;
+  }
+  if (bytes >= 1024) {
+    return `${Math.round(bytes / 1024)} KB`;
+  }
+  return `${bytes} B`;
+}
+
+/** 46.60 -> "46.6", 12.00 -> "12". */
+function trimZero(value: number): string {
+  return value.toFixed(1).replace(/\.0$/, '');
 }
