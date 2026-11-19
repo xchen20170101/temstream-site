@@ -126,7 +126,7 @@ export interface SoftwareApplicationInput {
   name: string;
   /** Free-text platform, e.g. "Windows". */
   platform: string;
-  /** Version string, e.g. "v0.4". */
+  /** Version string, e.g. "v1.0". */
   version: string;
   /** Absolute URL to the primary download. */
   downloadUrl: string;

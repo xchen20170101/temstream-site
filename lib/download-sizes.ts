@@ -4,7 +4,7 @@ import type { DownloadItem } from '@/lib/downloads';
  * Resolves the *real* byte size of each release asset at request time.
  *
  * Why not hardcode: the old `SIZE` table had drifted to 15/8/12 MB while
- * the actual v0.4 assets are ~55/47/79 MB — the UI was under-reporting by
+ * the actual v1.0 assets are ~55/47/79 MB — the UI was under-reporting by
  * up to 6x. Sizes now follow the release itself, and an unknown size is
  * rendered as nothing rather than as a wrong number.
  *
@@ -102,7 +102,7 @@ async function sizeFromHead(url: string): Promise<number | undefined> {
 /**
  * Resolve sizes for the given items under a specific release tag.
  *
- * `tag` matters: v0.4 and lan_v0.4 contain *different* builds with
+ * `tag` matters: v1.0 and lan_v1.0 contain *different* builds with
  * different sizes, so a global file-name -> size table would be wrong.
  *
  * Never throws. A partial map is a valid result; unknown assets are

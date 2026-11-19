@@ -14,7 +14,7 @@
       "cta": "Open",
       "download": {
         "title": "Download",
-        "desc": "Sunshine (host) and Moonlight (client) v0.4 dual mirrors. Everything you need for the WAN setup lives here."
+        "desc": "Sunshine (host) and Moonlight (client) v1.0 dual mirrors. Everything you need for the WAN setup lives here."
       },
       "tutorial": {
         "title": "Tutorial",
@@ -36,7 +36,7 @@
       "cta": "Open",
       "download": {
         "title": "Download",
-        "desc": "Sunshine + Moonlight v0.4 — the same binaries as the WAN page, ordered for LAN-first deployment."
+        "desc": "Sunshine + Moonlight v1.0 — the same binaries as the WAN page, ordered for LAN-first deployment."
       },
       "tutorial": {
         "title": "Tutorial",
@@ -145,9 +145,9 @@
   },
   "download": {
     "title": "Download",
-    "subtitle": "All builds ship from the temstream_release v0.4 dual mirrors (gitee by default, GitHub as backup). Install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "subtitle": "All builds ship from the temstream_release v1.0 dual mirrors (gitee by default, GitHub as backup). Install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
     "seoTitle": "Download Sunshine host & Moonlight client · temstream",
-    "seoDescription": "Sunshine Windows host and Moonlight Windows / Android client v0.4 from the dual mirrors (gitee + GitHub). Official WAN build. Install Sunshine on the gaming PC first, then Moonlight on your client device.",
+    "seoDescription": "Sunshine Windows host and Moonlight Windows / Android client v1.0 from the dual mirrors (gitee + GitHub). Official WAN build. Install Sunshine on the gaming PC first, then Moonlight on your client device.",
     "clientTitle": "Moonlight client",
     "clientSubtitle": "Runs on the device you want to play on. Windows and Android are first-class targets.",
     "serverTitle": "Sunshine host",
@@ -275,9 +275,9 @@
   },
   "lanDownload": {
     "title": "LAN download",
-    "subtitle": "For a LAN-only setup you only need two pieces of software — Sunshine (host) and Moonlight (client). The management portal is optional. These are the same v0.4 builds; install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
+    "subtitle": "For a LAN-only setup you only need two pieces of software — Sunshine (host) and Moonlight (client). The management portal is optional. These are the same v1.0 builds; install Sunshine on your gaming PC first, then Moonlight on the device you want to play on.",
     "seoTitle": "LAN Sunshine + Moonlight download · temstream",
-    "seoDescription": "Sunshine + Moonlight v0.4 binaries for LAN-only setups, ordered for LAN-first deployment. Install Sunshine on the gaming PC, then Moonlight on the client device — type IP + password on the login page and stream.",
+    "seoDescription": "Sunshine + Moonlight v1.0 binaries for LAN-only setups, ordered for LAN-first deployment. Install Sunshine on the gaming PC, then Moonlight on the client device — type IP + password on the login page and stream.",
     "clientTitle": "Moonlight client (LAN)",
     "clientSubtitle": "Runs on the device you want to play on. Open the login page, type in Sunshine's LAN IP and access password, and you're in.",
     "serverTitle": "Sunshine host (LAN)",

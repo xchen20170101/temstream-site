@@ -15,7 +15,7 @@
       "cta": "进入",
       "download": {
         "title": "下载",
-        "desc": "Sunshine（服务端）与 Moonlight（客户端）v0.4 双镜像下载。广域网方案的所有软件包都在这一页。"
+        "desc": "Sunshine（服务端）与 Moonlight（客户端）v1.0 双镜像下载。广域网方案的所有软件包都在这一页。"
       },
       "tutorial": {
         "title": "教程",
@@ -37,7 +37,7 @@
       "cta": "进入",
       "download": {
         "title": "下载",
-        "desc": "Sunshine + Moonlight v0.4 同一套安装包，按局域网优先顺序给出。"
+        "desc": "Sunshine + Moonlight v1.0 同一套安装包，按局域网优先顺序给出。"
       },
       "tutorial": {
         "title": "教程",
@@ -146,9 +146,9 @@
   },
   "download": {
     "title": "下载",
-    "subtitle": "所有下载均来自 temstream_release v0.4 双镜像（默认 gitee，备用 github）。建议先在游戏 PC 上安装 Sunshine，再到客户端设备上安装 Moonlight。",
+    "subtitle": "所有下载均来自 temstream_release v1.0 双镜像（默认 gitee，备用 github）。建议先在游戏 PC 上安装 Sunshine，再到客户端设备上安装 Moonlight。",
     "seoTitle": "下载 Sunshine 服务端与 Moonlight 客户端 · temstream",
-    "seoDescription": "Sunshine Windows 服务端与 Moonlight Windows / Android 客户端 v0.4 双镜像下载（gitee + GitHub）。广域网方案官方构建，建议先装 Sunshine 再装 Moonlight。",
+    "seoDescription": "Sunshine Windows 服务端与 Moonlight Windows / Android 客户端 v1.0 双镜像下载（gitee + GitHub）。广域网方案官方构建，建议先装 Sunshine 再装 Moonlight。",
     "clientTitle": "Moonlight 客户端",
     "clientSubtitle": "运行在你想要玩游戏的设备上。Windows / Android 优先支持。",
     "serverTitle": "Sunshine 服务端",
@@ -276,9 +276,9 @@
   },
   "lanDownload": {
     "title": "局域网下载",
-    "subtitle": "局域网场景下只需要 Sunshine（服务端）和 Moonlight（客户端）两套软件；管理端在局域网中是可选的。下面是同一套 v0.4 安装包，按局域网优先排序：先在游戏 PC 上装 Sunshine，再到客户端设备上装 Moonlight。",
+    "subtitle": "局域网场景下只需要 Sunshine（服务端）和 Moonlight（客户端）两套软件；管理端在局域网中是可选的。下面是同一套 v1.0 安装包，按局域网优先排序：先在游戏 PC 上装 Sunshine，再到客户端设备上装 Moonlight。",
     "seoTitle": "局域网 Sunshine + Moonlight 下载 · temstream",
-    "seoDescription": "局域网场景下 Sunshine + Moonlight v0.4 安装包，按局域网优先顺序给出。先在游戏 PC 装 Sunshine，再到客户端设备装 Moonlight，登录页填 IP+密码即连。",
+    "seoDescription": "局域网场景下 Sunshine + Moonlight v1.0 安装包，按局域网优先顺序给出。先在游戏 PC 装 Sunshine，再到客户端设备装 Moonlight，登录页填 IP+密码即连。",
     "clientTitle": "Moonlight 客户端（局域网）",
     "clientSubtitle": "运行在你想玩游戏的设备上；打开后在其登录页直接填入 Sunshine 的局域网 IP 与访问密码即可连接。",
     "serverTitle": "Sunshine 服务端（局域网）",

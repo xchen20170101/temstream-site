@@ -31,7 +31,7 @@ export type DownloadItem = {
 };
 
 /**
- * temstream_release mirrors. Both URLs ship the same v0.4 build.
+ * temstream_release mirrors. Both URLs ship the same v1.0 build.
  * zh visitors land on gitee by default (faster in mainland China);
  * en visitors land on github by default; either side can switch via
  * the per-card "mirror" link.
@@ -45,14 +45,14 @@ const GITEE_RELEASES = 'https://gitee.com/davidchen01/temstream_release/releases
  * authoritative pointer to the asset list, so a new release only needs
  * this constant bumped.
  */
-export const WAN_TAG = 'v0.4';
+export const WAN_TAG = 'v1.0';
 
 /** LAN-specific release tag (independently rotated from the WAN tag). */
-export const LAN_TAG = 'lan_v0.4';
+export const LAN_TAG = 'lan_v1.0';
 
 /**
  * Sizes used to be hardcoded per item, and they had drifted badly (the
- * cards claimed 15/8/12 MB while the real v0.4 assets are ~55/47/79 MB).
+ * cards claimed 15/8/12 MB while the real v1.0 assets are ~55/47/79 MB).
  * Each item now only declares its asset `fileName`; the real byte count
  * comes from the upstream release metadata at render time, and an
  * unknown size is omitted rather than guessed.
@@ -67,7 +67,7 @@ export const downloads: DownloadItem[] = [
     },
     platform: 'Windows',
     arch: 'AMD64 (zip)',
-    version: 'v0.4',
+    version: 'v1.0',
     fileName: 'moonlight-windows-amd64.zip',
     packageLabel: {
       zh: '压缩包，含完整客户端',
@@ -87,7 +87,7 @@ export const downloads: DownloadItem[] = [
     },
     platform: 'Android',
     arch: 'universal APK',
-    version: 'v0.4',
+    version: 'v1.0',
     fileName: 'temstream.apk',
     packageLabel: {
       zh: '通用 APK（含 ARM64 / x86_64）',
@@ -107,7 +107,7 @@ export const downloads: DownloadItem[] = [
     },
     platform: 'Windows',
     arch: 'AMD64 (installer)',
-    version: 'v0.4',
+    version: 'v1.0',
     fileName: 'Sunshine-Windows-AMD64-installer.exe',
     packageLabel: {
       zh: 'Windows 安装版（含 ViGEmBus 等驱动）',
@@ -122,7 +122,7 @@ export const downloads: DownloadItem[] = [
 
 /**
  * LAN-only downloads.  Same files as the WAN downloads but tagged
- * lan_v0.4 so that they can be updated / rotated independently of the
+ * lan_v1.0 so that they can be updated / rotated independently of the
  * WAN releases.
  */
 export const downloadsLan: DownloadItem[] = [
@@ -135,7 +135,7 @@ export const downloadsLan: DownloadItem[] = [
     },
     platform: 'Windows',
     arch: 'AMD64 (zip)',
-    version: 'v0.4',
+    version: 'v1.0',
     fileName: 'moonlight-windows-amd64.zip',
     packageLabel: {
       zh: '压缩包，含完整客户端',
@@ -155,7 +155,7 @@ export const downloadsLan: DownloadItem[] = [
     },
     platform: 'Android',
     arch: 'universal APK',
-    version: 'v0.4',
+    version: 'v1.0',
     fileName: 'temstream.apk',
     packageLabel: {
       zh: '通用 APK（含 ARM64 / x86_64）',
@@ -175,7 +175,7 @@ export const downloadsLan: DownloadItem[] = [
     },
     platform: 'Windows',
     arch: 'AMD64 (installer)',
-    version: 'v0.4',
+    version: 'v1.0',
     fileName: 'Sunshine-Windows-AMD64-installer.exe',
     packageLabel: {
       zh: 'Windows 安装版（含 ViGEmBus 等驱动）',

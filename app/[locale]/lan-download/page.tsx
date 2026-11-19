@@ -91,7 +91,7 @@ export default async function LanDownloadPage({
     <>
       {/* SoftwareApplication JSON-LD for the LAN download page.
           Same `OS_BY_DOWNLOAD_ID` mapping as the WAN page; the only
-          difference is the release tag (`lan_v0.4`) embedded inside
+          difference is the release tag (`lan_v1.0`) embedded inside
           `downloadUrl` via `primaryUrl()`. */}
       <JsonLd
         data={buildAppSchemas(
