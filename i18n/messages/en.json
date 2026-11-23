@@ -160,7 +160,13 @@
     "primaryFrom": "Primary:",
     "jumpNavAria": "On this page",
     "installOrderTitle": "Suggested install order",
-    "installOrderBody": "① Install Sunshine on your gaming PC. ② Then install Moonlight on your client device (phone or another PC) and sign in to start streaming."
+    "installOrderBody": "① Install Sunshine on your gaming PC. ② Then install Moonlight on your client device (phone or another PC) and sign in to start streaming.",
+    "workbuddyTitle": "Install with WorkBuddy",
+    "workbuddyLead": "Copy the prompt below into WorkBuddy, then replace YOUR_USERNAME and YOUR_PASSWORD with your own.",
+    "workbuddyPrompt": "Download the WAN edition of the Sunshine server (Windows AMD64 installer, not the Moonlight client) from https://www.temstream.cloud/zh/download and install it on this machine with admin rights — ask me to approve any UAC prompt. Then, using the command-line config tool \"sunshine_config.exe\", log in the existing account YOUR_USERNAME / YOUR_PASSWORD (bind, not register; pass the password via stdin), and after a successful login restart the Sunshine service with the tool's \"restart\" command. Finally report the service status, logged-in user and device_id.",
+    "workbuddyCopy": "Copy prompt",
+    "workbuddyCopied": "Copied",
+    "workbuddySafety": "The prompt contains your account password — only paste it into an environment you trust. You can also set a temporary password for the install and change it back afterwards."
   },
   "tutorial": {
     "title": "Safe and simple: stream with Sunshine in 4 steps",

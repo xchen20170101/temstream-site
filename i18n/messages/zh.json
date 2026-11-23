@@ -161,7 +161,13 @@
     "primaryFrom": "主镜像：",
     "jumpNavAria": "页内跳转",
     "installOrderTitle": "建议安装顺序",
-    "installOrderBody": "① 先在游戏 PC 上装 Sunshine。② 再到客户端设备（手机 / 另一台电脑）装 Moonlight，登录后即可串流。"
+    "installOrderBody": "① 先在游戏 PC 上装 Sunshine。② 再到客户端设备（手机 / 另一台电脑）装 Moonlight，登录后即可串流。",
+    "workbuddyTitle": "用 WorkBuddy 自动安装",
+    "workbuddyLead": "把下面这段提示词复制给 WorkBuddy，再把【你的用户名】【你的密码】换成你自己的。",
+    "workbuddyPrompt": "到 https://temstream.cloud/ 下载广域网 sunshine，然后在本机进行安装，安装完成后，使用 sunshine 配置工具（支持命令行）登录用户【你的用户名】，密码【你的密码】，登录成功后重启 sunshine 服务。",
+    "workbuddyCopy": "复制提示词",
+    "workbuddyCopied": "已复制",
+    "workbuddySafety": "提示词里包含你的账号密码，请只粘贴到你信任的环境；也可以先给账号设一个临时密码，装好后再改回来。"
   },
   "tutorial": {
     "title": "安全又简单：4 步搞定 Sunshine 串流",

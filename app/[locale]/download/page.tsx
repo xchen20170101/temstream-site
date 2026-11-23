@@ -4,6 +4,7 @@ import { downloads, primaryUrl, WAN_TAG } from '@/lib/downloads';
 import type { DownloadItem } from '@/lib/downloads';
 import { resolveSizes } from '@/lib/download-sizes';
 import { DownloadCard } from '@/components/DownloadCard';
+import { CopyButton } from '@/components/CopyButton';
 import { makeAlternates, ogLocale, homeCrumbLabel, sectionCrumbLabel, pageCrumbLabel } from '@/lib/seo';
 import { SectionContext } from '@/components/SectionContext';
 import { JsonLd } from '@/lib/jsonld';
@@ -179,6 +180,28 @@ export default async function DownloadPage({
             <p className="font-medium text-white">{t('installOrderTitle')}</p>
             <p className="leading-relaxed text-slate-400">{t('installOrderBody')}</p>
           </aside>
+        </div>
+
+        {/* WorkBuddy prompt. Visitors who would rather let an AI drive the
+            install copy this block and hand it to WorkBuddy. The prompt body
+            is product copy and must stay verbatim — the 【…】 markers are what
+            tells the visitor which parts to replace. */}
+        <div className="mt-4 glass-card lg:max-w-3xl">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h3 className="text-base font-semibold text-white">{t('workbuddyTitle')}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-slate-300">
+                {t('workbuddyLead')}
+              </p>
+            </div>
+            <CopyButton
+              text={t('workbuddyPrompt')}
+              copyLabel={t('workbuddyCopy')}
+              copiedLabel={t('workbuddyCopied')}
+            />
+          </div>
+          <pre className="mt-4 overflow-x-auto whitespace-pre-wrap break-words rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-xs leading-relaxed text-slate-200">{t('workbuddyPrompt')}</pre>
+          <p className="mt-3 text-xs leading-relaxed text-slate-400">{t('workbuddySafety')}</p>
         </div>
       </section>
 
